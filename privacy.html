@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - DevTools Hub</title>
+    <meta name="description" content="Privacy Policy for DevTools Hub - Learn how we protect your data and privacy">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="1"/></svg>');
+            background-size: 30px 30px;
+        }
+        
+        .page-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fancy Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            margin: 30px 0 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        
+        .back-button:hover::before {
+            opacity: 1;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover .back-icon {
+            transform: translateX(-5px);
+        }
+        
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin: 30px 0 15px;
+            font-weight: 700;
+        }
+        
+        .content-card h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        .content-card h3 {
+            color: #475569;
+            font-size: 1.3em;
+            margin: 25px 0 10px;
+            font-weight: 600;
+        }
+        
+        .content-card p {
+            color: #475569;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .content-card ul, .content-card ol {
+            margin: 15px 0 25px 25px;
+            color: #475569;
+        }
+        
+        .content-card li {
+            margin-bottom: 10px;
+        }
+        
+        .content-card strong {
+            color: #667eea;
+        }
+        
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 0;
+        }
+        
+        .last-updated {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        
+        .email-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            border-bottom: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .email-link:hover {
+            border-bottom-color: #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2em;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .back-button {
+                padding: 10px 18px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>🔒 Privacy Policy</h1>
+            <p>How we protect your data and respect your privacy</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span class="back-text">Back to Home</span>
+        </a>
+        
+        <!-- Privacy Policy Content -->
+        <div class="content-card">
+            <div class="last-updated">Last Updated: March 5, 2026</div>
+            
+            <h2>Our Commitment to Privacy</h2>
+            <p>At DevTools Hub, we take your privacy seriously. This policy describes how we handle your information when you use our tools and services.</p>
+            
+            <div class="highlight-box">
+                <p><strong>🔐 Key Point:</strong> All our tools run entirely in your browser. We never send your data to any server. What you type stays on your device.</p>
+            </div>
+            
+            <h2>Information We Collect</h2>
+            <p><strong>We collect zero personal data through our tools.</strong> Since all processing happens locally in your browser, we have no access to:</p>
+            <ul>
+                <li>The text you enter in any tool</li>
+                <li>The passwords you generate</li>
+                <li>The JSON you format</li>
+                <li>The Base64 you encode or decode</li>
+                <li>Any files you process</li>
+            </ul>
+            
+            <h3>Automatic Anonymous Data</h3>
+            <p>Like most websites, we may collect anonymous usage statistics through GitHub Pages:</p>
+            <ul>
+                <li>Pages visited</li>
+                <li>Time spent on site</li>
+                <li>Browser type and version</li>
+                <li>Device type (mobile/desktop)</li>
+                <li>General geographic region (country level only)</li>
+            </ul>
+            <p>This information is completely anonymous and cannot be linked to you personally.</p>
+            
+            <h2>Cookies and Tracking</h2>
+            <p>We use minimal cookies essential for website functionality:</p>
+            <ul>
+                <li><strong>Session cookies:</strong> Temporary cookies that expire when you close your browser</li>
+                <li><strong>Preference cookies:</strong> Remember your tool settings (like password length) during your visit</li>
+            </ul>
+            <p>We do not use tracking cookies, advertising cookies, or third-party marketing cookies.</p>
+            
+            <h2>Third-Party Services</h2>
+            <p>Our website is hosted on <strong>GitHub Pages</strong>. GitHub may collect basic access logs as described in their <a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" target="_blank" style="color: #667eea;">Privacy Statement</a>.</p>
+            
+            <h2>Children's Privacy</h2>
+            <p>Our services are suitable for all ages. We do not knowingly collect any personal information from children under 13.</p>
+            
+            <h2>Data Security</h2>
+            <p>Since we don't collect or store your data, there's nothing to secure on our end. Your privacy is protected by design:</p>
+            <ul>
+                <li>✅ All tools run locally in your browser</li>
+                <li>✅ No data transmission to any server</li>
+                <li>✅ No databases or user accounts</li>
+                <li>✅ No tracking or analytics scripts</li>
+            </ul>
+            
+            <h2>Changes to This Policy</h2>
+            <p>If we make any changes to this privacy policy, we'll update the "Last Updated" date at the top of this page. Continued use of our site constitutes acceptance of the updated policy.</p>
+            
+            <h2>Contact Us</h2>
+            <p>If you have questions about this privacy policy or how we handle your data, please contact us at:</p>
+            <p style="font-size: 1.3em; margin-top: 10px;">
+                <a href="mailto:citybreaks2019@gmail.com" class="email-link">📧 citybreaks2019@gmail.com</a>
+            </p>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <p><strong>Summary:</strong> We built DevTools Hub with privacy as the foundation. No servers, no data collection, no tracking. Just useful tools that respect your privacy.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

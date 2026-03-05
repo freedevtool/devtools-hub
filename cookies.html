@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies Policy - DevTools Hub</title>
+    <meta name="description" content="Cookies Policy for DevTools Hub - Learn about our minimal cookie usage">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="1"/></svg>');
+            background-size: 30px 30px;
+        }
+        
+        .page-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fancy Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            margin: 30px 0 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        
+        .back-button:hover::before {
+            opacity: 1;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover .back-icon {
+            transform: translateX(-5px);
+        }
+        
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin: 30px 0 15px;
+            font-weight: 700;
+        }
+        
+        .content-card h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        .content-card h3 {
+            color: #475569;
+            font-size: 1.3em;
+            margin: 25px 0 10px;
+            font-weight: 600;
+        }
+        
+        .content-card p {
+            color: #475569;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .content-card ul {
+            margin: 15px 0 25px 25px;
+            color: #475569;
+        }
+        
+        .content-card li {
+            margin-bottom: 12px;
+        }
+        
+        .cookie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: #f8fafc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .cookie-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .cookie-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .cookie-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .last-updated {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        
+        .cookie-icon {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2em;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .cookie-table {
+                font-size: 0.9em;
+            }
+            
+            .cookie-table th, .cookie-table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>🍪 Cookies Policy</h1>
+            <p>Understanding our minimal and privacy-respecting cookie usage</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span class="back-text">Back to Home</span>
+        </a>
+        
+        <!-- Cookies Policy Content -->
+        <div class="content-card">
+            <div class="last-updated">Last Updated: March 5, 2026</div>
+            
+            <h2>Our Cookie Philosophy</h2>
+            <p>At DevTools Hub, we believe in minimal, transparent, and privacy-respecting cookie usage. We use only essential cookies that improve your experience without tracking you across the internet.</p>
+            
+            <div class="highlight-box">
+                <p><strong>🍪 Key Point:</strong> We use only functional cookies. No tracking cookies, no advertising cookies, no third-party marketing cookies.</p>
+            </div>
+            
+            <h2>What Are Cookies?</h2>
+            <p>Cookies are small text files stored on your device when you visit a website. They help websites remember your preferences and improve your browsing experience.</p>
+            
+            <h2>Cookies We Use</h2>
+            <p>Here's a complete list of cookies we use on DevTools Hub:</p>
+            
+            <table class="cookie-table">
+                <thead>
+                    <tr>
+                        <th>Cookie Name</th>
+                        <th>Purpose</th>
+                        <th>Duration</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>tool_preferences</code></td>
+                        <td>Remembers your tool settings (like password length) during your visit</td>
+                        <td>Session only</td>
+                        <td>Essential</td>
+                    </tr>
+                    <tr>
+                        <td><code>theme_preference</code></td>
+                        <td>Saves your preferred color theme</td>
+                        <td>7 days</td>
+                        <td>Functional</td>
+                    </tr>
+                    <tr>
+                        <td><code>cookie_consent</code></td>
+                        <td>Records that you've seen our cookie notice</td>
+                        <td>30 days</td>
+                        <td>Essential</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>No Tracking or Advertising Cookies</h2>
+            <p><strong>We do not use:</strong></p>
+            <ul>
+                <li>❌ Google Analytics cookies</li>
+                <li>❌ Facebook/Meta pixels</li>
+                <li>❌ Advertising cookies of any kind</li>
+                <li>❌ Third-party tracking cookies</li>
+                <li>❌ Cross-site tracking cookies</li>
+            </ul>
+            
+            <h2>Third-Party Cookies</h2>
+            <p>Since our site is hosted on GitHub Pages, GitHub may set their own essential cookies for security and functionality. These are governed by <a href="https://docs.github.com/en/github/site-policy/github-privacy-statement" target="_blank" style="color: #667eea;">GitHub's Privacy Statement</a>.</p>
+            
+            <h2>Managing Cookies</h2>
+            <p>You can control and manage cookies in your browser settings:</p>
+            <ul>
+                <li><strong>Chrome:</strong> Settings → Privacy and Security → Cookies and other site data</li>
+                <li><strong>Firefox:</strong> Options → Privacy & Security → Cookies and Site Data</li>
+                <li><strong>Safari:</strong> Preferences → Privacy → Cookies and website data</li>
+                <li><strong>Edge:</strong> Settings → Site permissions → Cookies and site data</li>
+            </ul>
+            <p>Please note that blocking essential cookies may affect some functionality of our tools.</p>
+            
+            <h2>Cookie Consent</h2>
+            <p>By using our website, you consent to the use of essential cookies as described in this policy. We do not use any non-essential cookies that require explicit consent.</p>
+            
+            <h2>Updates to This Policy</h2>
+            <p>We may update this Cookies Policy occasionally. Any changes will be reflected with an updated "Last Updated" date at the top.</p>
+            
+            <h2>Contact Us</h2>
+            <p>If you have questions about our cookie usage, please contact us:</p>
+            <p style="font-size: 1.2em; margin-top: 10px;">
+                <a href="mailto:citybreaks2019@gmail.com" style="color: #667eea; text-decoration: none; font-weight: 600;">📧 citybreaks2019@gmail.com</a>
+            </p>
+            
+            <div class="highlight-box" style="margin-top: 30px; background: #e6f7ff; border-left-color: #1890ff;">
+                <p><strong>🍪 Summary:</strong> We use only essential cookies to improve your experience. No tracking, no ads, no third-party cookies. Your privacy is our priority.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

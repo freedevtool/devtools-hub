@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Use - DevTools Hub</title>
+    <meta name="description" content="Terms of Use for DevTools Hub - Please read before using our tools">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="1"/></svg>');
+            background-size: 30px 30px;
+        }
+        
+        .page-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-hero h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fancy Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            margin: 30px 0 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        
+        .back-button:hover::before {
+            opacity: 1;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover .back-icon {
+            transform: translateX(-5px);
+        }
+        
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin: 30px 0 15px;
+            font-weight: 700;
+        }
+        
+        .content-card h2:first-of-type {
+            margin-top: 0;
+        }
+        
+        .content-card h3 {
+            color: #475569;
+            font-size: 1.3em;
+            margin: 25px 0 10px;
+            font-weight: 600;
+        }
+        
+        .content-card p {
+            color: #475569;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+        
+        .content-card ul, .content-card ol {
+            margin: 15px 0 25px 25px;
+            color: #475569;
+        }
+        
+        .content-card li {
+            margin-bottom: 10px;
+        }
+        
+        .content-card strong {
+            color: #667eea;
+        }
+        
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .last-updated {
+            display: inline-block;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2em;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>📜 Terms of Use</h1>
+            <p>Please read these terms carefully before using our tools</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span class="back-text">Back to Home</span>
+        </a>
+        
+        <!-- Terms of Use Content -->
+        <div class="content-card">
+            <div class="last-updated">Last Updated: March 5, 2026</div>
+            
+            <h2>Acceptance of Terms</h2>
+            <p>By accessing or using DevTools Hub ("the Website"), you agree to be bound by these Terms of Use. If you disagree with any part of these terms, please do not use our services.</p>
+            
+            <h2>Description of Service</h2>
+            <p>DevTools Hub provides free online tools including but not limited to password generators, JSON formatters, Base64 encoders/decoders, and word counters. All tools run entirely in your browser - we do not store or process any data on our servers.</p>
+            
+            <div class="highlight-box">
+                <p><strong>⚠️ Important:</strong> Our tools are provided "as is" for general informational purposes. They should not be used for critical applications without independent verification.</p>
+            </div>
+            
+            <h2>User Responsibilities</h2>
+            <p>When using our tools, you agree to:</p>
+            <ul>
+                <li>Use the tools for lawful purposes only</li>
+                <li>Not attempt to reverse-engineer or abuse the tools</li>
+                <li>Not use the tools to store or process illegal content</li>
+                <li>Not attempt to compromise the website's security</li>
+                <li>Not use automated scripts to access the tools excessively</li>
+            </ul>
+            
+            <h2>Intellectual Property</h2>
+            <p>All content on this website, including but not limited to code, design, text, graphics, and logos, is the property of DevTools Hub and is protected by copyright and other intellectual property laws.</p>
+            
+            <p>You may:</p>
+            <ul>
+                <li>✅ Use the tools for personal and commercial purposes</li>
+                <li>✅ Share links to our tools</li>
+                <li>✅ Embed our tools on other websites (with attribution)</li>
+            </ul>
+            
+            <p>You may not:</p>
+            <ul>
+                <li>❌ Copy or reproduce the tools' code for commercial distribution</li>
+                <li>❌ Claim our tools as your own</li>
+                <li>❌ Remove copyright notices from our code</li>
+            </ul>
+            
+            <h2>Disclaimer of Warranties</h2>
+            <p>THE TOOLS AND SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT ANY WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:</p>
+            <ul>
+                <li>Warranties of accuracy or completeness</li>
+                <li>Warranties of uninterrupted service</li>
+                <li>Warranties of fitness for a particular purpose</li>
+                <li>Warranties of non-infringement</li>
+            </ul>
+            
+            <h2>Limitation of Liability</h2>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, DEVTOOLS HUB SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION, LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:</p>
+            <ul>
+                <li>Your use or inability to use our services</li>
+                <li>Any conduct or content of any third party</li>
+                <li>Unauthorized access to your data (though we don't store any)</li>
+                <li>Any errors or omissions in tool outputs</li>
+            </ul>
+            
+            <div class="warning-box">
+                <p><strong>🔐 Security Note:</strong> While our password generator creates strong passwords, we recommend using dedicated password managers for critical accounts. We are not responsible for any security breaches resulting from passwords generated using our tool.</p>
+            </div>
+            
+            <h2>Accuracy of Tools</h2>
+            <p>We strive to ensure all tools work correctly, but we cannot guarantee 100% accuracy. Please verify important outputs independently. For example:</p>
+            <ul>
+                <li>Test generated passwords with your own validation</li>
+                <li>Verify formatted JSON in other parsers for critical data</li>
+                <li>Double-check word counts for important documents</li>
+            </ul>
+            
+            <h2>Third-Party Links</h2>
+            <p>Our website may contain links to third-party websites. We are not responsible for the content or practices of these websites.</p>
+            
+            <h2>Modifications to Service</h2>
+            <p>We reserve the right to modify, suspend, or discontinue any part of our service at any time without notice. We are not liable to you or any third party for any modifications.</p>
+            
+            <h2>Changes to Terms</h2>
+            <p>We may update these Terms of Use occasionally. Continued use of our services after changes constitutes acceptance of the new terms.</p>
+            
+            <h2>Governing Law</h2>
+            <p>These terms shall be governed by the laws of [Your Country/State], without regard to its conflict of law provisions.</p>
+            
+            <h2>Contact Information</h2>
+            <p>For any questions about these Terms of Use, please contact us:</p>
+            <p style="font-size: 1.2em; margin-top: 10px;">
+                <a href="mailto:citybreaks2019@gmail.com" style="color: #667eea; text-decoration: none; font-weight: 600;">📧 citybreaks2019@gmail.com</a>
+            </p>
+            
+            <div class="highlight-box" style="margin-top: 30px;">
+                <p><strong>📋 Summary:</strong> Use our tools freely and responsibly. We provide them "as is" without warranties. Your continued use means you accept these terms.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

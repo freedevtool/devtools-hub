@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - DevTools Hub</title>
+    <meta name="description" content="Learn about DevTools Hub - Our mission, story, and commitment to free developer tools">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="1"/></svg>');
+            background-size: 30px 30px;
+        }
+        
+        .page-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-hero h1 {
+            font-size: 3.2em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .page-hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fancy Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            margin: 30px 0 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        
+        .back-button:hover::before {
+            opacity: 1;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover .back-icon {
+            transform: translateX(-5px);
+        }
+        
+        /* Content Card */
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .mission-statement {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .mission-statement h2 {
+            color: #667eea;
+            font-size: 2.2em;
+            margin-bottom: 15px;
+        }
+        
+        .mission-statement p {
+            font-size: 1.2em;
+            color: #475569;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .story-item {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .story-item h3 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+        }
+        
+        .value-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .value-card h4 {
+            color: #1e293b;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .value-card p {
+            color: #64748b;
+            font-size: 0.95em;
+        }
+        
+        .team-note {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 15px;
+        }
+        
+        .team-note h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .contact-email {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-email:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.4em;
+            }
+            
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-card {
+                padding: 25px;
+            }
+            
+            .mission-statement h2 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>📖 About Us</h1>
+            <p>The story behind DevTools Hub and our mission</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span class="back-text">Back to Home</span>
+        </a>
+        
+        <!-- About Content -->
+        <div class="content-card">
+            <div class="mission-statement">
+                <h2>🚀 Our Mission</h2>
+                <p>To provide professional-grade developer tools that are completely free, privacy-focused, and accessible to everyone, everywhere.</p>
+            </div>
+            
+            <h2>Our Story</h2>
+            <p>DevTools Hub was born from a simple observation: essential developer tools shouldn't cost money or compromise your privacy. Too many online tools either hide behind paywalls, bombard you with ads, or worse - collect and sell your data.</p>
+            
+            <p>We started building our own tools for personal use, and soon realized others could benefit from them too. So we decided to share them with the world, completely free and open source.</p>
+            
+            <div class="story-grid">
+                <div class="story-item">
+                    <h3>💡 The Beginning</h3>
+                    <p>What started as a simple password generator for personal use quickly grew into a collection of essential tools. Each tool was built to solve a real problem we encountered in our own development work.</p>
+                </div>
+                
+                <div class="story-item">
+                    <h3>🌍 Going Public</h3>
+                    <p>After sharing our tools with friends and receiving amazing feedback, we decided to make them public. Today, DevTools Hub serves thousands of users monthly, completely free of charge.</p>
+                </div>
+            </div>
+            
+            <h2 style="margin-top: 40px;">🌟 Our Core Values</h2>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🔒</div>
+                    <h4>Privacy First</h4>
+                    <p>All tools run in your browser. We never see, store, or process your data.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">💯</div>
+                    <h4>Forever Free</h4>
+                    <p>No premium tiers, no hidden costs, no paywalls. Ever.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🚀</div>
+                    <h4>Lightning Fast</h4>
+                    <p>Instant processing with no server delays or waiting.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">📱</div>
+                    <h4>Mobile Ready</h4>
+                    <p>Perfectly optimized for phones, tablets, and desktops.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🛠️</div>
+                    <h4>Practical Tools</h4>
+                    <p>Each tool solves a real problem developers face daily.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🌐</div>
+                    <h4>Open Source</h4>
+                    <p>Our code is transparent and available for review.</p>
+                </div>
+            </div>
+            
+            <h2 style="margin-top: 40px;">📊 By the Numbers</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 30px 0; text-align: center;">
+                <div style="background: #f8fafc; padding: 20px; border-radius: 10px;">
+                    <div style="font-size: 2em; font-weight: 800; color: #667eea;">4+</div>
+                    <div style="color: #64748b;">Powerful Tools</div>
+                </div>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 10px;">
+                    <div style="font-size: 2em; font-weight: 800; color: #667eea;">0</div>
+                    <div style="color: #64748b;">Data Stored</div>
+                </div>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 10px;">
+                    <div style="font-size: 2em; font-weight: 800; color: #667eea;">100%</div>
+                    <div style="color: #64748b;">Free Forever</div>
+                </div>
+                <div style="background: #f8fafc; padding: 20px; border-radius: 10px;">
+                    <div style="font-size: 2em; font-weight: 800; color: #667eea;">24/7</div>
+                    <div style="color: #64748b;">Availability</div>
+                </div>
+            </div>
+            
+            <div class="team-note">
+                <h3>👋 Behind the Scenes</h3>
+                <p>DevTools Hub is maintained by a small team of developers who believe that essential tools should be accessible to everyone. We're passionate about creating simple, effective solutions that respect your privacy.</p>
+                <p style="margin-top: 20px;">Have feedback or suggestions? We'd love to hear from you!</p>
+                <a href="mailto:citybreaks2019@gmail.com" class="contact-email">📧 citybreaks2019@gmail.com</a>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: #f8fafc; border-radius: 10px; text-align: center;">
+                <p style="color: #64748b;">DevTools Hub is and always will be free. No catch, no premium version - just useful tools for the developer community.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

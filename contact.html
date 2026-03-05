@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - DevTools Hub</title>
+    <meta name="description" content="Get in touch with DevTools Hub - We'd love to hear from you">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #9f7aea 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M0 0 L100 100 M100 0 L0 100" stroke="white" stroke-width="1"/></svg>');
+            background-size: 30px 30px;
+        }
+        
+        .page-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-hero h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        
+        .page-hero p {
+            font-size: 1.2em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Fancy Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1em;
+            margin: 30px 0 20px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+        
+        .back-button:hover::before {
+            opacity: 1;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .back-button:hover .back-icon {
+            transform: translateX(-5px);
+        }
+        
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Contact Info Cards */
+        .contact-info {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .contact-info h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            color: white;
+        }
+        
+        .info-details h3 {
+            color: #1e293b;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .info-details p {
+            color: #64748b;
+        }
+        
+        .info-details a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+        
+        .info-details a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .contact-form h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .faq-section h2 {
+            color: #1e293b;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .faq-question {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+        
+        .faq-answer {
+            color: #64748b;
+            padding-left: 20px;
+        }
+        
+        /* Response Time Badge */
+        .response-badge {
+            display: inline-block;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #0369a1;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9em;
+            margin-top: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2.4em;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 25px;
+            }
+            
+            .info-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>📬 Contact Us</h1>
+            <p>We'd love to hear from you. Get in touch!</p>
+        </div>
+    </section>
+    
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span class="back-text">Back to Home</span>
+        </a>
+        
+        <!-- Contact Grid -->
+        <div class="contact-grid">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h2>📞 Get in Touch</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">📧</div>
+                    <div class="info-details">
+                        <h3>Email</h3>
+                        <a href="mailto:citybreaks2019@gmail.com">citybreaks2019@gmail.com</a>
+                        <p style="font-size: 0.9em; margin-top: 5px;">We reply within 24-48 hours</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">💬</div>
+                    <div class="info-details">
+                        <h3>Feedback</h3>
+                        <p>Suggestions? Bugs? Feature requests? We're all ears!</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🤝</div>
+                    <div class="info-details">
+                        <h3>Collaboration</h3>
+                        <p>Interested in contributing or partnering? Let's talk!</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">🔒</div>
+                    <div class="info-details">
+                        <h3>Privacy Questions</h3>
+                        <p>Questions about your data? We're transparent and happy to answer.</p>
+                    </div>
+                </div>
+                
+                <div class="response-badge">
+                    ⚡ Average response time: 24 hours
+                </div>
+            </div>
+            
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2>📝 Send a Message</h2>
+                <form action="mailto:citybreaks2019@gmail.com" method="POST" enctype="text/plain">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Your message here..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">📨 Send Message</button>
+                </form>
+                
+                <p style="text-align: center; margin-top: 15px; color: #64748b; font-size: 0.9em;">
+                    We'll get back to you as soon as possible. Your email is safe with us.
+                </p>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">How quickly do you respond?</div>
+                <div class="faq-answer">We typically respond within 24-48 hours. For urgent matters, please mention "URGENT" in your email subject line.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Do you offer technical support?</div>
+                <div class="faq-answer">Yes! If you're having issues with any tool, please let us know. Include details about your device and browser to help us troubleshoot.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Can I suggest a new tool?</div>
+                <div class="faq-answer">Absolutely! We're always looking for ideas. Send us your suggestions and we'll consider adding them to our roadmap.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Is my data safe when I contact you?</div>
+                <div class="faq-answer">Yes. We only use your email to respond to your inquiry. We never share your information with third parties.</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
