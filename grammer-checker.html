@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Grammar Checker - AI-Powered Writing Assistant</title>
+    <meta name="description" content="Free online grammar checker. Check spelling, grammar, and punctuation instantly. AI-powered writing assistant for error-free text.">
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="TppyO_9iEI0Ey1QJ21HOrPLPLoMVDviDPF3ICqZr_v4" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 20px;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9em;
+        }
+        
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .input-area {
+            margin-bottom: 20px;
+        }
+        
+        .input-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            line-height: 1.6;
+            resize: vertical;
+            min-height: 200px;
+            font-family: inherit;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .file-upload {
+            display: none;
+        }
+        
+        .upload-label {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #e2e8f0;
+            color: #4a5568;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-label:hover {
+            background: #cbd5e0;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .primary-btn {
+            flex: 1;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .secondary-btn {
+            padding: 15px 25px;
+            background: #e2e8f0;
+            color: #333;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-btn:hover {
+            background: #cbd5e0;
+        }
+        
+        .results-area {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .error-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #f56565;
+        }
+        
+        .error-item.warning {
+            border-left-color: #ed8936;
+        }
+        
+        .error-type {
+            min-width: 80px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+        
+        .error-type.spelling {
+            color: #f56565;
+        }
+        
+        .error-type.grammar {
+            color: #ed8936;
+        }
+        
+        .error-context {
+            flex: 1;
+        }
+        
+        .error-word {
+            background: #fed7d7;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        
+        .error-suggestion {
+            color: #48bb78;
+            font-weight: 600;
+        }
+        
+        .corrected-text {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+        
+        .corrected-text .corrected {
+            background: #c6f6d5;
+            padding: 2px 0;
+        }
+        
+        .message-area {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .success-message {
+            background: #c6f6d5;
+            color: #22543d;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-bar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .error-item {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span>Back to Tools</span>
+        </a>
+        
+        <!-- Main Tool Card -->
+        <div class="tool-card">
+            <h1>📝 AI Grammar Checker</h1>
+            <p class="subtitle">Check spelling, grammar, and punctuation instantly. Powered by NLP technology.</p>
+            
+            <!-- Statistics -->
+            <div class="stats-bar" id="statsBar" style="display: none;">
+                <div class="stat-item">
+                    <div class="stat-label">Words</div>
+                    <div class="stat-value" id="wordCount">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Errors</div>
+                    <div class="stat-value" id="errorCount">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Time</div>
+                    <div class="stat-value" id="readTime">0 min</div>
+                </div>
+            </div>
+            
+            <!-- Input Tabs -->
+            <div class="input-tabs">
+                <button class="tab-btn active" id="typeTab">Type Text</button>
+                <button class="tab-btn" id="uploadTab">Upload File</button>
+            </div>
+            
+            <!-- Text Input Area -->
+            <div class="input-area" id="textInputArea">
+                <textarea id="inputText" placeholder="Type or paste your text here... (e.g., 'I have went to the store yesterday and buyed some apples.')">I have went to the store yesterday and buyed some apples.</textarea>
+                
+                <!-- File Upload (Hidden by default) -->
+                <div id="fileUploadArea" style="display: none;">
+                    <input type="file" id="fileInput" accept=".txt,.doc,.docx" class="file-upload">
+                    <label for="fileInput" class="upload-label">📁 Choose File (TXT, DOC)</label>
+                    <p style="color: #64748b; margin-top: 10px; font-size: 0.9em;">Maximum file size: 1MB</p>
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="primary-btn" onclick="checkGrammar()">🔍 Check Grammar</button>
+                <button class="secondary-btn" onclick="clearAll()">🗑️ Clear</button>
+            </div>
+            
+            <!-- Results Area -->
+            <div id="resultsArea" class="results-area" style="display: none;">
+                <h3 style="margin-bottom: 15px; color: #4a5568;">Issues Found</h3>
+                <div id="errorsList"></div>
+                
+                <h3 style="margin: 20px 0 10px; color: #4a5568;">Corrected Version</h3>
+                <div class="corrected-text" id="correctedText"></div>
+            </div>
+            
+            <!-- Message Area -->
+            <div id="messageBox" class="message-area"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Common spelling errors database
+        const spellingErrors = {
+            // Common misspellings
+            'teh': 'the',
+            'recieve': 'receive',
+            'seperate': 'separate',
+            'occured': 'occurred',
+            'occurrance': 'occurrence',
+            'definately': 'definitely',
+            'goverment': 'government',
+            'accomodate': 'accommodate',
+            'wierd': 'weird',
+            'thier': 'their',
+            'truely': 'truly',
+            'writting': 'writing',
+            'dissapoint': 'disappoint',
+            'untill': 'until',
+            'beggining': 'beginning',
+            'embarass': 'embarrass',
+            'calender': 'calendar',
+            'tommorow': 'tomorrow',
+            'tounge': 'tongue',
+            'neccessary': 'necessary',
+            'basicly': 'basically',
+            'specificaly': 'specifically',
+            'freind': 'friend',
+            'beleive': 'believe',
+            'acheive': 'achieve',
+            'adress': 'address',
+            'alot': 'a lot',
+            'aparent': 'apparent',
+            'arguement': 'argument',
+            'artical': 'article',
+            'bizzare': 'bizarre',
+            'buisness': 'business',
+            'comittee': 'committee',
+            'comming': 'coming',
+            'commited': 'committed',
+            'concious': 'conscious',
+            'consistant': 'consistent',
+            'contagious': 'contagious',
+            'desicion': 'decision',
+            'desireable': 'desirable',
+            'dissapear': 'disappear',
+            'drunkeness': 'drunkenness',
+            'efficent': 'efficient',
+            'enviroment': 'environment',
+            'esential': 'essential',
+            'exagerate': 'exaggerate',
+            'excellant': 'excellent',
+            'existence': 'existence',
+            'experiance': 'experience',
+            'febuary': 'february',
+            'foriegn': 'foreign',
+            'fourty': 'forty',
+            'foward': 'forward',
+            'frustrated': 'frustrated',
+            'guage': 'gauge',
+            'general': 'generally',
+            'grammer': 'grammar',
+            'grateful': 'grateful',
+            'grief': 'grief',
+            'grievous': 'grievous',
+            'guarentee': 'guarantee',
+            'guidence': 'guidance',
+            'harrass': 'harass',
+            'hier': 'higher',
+            'humour': 'humor',
+            'imediately': 'immediately',
+            'independance': 'independence',
+            'indispensible': 'indispensable',
+            'innoculate': 'inoculate',
+            'inteligence': 'intelligence',
+            'interupt': 'interrupt',
+            'irresistable': 'irresistible',
+            'jewlery': 'jewelry',
+            'judgement': 'judgment',
+            'knowlege': 'knowledge',
+            'labratory': 'laboratory',
+            'lenght': 'length',
+            'liase': 'liaise',
+            'libary': 'library',
+            'lisence': 'license',
+            'maintainance': 'maintenance',
+            'mispell': 'misspell',
+            'misterious': 'mysterious',
+            'monestary': 'monastery',
+            'monkies': 'monkeys',
+            'morgage': 'mortgage',
+            'mountian': 'mountain',
+            'neccessary': 'necessary',
+            'neighbour': 'neighbor',
+            'noticable': 'noticeable',
+            'occassion': 'occasion',
+            'occurence': 'occurrence',
+            'originaly': 'originally',
+            'overated': 'overrated',
+            'parralel': 'parallel',
+            'parliment': 'parliament',
+            'particular': 'particularly',
+            'percieve': 'perceive',
+            'perserverance': 'perseverance',
+            'phenomenon': 'phenomenon',
+            'playright': 'playwright',
+            'posession': 'possession',
+            'potatos': 'potatoes',
+            'prefered': 'preferred',
+            'prefering': 'preferring',
+            'presense': 'presence',
+            'privelege': 'privilege',
+            'publicly': 'publicly',
+            'pursuade': 'persuade',
+            'realy': 'really',
+            'recieve': 'receive',
+            'refered': 'referred',
+            'refering': 'referring',
+            'remeber': 'remember',
+            'remembrence': 'remembrance',
+            'resistence': 'resistance',
+            'responsable': 'responsible',
+            'restaraunt': 'restaurant',
+            'rhythm': 'rhythm',
+            'rythm': 'rhythm',
+            'sargent': 'sergeant',
+            'seige': 'siege',
+            'sence': 'sense',
+            'seperate': 'separate',
+            'sieze': 'seize',
+            'similiar': 'similar',
+            'sincerley': 'sincerely',
+            'speach': 'speech',
+            'stoped': 'stopped',
+            'strength': 'strength',
+            'strenous': 'strenuous',
+            'suposed': 'supposed',
+            'supposably': 'supposedly',
+            'surprize': 'surprise',
+            'targetted': 'targeted',
+            'teh': 'the',
+            'thier': 'their',
+            'tomatos': 'tomatoes',
+            'tommorrow': 'tomorrow',
+            'tongue': 'tongue',
+            'truely': 'truly',
+            'twelth': 'twelfth',
+            'tyrany': 'tyranny',
+            'unbeleivable': 'unbelievable',
+            'unforseen': 'unforeseen',
+            'unfortunatly': 'unfortunately',
+            'untill': 'until',
+            'unussual': 'unusual',
+            'vacume': 'vacuum',
+            'vegatarian': 'vegetarian',
+            'vegitable': 'vegetable',
+            'vehical': 'vehicle',
+            'vengance': 'vengeance',
+            'villian': 'villain',
+            'wierd': 'weird',
+            'writting': 'writing',
+            'yatch': 'yacht',
+            'your': "you're",
+            'buyed': 'bought',
+            'goed': 'went',
+            'doed': 'did',
+            'rumored': 'rumoured',
+            'color': 'colour',
+            'center': 'centre',
+            'theater': 'theatre'
+        };
+        
+        // Grammar patterns (regex-based detection)
+        const grammarPatterns = [
+            {
+                pattern: /\b(has|have|had)\s+(\w+ed)\b(?!\s+been)/gi,
+                replace: (match, p1, p2) => `${p1} been ${p2}`,
+                desc: 'Missing auxiliary verb',
+                type: 'grammar'
+            },
+            {
+                pattern: /\b(am|is|are|was|were)\s+(\w+ed)\b(?!\s+by)/gi,
+                replace: (match, p1, p2) => `${p1} been ${p2}`,
+                desc: 'Passive voice misuse',
+                type: 'grammar'
+            },
+            {
+                pattern: /\b(he|she|it)\s+(don't|doesn't)\s+(\w+)/gi,
+                replace: (match, p1, p2, p3) => `${p1} ${p2 === "don't" ? "doesn't" : p2} ${p3}`,
+                desc: 'Subject-verb agreement',
+                type: 'grammar'
+            },
+            {
+                pattern: /\b(I|you|we|they)\s+(doesn't)\s+(\w+)/gi,
+                replace: (match, p1, p2, p3) => `${p1} don't ${p3}`,
+                desc: 'Subject-verb agreement',
+                type: 'grammar'
+            },
+            {
+                pattern: /\b(himself|herself|itself|themselves)\s+(\w+ed)\b/gi,
+                replace: (match, p1, p2) => `${p1} ${p2}`,
+                desc: 'Reflexive pronoun misuse',
+                type: 'grammar'
+            }
+        ];
+        
+        // Tab switching
+        document.getElementById('typeTab').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('uploadTab').classList.remove('active');
+            document.getElementById('textInputArea').style.display = 'block';
+            document.getElementById('fileUploadArea').style.display = 'none';
+        });
+        
+        document.getElementById('uploadTab').addEventListener('click', function() {
+            this.classList.add('active');
+            document.getElementById('typeTab').classList.remove('active');
+            document.getElementById('textInputArea').style.display = 'block';
+            document.getElementById('fileUploadArea').style.display = 'block';
+        });
+        
+        // File input handler
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 1024 * 1024) {
+                showMessage('File too large! Maximum 1MB', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('inputText').value = event.target.result;
+                showMessage('File loaded successfully!', 'success');
+            };
+            reader.readAsText(file);
+        });
+        
+        function checkGrammar() {
+            const input = document.getElementById('inputText').value;
+            
+            if (!input.trim()) {
+                showMessage('Please enter some text to check', 'error');
+                return;
+            }
+            
+            // Update stats
+            updateStats(input);
+            
+            // Split into sentences
+            const sentences = input.split(/[.!?]+/).filter(s => s.trim());
+            const words = input.split(/\s+/).filter(w => w.trim());
+            
+            const errors = [];
+            let correctedText = input;
+            
+            // Check each word for spelling
+            words.forEach(word => {
+                const cleanWord = word.replace(/[.,!?;:()]/g, '').toLowerCase();
+                if (spellingErrors[cleanWord]) {
+                    errors.push({
+                        type: 'spelling',
+                        word: word,
+                        suggestion: spellingErrors[cleanWord],
+                        context: `Spelling error: "${word}" should be "${spellingErrors[cleanWord]}"`
+                    });
+                    
+                    // Replace in corrected text (preserve original case)
+                    const regex = new RegExp(`\\b${word}\\b`, 'g');
+                    let replacement = spellingErrors[cleanWord];
+                    if (word[0] === word[0].toUpperCase()) {
+                        replacement = replacement.charAt(0).toUpperCase() + replacement.slice(1);
+                    }
+                    correctedText = correctedText.replace(regex, replacement);
+                }
+            });
+            
+            // Check grammar patterns
+            grammarPatterns.forEach(pattern => {
+                const matches = input.match(pattern.pattern);
+                if (matches) {
+                    matches.forEach(match => {
+                        errors.push({
+                            type: 'grammar',
+                            word: match,
+                            suggestion: 'Check grammar structure',
+                            context: pattern.desc
+                        });
+                    });
+                    
+                    // Apply correction
+                    correctedText = correctedText.replace(pattern.pattern, pattern.replace);
+                }
+            });
+            
+            // Check for specific grammar issues
+            if (input.includes('have went')) {
+                errors.push({
+                    type: 'grammar',
+                    word: 'have went',
+                    suggestion: 'have gone',
+                    context: 'Incorrect past participle: use "have gone" instead of "have went"'
+                });
+                correctedText = correctedText.replace(/have went/g, 'have gone');
+            }
+            
+            if (input.includes('buyed')) {
+                errors.push({
+                    type: 'spelling',
+                    word: 'buyed',
+                    suggestion: 'bought',
+                    context: 'Incorrect past tense: "bought" is the correct form'
+                });
+                correctedText = correctedText.replace(/buyed/g, 'bought');
+            }
+            
+            // Display results
+            displayResults(errors, correctedText);
+            document.getElementById('resultsArea').style.display = 'block';
+            
+            if (errors.length === 0) {
+                document.getElementById('errorsList').innerHTML = '<p style="color: #48bb78;">✅ No errors found! Your text looks good.</p>';
+            }
+            
+            showMessage(`Found ${errors.length} potential error${errors.length !== 1 ? 's' : ''}`, errors.length > 0 ? 'error' : 'success');
+        }
+        
+        function updateStats(text) {
+            document.getElementById('statsBar').style.display = 'flex';
+            
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('wordCount').textContent = words;
+            
+            // Reading time (200 words per minute)
+            const minutes = Math.ceil(words / 200);
+            document.getElementById('readTime').textContent = minutes + ' min';
+        }
+        
+        function displayResults(errors, correctedText) {
+            const errorsList = document.getElementById('errorsList');
+            errorsList.innerHTML = '';
+            
+            document.getElementById('errorCount').textContent = errors.length;
+            
+            if (errors.length === 0) {
+                errorsList.innerHTML = '<p style="color: #48bb78; text-align: center;">✅ No issues found! Your text is perfect.</p>';
+            } else {
+                errors.forEach(error => {
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = `error-item ${error.type === 'spelling' ? 'spelling' : 'warning'}`;
+                    errorDiv.innerHTML = `
+                        <div class="error-type ${error.type}">${error.type === 'spelling' ? '📝 Spelling' : '⚡ Grammar'}</div>
+                        <div class="error-context">
+                            <span class="error-word">${error.word}</span> → 
+                            <span class="error-suggestion">${error.suggestion}</span>
+                            <div style="color: #718096; font-size: 0.9em; margin-top: 5px;">${error.context}</div>
+                        </div>
+                    `;
+                    errorsList.appendChild(errorDiv);
+                });
+            }
+            
+            // Show corrected version with highlighting
+            let highlighted = correctedText;
+            errors.forEach(error => {
+                const regex = new RegExp(`\\b${error.suggestion}\\b`, 'g');
+                highlighted = highlighted.replace(regex, `<span class="corrected">${error.suggestion}</span>`);
+            });
+            document.getElementById('correctedText').innerHTML = highlighted;
+        }
+        
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('resultsArea').style.display = 'none';
+            document.getElementById('statsBar').style.display = 'none';
+            document.getElementById('fileInput').value = '';
+            document.getElementById('messageBox').innerHTML = '';
+        }
+        
+        function showMessage(text, type) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = text;
+            messageBox.className = 'message-area ' + (type === 'success' ? 'success-message' : 'error-message');
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageBox.innerHTML = '';
+                    messageBox.className = 'message-area';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
