@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - DevTools Hub</title>
+    <meta name="description" content="Free QR Code Generator. Create custom QR codes for URLs, text, and more instantly.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Fancy Round Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .primary-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .secondary-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            background: #e2e8f0;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-btn:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+        
+        .qr-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #qrCode {
+            max-width: 200px;
+            margin: 10px auto;
+        }
+        
+        #qrCode img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #48bb78;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+        
+        .message-area {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            min-height: 50px;
+        }
+        
+        .error-message {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-card {
+                padding: 20px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Fancy Round Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span>Back to Tools</span>
+        </a>
+        
+        <!-- Main Tool Card -->
+        <div class="tool-card">
+            <h1>🏷️ QR Code Generator</h1>
+            <p class="subtitle">Create custom QR codes for URLs, text, and more</p>
+            
+            <!-- Input Options -->
+            <div class="input-group">
+                <label for="qrType">Select QR Code Type:</label>
+                <select id="qrType">
+                    <option value="url">URL / Website Link</option>
+                    <option value="text">Plain Text</option>
+                    <option value="email">Email Address</option>
+                    <option value="phone">Phone Number</option>
+                    <option value="sms">SMS Message</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="qrInput">Enter Content:</label>
+                <textarea id="qrInput" placeholder="Enter URL, text, or other content...">https://freedevtool.github.io/devtools-hub/</textarea>
+            </div>
+            
+            <div class="input-group">
+                <label for="qrSize">QR Code Size:</label>
+                <select id="qrSize">
+                    <option value="100">Small (100x100)</option>
+                    <option value="150">Medium (150x150)</option>
+                    <option value="200" selected>Large (200x200)</option>
+                    <option value="250">Extra Large (250x250)</option>
+                </select>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="primary-btn" onclick="generateQR()">✨ Generate QR Code</button>
+                <button class="secondary-btn" onclick="clearQR()">🗑️ Clear</button>
+            </div>
+            
+            <!-- QR Code Display -->
+            <div class="qr-container" id="qrContainer">
+                <div id="qrCode"></div>
+                <a id="downloadLink" class="download-btn" style="display: none;" download="qrcode.png">📥 Download QR Code</a>
+            </div>
+            
+            <!-- Message Area -->
+            <div id="messageBox" class="message-area"></div>
+        </div>
+    </div>
+    
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script>
+        let currentQR = null;
+        
+        function generateQR() {
+            const type = document.getElementById('qrType').value;
+            const input = document.getElementById('qrInput').value.trim();
+            const size = document.getElementById('qrSize').value;
+            const qrContainer = document.getElementById('qrCode');
+            const messageBox = document.getElementById('messageBox');
+            const downloadLink = document.getElementById('downloadLink');
+            
+            if (!input) {
+                showMessage('Please enter content for QR code', 'error');
+                return;
+            }
+            
+            // Format content based on type
+            let qrContent = input;
+            if (type === 'email') {
+                qrContent = `mailto:${input}`;
+            } else if (type === 'phone') {
+                qrContent = `tel:${input}`;
+            } else if (type === 'sms') {
+                qrContent = `smsto:${input}`;
+            }
+            
+            // Clear previous QR
+            qrContainer.innerHTML = '';
+            
+            try {
+                // Create new QR code
+                currentQR = new QRCode(qrContainer, {
+                    text: qrContent,
+                    width: parseInt(size),
+                    height: parseInt(size),
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                
+                // Show download link after QR is generated
+                setTimeout(() => {
+                    const qrImage = qrContainer.querySelector('img');
+                    if (qrImage) {
+                        downloadLink.href = qrImage.src;
+                        downloadLink.style.display = 'inline-block';
+                    }
+                }, 100);
+                
+                showMessage('✅ QR Code generated successfully!', 'success');
+            } catch (error) {
+                showMessage('❌ Failed to generate QR code', 'error');
+            }
+        }
+        
+        function clearQR() {
+            document.getElementById('qrInput').value = '';
+            document.getElementById('qrCode').innerHTML = '';
+            document.getElementById('downloadLink').style.display = 'none';
+            document.getElementById('messageBox').innerHTML = '';
+        }
+        
+        function showMessage(text, type) {
+            const messageBox = document.getElementById('messageBox');
+            messageBox.innerHTML = text;
+            messageBox.className = 'message-area ' + (type === 'success' ? 'success-message' : 'error-message');
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageBox.innerHTML = '';
+                    messageBox.className = 'message-area';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>

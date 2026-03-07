@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Converter - DevTools Hub</title>
+    <meta name="description" content="Free Color Converter. Convert between HEX, RGB, HSL, and color names instantly.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Fancy Round Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .back-button:hover {
+            transform: translateX(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .back-icon {
+            font-size: 1.3em;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .color-preview {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 3px solid #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .color-input-row {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .color-input-row input[type="color"] {
+            width: 60px;
+            height: 50px;
+            padding: 5px;
+            cursor: pointer;
+        }
+        
+        .color-values {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .color-value-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .color-value-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .value-label {
+            width: 80px;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .value-text {
+            flex: 1;
+            font-family: monospace;
+            font-size: 1.1em;
+        }
+        
+        .copy-btn {
+            padding: 5px 15px;
+            background: #e2e8f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #cbd5e0;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .primary-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .secondary-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            background: #e2e8f0;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        
+        .secondary-btn:hover {
+            background: #cbd5e0;
+            transform: translateY(-2px);
+        }
+        
+        .message-area {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        
+        .success-message {
+            background: #c6f6d5;
+            color: #22543d;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .tool-card {
+                padding: 20px;
+            }
+            
+            .color-input-row {
+                flex-direction: column;
+            }
+            
+            .color-value-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .value-label {
+                width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Fancy Round Back Button -->
+        <a href="index.html" class="back-button">
+            <span class="back-icon">←</span>
+            <span>Back to Tools</span>
+        </a>
+        
+        <!-- Main Tool Card -->
+        <div class="tool-card">
+            <h1>🎨 Color Converter</h1>
+            <p class="subtitle">Convert between HEX, RGB, HSL, and color names instantly</p>
+            
+            <!-- Color Preview -->
+            <div class="color-preview" id="colorPreview" style="background-color: #667eea;"></div>
+            
+            <!-- Color Input Options -->
+            <div class="input-group">
+                <label for="colorInput">Enter Color (HEX, RGB, or color name):</label>
+                <div class="color-input-row">
+                    <input type="text" id="colorInput" placeholder="#667eea or rgb(102,126,234) or purple" value="#667eea">
+                    <input type="color" id="colorPicker" value="#667eea">
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="primary-btn" onclick="convertColor()">🔄 Convert</button>
+                <button class="secondary-btn" onclick="resetColor()">↺ Reset</button>
+            </div>
+            
+            <!-- Color Values -->
+            <div class="color-values" id="colorValues">
+                <div class="color-value-item">
+                    <span class="value-label">HEX:</span>
+                    <span class="value-text" id="hexValue">#667eea</span>
+                    <button class="copy-btn" onclick="copyToClipboard('hexValue')">Copy</button>
+                </div>
+                <div class="color-value-item">
+                    <span class="value-label">RGB:</span>
+                    <span class="value-text" id="rgbValue">rgb(102, 126, 234)</span>
+                    <button class="copy-btn" onclick="copyToClipboard('rgbValue')">Copy</button>
+                </div>
+                <div class="color-value-item">
+                    <span class="value-label">HSL:</span>
+                    <span class="value-text" id="hslValue">hsl(230, 76%, 66%)</span>
+                    <button class="copy-btn" onclick="copyToClipboard('hslValue')">Copy</button>
+                </div>
+                <div class="color-value-item">
+                    <span class="value-label">Color Name:</span>
+                    <span class="value-text" id="colorName">Medium Slate Blue</span>
+                    <button class="copy-btn" onclick="copyToClipboard('colorName')">Copy</button>
+                </div>
+            </div>
+            
+            <!-- Message Area -->
+            <div id="messageBox" class="message-area"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Color name database (common colors)
+        const colorNames = {
+            '#000000': 'Black',
+            '#ffffff': 'White',
+            '#ff0000': 'Red',
+            '#00ff00': 'Lime',
+            '#0000ff': 'Blue',
+            '#ffff00': 'Yellow',
+            '#00ffff': 'Cyan',
+            '#ff00ff': 'Magenta',
+            '#c0c0c0': 'Silver',
+            '#808080': 'Gray',
+            '#800000': 'Maroon',
+            '#808000': 'Olive',
+            '#008000': 'Green',
+            '#800080': 'Purple',
+            '#008080': 'Teal',
+            '#000080': 'Navy',
+            '#ffa500': 'Orange',
+            '#ffc0cb': 'Pink',
+            '#ffd700': 'Gold',
+            '#4b0082': 'Indigo',
+            '#ee82ee': 'Violet',
+            '#f5f5dc': 'Beige',
+            '#a52a2a': 'Brown',
+            '#5f9ea0': 'Cadet Blue',
+            '#7fff00': 'Chartreuse',
+            '#d2691e': 'Chocolate',
+            '#ff7f50': 'Coral',
+            '#6495ed': 'Cornflower Blue',
+            '#dc143c': 'Crimson',
+            '#00ffff': 'Cyan',
+            '#00008b': 'Dark Blue',
+            '#008b8b': 'Dark Cyan',
+            '#b8860b': 'Dark Goldenrod',
+            '#a9a9a9': 'Dark Gray',
+            '#006400': 'Dark Green',
+            '#bdb76b': 'Dark Khaki',
+            '#8b008b': 'Dark Magenta',
+            '#556b2f': 'Dark Olive Green',
+            '#ff8c00': 'Dark Orange',
+            '#9932cc': 'Dark Orchid',
+            '#8b0000': 'Dark Red',
+            '#e9967a': 'Dark Salmon',
+            '#8fbc8f': 'Dark Sea Green',
+            '#483d8b': 'Dark Slate Blue',
+            '#2f4f4f': 'Dark Slate Gray',
+            '#00ced1': 'Dark Turquoise',
+            '#9400d3': 'Dark Violet',
+            '#ff1493': 'Deep Pink',
+            '#00bfff': 'Deep Sky Blue',
+            '#696969': 'Dim Gray',
+            '#1e90ff': 'Dodger Blue',
+            '#b22222': 'Fire Brick',
+            '#fffaf0': 'Floral White',
+            '#228b22': 'Forest Green',
+            '#dcdcdc': 'Gainsboro',
+            '#f8f8ff': 'Ghost White',
+            '#ffd700': 'Gold',
+            '#daa520': 'Goldenrod',
+            '#808080': 'Gray',
+            '#008000': 'Green',
+            '#adff2f': 'Green Yellow',
+            '#f0fff0': 'Honeydew',
+            '#ff69b4': 'Hot Pink',
+            '#cd5c5c': 'Indian Red',
+            '#4b0082': 'Indigo',
+            '#fffff0': 'Ivory',
+            '#f0e68c': 'Khaki',
+            '#e6e6fa': 'Lavender',
+            '#fff0f5': 'Lavender Blush',
+            '#7cfc00': 'Lawn Green',
+            '#fffacd': 'Lemon Chiffon',
+            '#add8e6': 'Light Blue',
+            '#f08080': 'Light Coral',
+            '#e0ffff': 'Light Cyan',
+            '#fafad2': 'Light Goldenrod Yellow',
+            '#d3d3d3': 'Light Gray',
+            '#90ee90': 'Light Green',
+            '#ffb6c1': 'Light Pink',
+            '#ffa07a': 'Light Salmon',
+            '#20b2aa': 'Light Sea Green',
+            '#87cefa': 'Light Sky Blue',
+            '#778899': 'Light Slate Gray',
+            '#b0c4de': 'Light Steel Blue',
+            '#ffffe0': 'Light Yellow',
+            '#00ff00': 'Lime',
+            '#32cd32': 'Lime Green',
+            '#faf0e6': 'Linen',
+            '#ff00ff': 'Magenta',
+            '#800000': 'Maroon',
+            '#66cdaa': 'Medium Aquamarine',
+            '#0000cd': 'Medium Blue',
+            '#ba55d3': 'Medium Orchid',
+            '#9370db': 'Medium Purple',
+            '#3cb371': 'Medium Sea Green',
+            '#7b68ee': 'Medium Slate Blue',
+            '#00fa9a': 'Medium Spring Green',
+            '#48d1cc': 'Medium Turquoise',
+            '#c71585': 'Medium Violet Red',
+            '#191970': 'Midnight Blue',
+            '#f5fffa': 'Mint Cream',
+            '#ffe4e1': 'Misty Rose',
+            '#ffe4b5': 'Moccasin',
+            '#ffdead': 'Navajo White',
+            '#000080': 'Navy',
+            '#fdf5e6': 'Old Lace',
+            '#808000': 'Olive',
+            '#6b8e23': 'Olive Drab',
+            '#ffa500': 'Orange',
+            '#ff4500': 'Orange Red',
+            '#da70d6': 'Orchid',
+            '#eee8aa': 'Pale Goldenrod',
+            '#98fb98': 'Pale Green',
+            '#afeeee': 'Pale Turquoise',
+            '#db7093': 'Pale Violet Red',
+            '#ffefd5': 'Papaya Whip',
+            '#ffdab9': 'Peach Puff',
+            '#cd853f': 'Peru',
+            '#ffc0cb': 'Pink',
+            '#dda0dd': 'Plum',
+            '#b0e0e6': 'Powder Blue',
+            '#800080': 'Purple',
+            '#ff0000': 'Red',
+            '#bc8f8f': 'Rosy Brown',
+            '#4169e1': 'Royal Blue',
+            '#8b4513': 'Saddle Brown',
+            '#fa8072': 'Salmon',
+            '#f4a460': 'Sandy Brown',
+            '#2e8b57': 'Sea Green',
+            '#fff5ee': 'Seashell',
+            '#a0522d': 'Sienna',
+            '#c0c0c0': 'Silver',
+            '#87ceeb': 'Sky Blue',
+            '#6a5acd': 'Slate Blue',
+            '#708090': 'Slate Gray',
+            '#fffafa': 'Snow',
+            '#00ff7f': 'Spring Green',
+            '#4682b4': 'Steel Blue',
+            '#d2b48c': 'Tan',
+            '#008080': 'Teal',
+            '#d8bfd8': 'Thistle',
+            '#ff6347': 'Tomato',
+            '#40e0d0': 'Turquoise',
+            '#ee82ee': 'Violet',
+            '#f5deb3': 'Wheat',
+            '#ffffff': 'White',
+            '#f5f5f5': 'White Smoke',
+            '#ffff00': 'Yellow',
+            '#9acd32': 'Yellow Green'
+        };
+        
+        // Sync color picker with text input
+        document.getElementById('colorPicker').addEventListener('input', function(e) {
+            document.getElementById('colorInput').value = e.target.value;
+            convertColor();
+        });
+        
+        function hexToRgb(hex) {
+            // Remove # if present
+            hex = hex.replace(/^#/, '');
+            
+            // Parse hex values
+            let r, g, b;
+            if (hex.length === 3) {
+                r = parseInt(hex[0] + hex[0], 16);
+                g = parseInt(hex[1] + hex[1], 16);
+                b = parseInt(hex[2] + hex[2], 16);
+            } else if (hex.length === 6) {
+                r = parseInt(hex.substring(0, 2), 16);
+                g = parseInt(hex.substring(2, 4), 16);
+                b = parseInt(hex.substring(4, 6), 16);
+            } else {
+                return null;
+            }
+            
+            return { r, g, b };
+        }
+        
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            
+            if (max === min) {
+                h = s = 0; // achromatic
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                
+                switch (max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            
+            h = Math.round(h * 360);
+            s = Math.round(s * 100);
+            l = Math.round(l * 100);
+            
+            return { h, s, l };
+        }
+        
+        function parseColor(input) {
+            // Check if it's HEX
+            if (input.startsWith('#')) {
+                return hexToRgb(input);
+            }
+            
+            // Check if it's RGB format
+            const rgbMatch = input.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/i);
+            if (rgbMatch) {
+                return {
+                    r: parseInt(rgbMatch[1]),
+                    g: parseInt(rgbMatch[2]),
+                    b: parseInt(rgbMatch[3])
+                };
+            }
+            
+            // Check if it's color name
+            for (let [hex, name] of Object.entries(colorNames)) {
+                if (name.toLowerCase() === input.toLowerCase()) {
+                    return hexToRgb(hex);
+                }
+            }
+            
+            return null;
+        }
+        
+        function convertColor() {
+            const input = document.getElementById('colorInput').value.trim();
+            const preview = document.getElementById('colorPreview');
+            const colorPicker = document.getElementById('colorPicker');
+            const messageBox = document.getElementById('messageBox');
+            
+            if (!input) {
+                messageBox.innerHTML = 'Please enter a color';
+                messageBox.className = 'message-area error-message';
+                return;
+            }
+            
+            const rgb = parseColor(input);
+            
+            if (!rgb) {
+                messageBox.innerHTML = 'Invalid color format. Use HEX (#ff0000), RGB (rgb(255,0,0)), or color name (red)';
+                messageBox.className = 'message-area error-message';
+                return;
+            }
+            
+            // Update preview
+            const rgbString = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+            preview.style.backgroundColor = rgbString;
+            
+            // Update color picker
+            const hex = '#' + ((1 << 24) + (rgb.r << 16) + (rgb.g << 8) + rgb.b).toString(16).slice(1);
+            colorPicker.value = hex;
+            
+            // Update values
+            document.getElementById('hexValue').textContent = hex.toUpperCase();
+            document.getElementById('rgbValue').textContent = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+            
+            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+            document.getElementById('hslValue').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            
+            // Find color name
+            const colorName = colorNames[hex.toLowerCase()] || 'Custom Color';
+            document.getElementById('colorName').textContent = colorName;
+            
+            messageBox.innerHTML = '✅ Color converted successfully!';
+            messageBox.className = 'message-area success-message';
+            
+            setTimeout(() => {
+                messageBox.innerHTML = '';
+                messageBox.className = 'message-area';
+            }, 2000);
+        }
+        
+        function resetColor() {
+            document.getElementById('colorInput').value = '#667eea';
+            document.getElementById('colorPicker').value = '#667eea';
+            convertColor();
+        }
+        
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const messageBox = document.getElementById('messageBox');
+                messageBox.innerHTML = '✅ Copied to clipboard!';
+                messageBox.className = 'message-area success-message';
+                
+                setTimeout(() => {
+                    messageBox.innerHTML = '';
+                    messageBox.className = 'message-area';
+                }, 2000);
+            });
+        }
+        
+        // Initial conversion
+        window.onload = convertColor;
+    </script>
+</body>
+</html>
