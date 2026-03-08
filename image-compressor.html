@@ -25,7 +25,7 @@
         .tool-card {
             background: white;
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         h1 { margin-bottom: 20px; }
@@ -54,6 +54,15 @@
             max-width: 100%;
             max-height: 200px;
             margin: 10px 0;
+        }
+        .file-info {
+            font-size: 14px;
+            color: #4a5568;
+            margin: 5px 0;
+        }
+        .savings {
+            color: #48bb78;
+            font-weight: bold;
         }
         .controls {
             background: #f8fafc;
@@ -101,11 +110,6 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-        .file-info {
-            margin-top: 10px;
-            color: #4a5568;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -113,7 +117,7 @@
         <a href="index.html" class="back-btn">← Back</a>
         <div class="tool-card">
             <h1>🗜️ Image Compressor</h1>
-            <p>Compress images by up to 80% without losing quality</p>
+            <p>Reduce image file size significantly - perfect for web</p>
             
             <div class="upload-area" onclick="document.getElementById('fileInput').click()">
                 <div style="font-size: 40px;">📁</div>
@@ -133,23 +137,24 @@
                         <h3>Compressed</h3>
                         <img id="compressedImg" src="">
                         <div class="file-info" id="compressedInfo"></div>
-                        <div class="file-info" id="savingsInfo" style="color: #48bb78;"></div>
+                        <div class="file-info savings" id="savingsInfo"></div>
                     </div>
                 </div>
 
                 <div class="controls">
                     <div class="quality-control">
-                        <label>Quality: <span id="qualityValue">70</span>% (Lower = Smaller file)</label>
-                        <input type="range" id="quality" min="10" max="100" value="70" oninput="document.getElementById('qualityValue').textContent = this.value">
+                        <label>Quality: <span id="qualityValue">50</span>% (Lower = Smaller file)</label>
+                        <input type="range" id="quality" min="10" max="100" value="50" step="5" 
+                               oninput="document.getElementById('qualityValue').textContent = this.value">
                     </div>
                     
                     <div class="button-group">
-                        <button class="compress-btn" onclick="compressImage()">🔄 Compress Image</button>
-                        <button class="delete-btn" onclick="deleteImage()">🗑️ Delete Image</button>
+                        <button class="compress-btn" onclick="compressImage()">🔄 Compress Now</button>
+                        <button class="delete-btn" onclick="deleteImage()">🗑️ Delete</button>
                     </div>
 
                     <div style="text-align: center; margin-top: 15px;">
-                        <a id="downloadLink" class="download-btn" style="display: none;">📥 Download Compressed Image</a>
+                        <a id="downloadLink" class="download-btn" style="display: none;">📥 Download Compressed</a>
                     </div>
                 </div>
             </div>
@@ -159,6 +164,7 @@
     <script>
         let originalFile = null;
         let originalImage = null;
+        let originalSize = 0;
 
         document.getElementById('fileInput').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -170,23 +176,24 @@
             }
 
             originalFile = file;
+            originalSize = file.size;
+            
             const reader = new FileReader();
             reader.onload = function(e) {
                 originalImage = new Image();
                 originalImage.src = e.target.result;
-                document.getElementById('originalImg').src = e.target.result;
-                
-                // Show original file info
-                document.getElementById('originalInfo').innerHTML = `
-                    Size: ${(file.size / 1024).toFixed(2)} KB<br>
-                    Type: ${file.type.split('/')[1].toUpperCase()}
-                `;
-                
-                document.getElementById('previewSection').style.display = 'block';
-                document.getElementById('compressedImg').src = '';
-                document.getElementById('compressedInfo').innerHTML = '';
-                document.getElementById('savingsInfo').innerHTML = '';
-                document.getElementById('downloadLink').style.display = 'none';
+                originalImage.onload = function() {
+                    document.getElementById('originalImg').src = e.target.result;
+                    document.getElementById('originalInfo').innerHTML = `
+                        Size: ${(originalSize / 1024).toFixed(2)} KB<br>
+                        Dimensions: ${originalImage.width} x ${originalImage.height}
+                    `;
+                    document.getElementById('previewSection').style.display = 'block';
+                    document.getElementById('compressedImg').src = '';
+                    document.getElementById('compressedInfo').innerHTML = '';
+                    document.getElementById('savingsInfo').innerHTML = '';
+                    document.getElementById('downloadLink').style.display = 'none';
+                };
             };
             reader.readAsDataURL(file);
         });
@@ -196,6 +203,7 @@
 
             const quality = document.getElementById('quality').value / 100;
             
+            // Create canvas with original dimensions
             const canvas = document.createElement('canvas');
             canvas.width = originalImage.width;
             canvas.height = originalImage.height;
@@ -203,33 +211,43 @@
             const ctx = canvas.getContext('2d');
             ctx.drawImage(originalImage, 0, 0);
 
+            // Compress based on file type
+            let outputType = originalFile.type;
+            if (outputType === 'image/png') {
+                // PNG doesn't support quality parameter well
+                outputType = 'image/jpeg'; // Convert to JPEG for better compression
+            }
+
             canvas.toBlob(function(blob) {
                 const url = URL.createObjectURL(blob);
                 document.getElementById('compressedImg').src = url;
                 
-                // Calculate savings
-                const originalSize = originalFile.size;
                 const compressedSize = blob.size;
                 const savings = ((1 - compressedSize/originalSize) * 100).toFixed(1);
+                const savedKB = ((originalSize - compressedSize) / 1024).toFixed(2);
                 
                 document.getElementById('compressedInfo').innerHTML = `
-                    Size: ${(compressedSize / 1024).toFixed(2)} KB
+                    Size: ${(compressedSize / 1024).toFixed(2)} KB<br>
+                    Dimensions: ${originalImage.width} x ${originalImage.height}
                 `;
                 
                 if (savings > 0) {
                     document.getElementById('savingsInfo').innerHTML = `
-                        ✨ Saved ${savings}% (${((originalSize - compressedSize) / 1024).toFixed(2)} KB)
+                        ✨ Saved ${savings}% (${savedKB} KB)
+                    `;
+                } else {
+                    document.getElementById('savingsInfo').innerHTML = `
+                        ⚠️ Try lower quality for better compression
                     `;
                 }
 
                 // Setup download
                 const downloadLink = document.getElementById('downloadLink');
                 downloadLink.href = url;
-                downloadLink.download = 'compressed-' + originalFile.name;
+                downloadLink.download = 'compressed-' + originalFile.name.split('.')[0] + '.jpg';
                 downloadLink.style.display = 'inline-block';
-                downloadLink.textContent = '📥 Download Compressed Image';
 
-            }, originalFile.type, quality);
+            }, outputType, quality);
         }
 
         function deleteImage() {
