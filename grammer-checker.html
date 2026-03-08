@@ -3,383 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Grammar Checker - AI-Powered Writing Assistant</title>
-    <meta name="description" content="Free online grammar checker. Check spelling, grammar, and punctuation instantly.">
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="TppyO_9iEI0Ey1QJ21HOrPLPLoMVDviDPF3ICqZr_v4" />
+    <title>Grammar Checker - DevTools Hub</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
         .container {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
             background: white;
             color: #667eea;
             text-decoration: none;
-            padding: 12px 25px;
             border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
-        
-        .back-button:hover {
-            transform: translateX(-5px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
         .tool-card {
             background: white;
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        
         h1 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 2em;
-        }
-        
-        .subtitle {
-            color: #666;
-            margin-bottom: 25px;
-        }
-        
-        .stats-bar {
-            display: flex;
-            gap: 20px;
-            background: #f0f4f8;
-            padding: 15px;
-            border-radius: 10px;
             margin-bottom: 20px;
         }
-        
-        .stat-item {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .stat-label {
-            color: #64748b;
-            font-size: 0.9em;
-        }
-        
-        .stat-value {
-            font-size: 1.8em;
-            font-weight: 700;
-            color: #667eea;
-        }
-        
         textarea {
             width: 100%;
-            padding: 20px;
-            border: 2px solid #e2e8f0;
+            height: 200px;
+            padding: 15px;
+            border: 2px solid #ddd;
             border-radius: 10px;
             font-size: 16px;
-            line-height: 1.6;
-            resize: vertical;
-            min-height: 200px;
-            font-family: inherit;
+            margin-bottom: 20px;
         }
-        
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .primary-btn {
-            flex: 1;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        button {
+            padding: 12px 25px;
+            background: #667eea;
             color: white;
             border: none;
             border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
+            font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            margin-right: 10px;
         }
-        
-        .primary-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        button:hover {
+            background: #5a67d8;
         }
-        
-        .secondary-btn {
-            padding: 15px 25px;
-            background: #e2e8f0;
-            color: #333;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .secondary-btn:hover {
-            background: #cbd5e0;
-        }
-        
-        .results-area {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 20px;
+        .results {
             margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
         }
-        
         .error-item {
-            background: white;
-            border-left: 4px solid #f56565;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 10px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
             margin-bottom: 10px;
         }
-        
-        .error-word {
-            font-weight: 700;
-            color: #c53030;
-        }
-        
-        .error-suggestion {
-            color: #38a169;
-            font-weight: 700;
-        }
-        
-        .corrected-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            border: 2px solid #c6f6d5;
-            margin-top: 15px;
-            line-height: 1.8;
-        }
-        
-        .message-area {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 8px;
-        }
-        
-        .success-message {
-            background: #c6f6d5;
-            color: #22543d;
-            padding: 10px 15px;
-            border-radius: 8px;
-        }
-        
-        .error-message {
-            background: #fed7d7;
-            color: #c53030;
-            padding: 10px 15px;
-            border-radius: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .stats-bar {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .button-group {
-                flex-direction: column;
-            }
+        .corrected {
+            margin-top: 20px;
+            padding: 15px;
+            background: #d4edda;
+            border-left: 4px solid #28a745;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="back-button">
-            <span class="back-icon">←</span>
-            <span>Back to Tools</span>
-        </a>
+        <a href="index.html" class="back-btn">← Back to Tools</a>
         
         <div class="tool-card">
             <h1>📝 Grammar Checker</h1>
-            <p class="subtitle">Check spelling, grammar, and punctuation instantly</p>
+            <p>Check your text for common grammar and spelling mistakes</p>
             
-            <div class="stats-bar" id="statsBar" style="display: none;">
-                <div class="stat-item">
-                    <div class="stat-label">Words</div>
-                    <div class="stat-value" id="wordCount">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Errors</div>
-                    <div class="stat-value" id="errorCount">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Reading Time</div>
-                    <div class="stat-value" id="readTime">0 min</div>
-                </div>
-            </div>
+            <textarea id="inputText" placeholder="Type or paste your text here...">I have went to the store yesterday and buyed some apples. Their is a mistake here.</textarea>
             
-            <textarea id="inputText" placeholder="Type or paste your text here...">I have went to the store yesterday and buyed some apples.</textarea>
+            <button onclick="checkGrammar()">🔍 Check Grammar</button>
+            <button onclick="clearText()">🗑️ Clear</button>
             
-            <div class="button-group">
-                <button class="primary-btn" onclick="checkGrammar()">🔍 Check Grammar</button>
-                <button class="secondary-btn" onclick="clearText()">🗑️ Clear</button>
-            </div>
-            
-            <div id="resultsArea" class="results-area" style="display: none;">
-                <h3 style="margin-bottom: 15px;">Issues Found:</h3>
-                <div id="errorsList"></div>
-                
-                <h3 style="margin: 20px 0 10px;">Corrected Version:</h3>
-                <div class="corrected-box" id="correctedText"></div>
-            </div>
-            
-            <div id="messageBox" class="message-area"></div>
+            <div id="results" class="results" style="display: none;"></div>
         </div>
     </div>
     
     <script>
-        const errorDatabase = {
-            'went': { correct: 'gone', context: 'after "have/has/had", use "gone" instead of "went"' },
-            'buyed': { correct: 'bought', context: 'past tense of "buy" is "bought", not "buyed"' },
-            'goed': { correct: 'went', context: 'past tense of "go" is "went", not "goed"' },
-            'doed': { correct: 'did', context: 'past tense of "do" is "did", not "doed"' },
-            'eated': { correct: 'ate', context: 'past tense of "eat" is "ate", not "eated"' },
-            'runned': { correct: 'ran', context: 'past tense of "run" is "ran", not "runned"' },
-            'swimmed': { correct: 'swam', context: 'past tense of "swim" is "swam", not "swimmed"' },
-            'drinked': { correct: 'drank', context: 'past tense of "drink" is "drank", not "drinked"' },
-            'thier': { correct: 'their', context: 'possessive form is "their", not "thier"' },
-            'recieve': { correct: 'receive', context: 'spelling: "i before e except after c"' },
-            'seperate': { correct: 'separate', context: 'there is "a" in "separate", not "e"' },
-            'definately': { correct: 'definitely', context: 'spelling: "definite" + "ly"' },
-            'occured': { correct: 'occurred', context: 'double "r" in past tense: occurred' },
-            'untill': { correct: 'until', context: 'only one "l" at the end' },
-            'tommorow': { correct: 'tomorrow', context: 'double "m", double "r": tomorrow' },
-            'calender': { correct: 'calendar', context: 'ends with "ar", not "er"' },
-            'alot': { correct: 'a lot', context: '"a lot" is two words, not one' },
-            'freind': { correct: 'friend', context: 'ends with "end", not "ind"' },
-            'beleive': { correct: 'believe', context: '"i" before "e" except after "c"' }
-        };
-        
         function checkGrammar() {
-            const input = document.getElementById('inputText').value;
+            const text = document.getElementById('inputText').value;
             
-            if (!input.trim()) {
-                showMessage('Please enter some text', 'error');
+            if (!text.trim()) {
+                alert('Please enter some text');
                 return;
             }
             
-            // Show stats bar
-            document.getElementById('statsBar').style.display = 'flex';
-            
-            // Calculate stats
-            const words = input.trim().split(/\s+/).length;
-            document.getElementById('wordCount').textContent = words;
-            document.getElementById('readTime').textContent = Math.ceil(words / 200) + ' min';
-            
-            // Find errors
             const errors = [];
-            let correctedText = input;
-            const words_array = input.split(/\s+/);
+            let corrected = text;
             
-            words_array.forEach(word => {
-                const cleanWord = word.replace(/[.,!?;:()]/g, '').toLowerCase();
-                
-                if (errorDatabase[cleanWord]) {
+            // Common error patterns
+            const patterns = [
+                { wrong: 'have went', correct: 'have gone', msg: 'Use "have gone" instead of "have went"' },
+                { wrong: 'buyed', correct: 'bought', msg: 'Past tense of "buy" is "bought"' },
+                { wrong: 'goed', correct: 'went', msg: 'Past tense of "go" is "went"' },
+                { wrong: 'doed', correct: 'did', msg: 'Past tense of "do" is "did"' },
+                { wrong: 'eated', correct: 'ate', msg: 'Past tense of "eat" is "ate"' },
+                { wrong: 'thier', correct: 'their', msg: 'Possessive form is "their"' },
+                { wrong: 'recieve', correct: 'receive', msg: 'Spelling: receive (i before e except after c)' },
+                { wrong: 'seperate', correct: 'separate', msg: 'Spelling: separate (has "a" in middle)' },
+                { wrong: 'definately', correct: 'definitely', msg: 'Spelling: definitely' },
+                { wrong: 'occured', correct: 'occurred', msg: 'Spelling: occurred (double r)' },
+                { wrong: 'untill', correct: 'until', msg: 'Spelling: until (one l)' },
+                { wrong: 'tommorow', correct: 'tomorrow', msg: 'Spelling: tomorrow (double m, double r)' },
+                { wrong: 'alot', correct: 'a lot', msg: '"a lot" is two words' },
+                { wrong: 'freind', correct: 'friend', msg: 'Spelling: friend' },
+                { wrong: 'calender', correct: 'calendar', msg: 'Spelling: calendar' }
+            ];
+            
+            // Check each pattern
+            patterns.forEach(pattern => {
+                if (text.toLowerCase().includes(pattern.wrong)) {
                     errors.push({
-                        original: word,
-                        correct: errorDatabase[cleanWord].correct,
-                        context: errorDatabase[cleanWord].context
+                        word: pattern.wrong,
+                        suggestion: pattern.correct,
+                        message: pattern.msg
                     });
                     
                     // Replace in corrected text
-                    const regex = new RegExp('\\b' + word + '\\b', 'g');
-                    correctedText = correctedText.replace(regex, errorDatabase[cleanWord].correct);
+                    const regex = new RegExp(pattern.wrong, 'gi');
+                    corrected = corrected.replace(regex, pattern.correct);
                 }
             });
             
-            // Check for "have went" pattern
-            if (input.includes('have went')) {
-                errors.push({
-                    original: 'have went',
-                    correct: 'have gone',
-                    context: 'use "have gone" instead of "have went"'
-                });
-                correctedText = correctedText.replace(/have went/g, 'have gone');
-            }
+            // Check for "their/there/they're" confusion
+            const words = text.split(' ');
+            words.forEach((word, index) => {
+                if (word.toLowerCase() === 'their' && index > 0 && words[index-1] === 'is') {
+                    errors.push({
+                        word: 'their',
+                        suggestion: 'there',
+                        message: 'Use "there" for existence (there is)'
+                    });
+                }
+            });
             
             // Display results
-            displayResults(errors, correctedText);
-            document.getElementById('resultsArea').style.display = 'block';
-            document.getElementById('errorCount').textContent = errors.length;
-            
-            if (errors.length > 0) {
-                showMessage('Found ' + errors.length + ' error(s)', 'error');
-            } else {
-                showMessage('No errors found!', 'success');
-            }
+            displayResults(errors, corrected);
         }
         
-        function displayResults(errors, correctedText) {
-            const errorsList = document.getElementById('errorsList');
-            errorsList.innerHTML = '';
+        function displayResults(errors, corrected) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+            
+            let html = '<h3>Issues Found:</h3>';
             
             if (errors.length === 0) {
-                errorsList.innerHTML = '<p style="color: #38a169;">✓ Your text looks good!</p>';
+                html += '<p style="color: #28a745;">✓ No errors found! Your text looks good.</p>';
             } else {
                 errors.forEach(error => {
-                    errorsList.innerHTML += `
+                    html += `
                         <div class="error-item">
-                            <div><span class="error-word">${error.original}</span> → <span class="error-suggestion">${error.correct}</span></div>
-                            <div style="color: #718096; font-size: 0.9em; margin-top: 5px;">${error.context}</div>
+                            <strong>❌ ${error.word}</strong> → <strong style="color: #28a745;">${error.suggestion}</strong>
+                            <br><small>${error.message}</small>
                         </div>
                     `;
                 });
             }
             
-            document.getElementById('correctedText').innerHTML = correctedText;
+            html += '<div class="corrected">';
+            html += '<h4>Suggested Correction:</h4>';
+            html += `<p>${corrected}</p>`;
+            html += '</div>';
+            
+            resultsDiv.innerHTML = html;
         }
         
         function clearText() {
             document.getElementById('inputText').value = '';
-            document.getElementById('resultsArea').style.display = 'none';
-            document.getElementById('statsBar').style.display = 'none';
-            document.getElementById('messageBox').innerHTML = '';
-        }
-        
-        function showMessage(text, type) {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.innerHTML = text;
-            messageBox.className = 'message-area ' + (type === 'success' ? 'success-message' : 'error-message');
-            
-            if (type === 'success') {
-                setTimeout(() => {
-                    messageBox.innerHTML = '';
-                }, 3000);
-            }
+            document.getElementById('results').style.display = 'none';
         }
     </script>
 </body>
