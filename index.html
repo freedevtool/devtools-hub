@@ -18,7 +18,47 @@
         html {
             scroll-behavior: smooth;
         }
-        
+        <script>
+function filterTools(category) {
+    // Update active button
+    document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter tools
+    const tools = document.querySelectorAll('.tool-card');
+    tools.forEach(tool => {
+        if (category === 'all') {
+            tool.style.display = 'block';
+        } else {
+            if (tool.dataset.category === category) {
+                tool.style.display = 'block';
+            } else {
+                tool.style.display = 'none';
+            }
+        }
+    });
+}
+
+// Initialize counts
+function updateCounts() {
+    const categories = ['dev', 'image', 'text', 'utility'];
+    categories.forEach(cat => {
+        const count = document.querySelectorAll(`.tool-card[data-category="${cat}"]`).length;
+        const btn = Array.from(document.querySelectorAll('.cat-btn')).find(
+            btn => btn.textContent.includes(cat === 'dev' ? 'Development' : 
+                                          cat === 'image' ? 'Image' : 
+                                          cat === 'text' ? 'Text' : 'Utilities')
+        );
+        if (btn) {
+            const span = btn.querySelector('span');
+            if (span) span.textContent = count;
+        }
+    });
+}
+
+// Run on load
+window.onload = updateCounts;
+</script>
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -424,6 +464,121 @@
             }
         }
     </style>
+         /* Category Tabs - Card Style */
+          .category-tabs {
+           display: flex;
+           gap: 15px;
+           margin: 30px 0 40px;
+           flex-wrap: wrap;
+          justify-content: center;
+        }
+
+.cat-btn {
+    padding: 15px 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 15px;
+    color: #333;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    min-width: 120px;
+}
+
+.cat-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    background: white;
+}
+
+.cat-btn.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    border-color: transparent;
+}
+
+/* Count Badge */
+.cat-btn span {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+
+.active span {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 3-Column Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Compact Cards */
+.tool-card {
+    padding: 20px !important;
+    border-radius: 15px !important;
+}
+
+.tool-icon {
+    font-size: 2.2em !important;
+    margin-bottom: 10px !important;
+}
+
+.tool-card h3 {
+    font-size: 1.2em !important;
+    margin-bottom: 5px !important;
+}
+
+.tool-card p {
+    font-size: 0.85em !important;
+    margin-bottom: 12px !important;
+    line-height: 1.4 !important;
+    color: #666 !important;
+}
+
+.tool-tag {
+    font-size: 0.7em !important;
+    padding: 4px 10px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tools-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cat-btn {
+        padding: 12px 20px;
+        min-width: 100px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .category-tabs {
+        gap: 10px;
+    }
+    
+    .cat-btn {
+        padding: 10px 15px;
+        min-width: calc(50% - 10px);
+    }
+}
 </head>
 <body>
     <!-- Floating Particles -->
@@ -477,100 +632,115 @@
             </div>
 
             <div class="tools-grid">
-                <!-- Password Generator -->
-                <a href="password-generator.html" class="tool-card">
-                    <div class="tool-icon">🔐</div>
-                    <h3>Password Generator</h3>
-                    <p>Create strong, secure passwords with customizable options. Includes strength meter.</p>
-                    <span class="tool-tag">Security</span>
-                </a>
+                <!-- Category Tabs - Card Style -->
+<div class="category-tabs">
+    <button class="cat-btn active" onclick="filterTools('all')">
+        All Tools <span>12</span>
+    </button>
+    <button class="cat-btn" onclick="filterTools('dev')">
+        💻 Development <span>2</span>
+    </button>
+    <button class="cat-btn" onclick="filterTools('image')">
+        🖼️ Image Tools <span>3</span>
+    </button>
+    <button class="cat-btn" onclick="filterTools('text')">
+        📝 Text Tools <span>2</span>
+    </button>
+    <button class="cat-btn" onclick="filterTools('utility')">
+        🔧 Utilities <span>5</span>
+    </button>
+</div>
 
-                <!-- JSON Formatter -->
-                <a href="json-formatter.html" class="tool-card">
-                    <div class="tool-icon">🔄</div>
-                    <h3>JSON Formatter</h3>
-                    <p>Format, validate, and minify JSON data with syntax highlighting.</p>
-                    <span class="tool-tag">Development</span>
-                </a>
-
-                <!-- Base64 Encoder -->
-                <a href="base64.html" class="tool-card">
-                    <div class="tool-icon">🔤</div>
-                    <h3>Base64 Encoder</h3>
-                    <p>Encode text to Base64 and decode Base64 back to text instantly.</p>
-                    <span class="tool-tag">Encoding</span>
-                </a>
-
-                <!-- Word Counter -->
-                <a href="word-counter.html" class="tool-card">
-                    <div class="tool-icon">📝</div>
-                    <h3>Word Counter</h3>
-                    <p>Count words, characters, sentences, and estimate reading time.</p>
-                    <span class="tool-tag">Writing</span>
-                </a>
-
-                <!-- QR Code Generator -->
-                <a href="qr-generator.html" class="tool-card">
-                    <div class="tool-icon">🏷️</div>
-                    <h3>QR Code Generator</h3>
-                    <p>Create custom QR codes for URLs, text, and more. Perfect for sharing.</p>
-                    <span class="tool-tag">Utility</span>
-                </a>
-
-                <!-- Color Converter -->
-                <a href="color-converter.html" class="tool-card">
-                    <div class="tool-icon">🎨</div>
-                    <h3>Color Converter</h3>
-                    <p>Convert between HEX, RGB, HSL, and color names instantly.</p>
-                    <span class="tool-tag">Design</span>
-                </a>
-
-                <!-- Image Resizer -->
-                <a href="image-resizer.html" class="tool-card">
-                    <div class="tool-icon">🖼️</div>
-                    <h3>Image Resizer</h3>
-                    <p>Resize images instantly without losing quality. Perfect for social media.</p>
-                    <span class="tool-tag">Image</span>
-                </a>
-
-                <!-- Unit Converter -->
-                <a href="unit-converter.html" class="tool-card">
-                    <div class="tool-icon">📏</div>
-                    <h3>Unit Converter</h3>
-                    <p>Convert between length, weight, temperature, and more.</p>
-                    <span class="tool-tag">Utility</span>
-                </a>
-
-                <!-- Grammar Checker -->
-                <a href="grammar-checker.html" class="tool-card">
-                    <div class="tool-icon">✅</div>
-                    <h3>Grammar Checker</h3>
-                    <p>Check spelling, grammar, and punctuation instantly. AI-powered.</p>
-                    <span class="tool-tag">Writing</span>
-                </a>
-
-                <!-- Background Remover -->
-                <a href="background-remover.html" class="tool-card">
-                    <div class="tool-icon">✨</div>
-                    <h3>Background Remover</h3>
-                    <p>Remove image backgrounds instantly with AI. Perfect for product photos.</p>
-                    <span class="tool-tag">Image</span>
-                </a>
-
-                <!-- PDF to JPG -->
-                <a href="pdf-to-jpg.html" class="tool-card">
-                    <div class="tool-icon">📄</div>
-                    <h3>PDF to JPG</h3>
-                    <p>Convert PDF pages to high-quality images. 100% private, no upload.</p>
-                    <span class="tool-tag">PDF</span>
-                </a>
-
-                <!-- Image Compressor (NEW) -->
-                <a href="image-compressor.html" class="tool-card">
-                    <div class="tool-icon">🗜️</div>
-                    <h3>Image Compressor</h3>
-                    <p>Reduce image file size by up to 90% without losing quality. Perfect for web.</p>
-                    <span class="tool-tag">Image</span>
+<!-- Tools Grid with Categories -->
+<div class="tools-grid" id="toolsGrid">
+    <!-- DEVELOPMENT TOOLS (2) -->
+    <a href="json-formatter.html" class="tool-card" data-category="dev">
+        <div class="tool-icon">🔄</div>
+        <h3>JSON Formatter</h3>
+        <p>Format, validate, and minify JSON data with syntax highlighting</p>
+        <span class="tool-tag">Dev</span>
+    </a>
+    
+    <a href="base64.html" class="tool-card" data-category="dev">
+        <div class="tool-icon">🔤</div>
+        <h3>Base64 Encoder</h3>
+        <p>Encode text to Base64 and decode Base64 back to text instantly</p>
+        <span class="tool-tag">Dev</span>
+    </a>
+    
+    <!-- IMAGE TOOLS (3) -->
+    <a href="image-resizer.html" class="tool-card" data-category="image">
+        <div class="tool-icon">🖼️</div>
+        <h3>Image Resizer</h3>
+        <p>Resize images instantly without losing quality</p>
+        <span class="tool-tag">Image</span>
+    </a>
+    
+    <a href="image-compressor.html" class="tool-card" data-category="image">
+        <div class="tool-icon">🗜️</div>
+        <h3>Image Compressor</h3>
+        <p>Reduce image file size by up to 90% without losing quality</p>
+        <span class="tool-tag">Image</span>
+    </a>
+    
+    <a href="background-remover.html" class="tool-card" data-category="image">
+        <div class="tool-icon">✨</div>
+        <h3>Background Remover</h3>
+        <p>Remove image backgrounds instantly with AI</p>
+        <span class="tool-tag">Image</span>
+    </a>
+    
+    <!-- TEXT TOOLS (2) -->
+    <a href="word-counter.html" class="tool-card" data-category="text">
+        <div class="tool-icon">📝</div>
+        <h3>Word Counter</h3>
+        <p>Count words, characters, sentences, and estimate reading time</p>
+        <span class="tool-tag">Text</span>
+    </a>
+    
+    <a href="grammar-checker.html" class="tool-card" data-category="text">
+        <div class="tool-icon">✅</div>
+        <h3>Grammar Checker</h3>
+        <p>Check spelling, grammar, and punctuation instantly</p>
+        <span class="tool-tag">Text</span>
+    </a>
+    
+    <!-- UTILITY TOOLS (5) -->
+    <a href="password-generator.html" class="tool-card" data-category="utility">
+        <div class="tool-icon">🔐</div>
+        <h3>Password Generator</h3>
+        <p>Create strong, secure passwords with customizable options</p>
+        <span class="tool-tag">Utility</span>
+    </a>
+    
+    <a href="qr-generator.html" class="tool-card" data-category="utility">
+        <div class="tool-icon">🏷️</div>
+        <h3>QR Generator</h3>
+        <p>Create custom QR codes for URLs, text, and more</p>
+        <span class="tool-tag">Utility</span>
+    </a>
+    
+    <a href="color-converter.html" class="tool-card" data-category="utility">
+        <div class="tool-icon">🎨</div>
+        <h3>Color Converter</h3>
+        <p>Convert between HEX, RGB, HSL, and color names</p>
+        <span class="tool-tag">Utility</span>
+    </a>
+    
+    <a href="unit-converter.html" class="tool-card" data-category="utility">
+        <div class="tool-icon">📏</div>
+        <h3>Unit Converter</h3>
+        <p>Convert length, weight, temperature, and more</p>
+        <span class="tool-tag">Utility</span>
+    </a>
+    
+    <a href="pdf-to-jpg.html" class="tool-card" data-category="utility">
+        <div class="tool-icon">📄</div>
+        <h3>PDF to JPG</h3>
+        <p>Convert PDF pages to high-quality images</p>
+        <span class="tool-tag">Utility</span>
+    </a>
+</div>
                 </a>
             </div>
         </section>
