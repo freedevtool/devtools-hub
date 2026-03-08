@@ -144,6 +144,14 @@
             border-radius: 8px;
             font-weight: 600;
         }
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            color: #856404;
+        }
         @media (max-width: 768px) {
             .preview-container {
                 grid-template-columns: 1fr;
@@ -160,7 +168,11 @@
         
         <div class="tool-card">
             <h1>🗜️ Image Compressor</h1>
-            <p class="subtitle">Reduce image file size without losing quality. 100% free - no upload needed.</p>
+            <p class="subtitle">Reduce image file size without losing quality. 100% free - all in your browser.</p>
+            
+            <div class="warning-box">
+                <strong>💡 Tip:</strong> Lower quality = smaller file size. For web, 70-80% quality is perfect!
+            </div>
             
             <div class="upload-area" id="uploadArea">
                 <div class="upload-icon">📸</div>
@@ -172,8 +184,8 @@
             <div id="controls" style="display: none;">
                 <div class="compress-controls">
                     <div class="control-group">
-                        <label>Quality: <span id="qualityValue">80</span>%</label>
-                        <input type="range" id="quality" min="10" max="100" value="80">
+                        <label>Quality: <span id="qualityValue">70</span>% (Lower = Smaller file)</label>
+                        <input type="range" id="quality" min="10" max="100" value="70">
                     </div>
                 </div>
                 
@@ -187,12 +199,13 @@
                         <h4>Compressed</h4>
                         <img id="compressedPreview" src="">
                         <div class="file-info" id="compressedInfo"></div>
+                        <div class="file-info" id="savingsInfo" style="color: #28a745; font-weight: bold;"></div>
                     </div>
                 </div>
                 
                 <button class="primary-btn" onclick="compressImage()">🔄 Compress Image</button>
                 <div style="text-align: center; margin-top: 15px;">
-                    <a id="downloadLink" class="download-btn" style="display: none;">📥 Download Compressed</a>
+                    <a id="downloadLink" class="download-btn" style="display: none;">📥 Download Compressed Image</a>
                 </div>
             </div>
         </div>
@@ -222,7 +235,11 @@
                 document.getElementById('originalPreview').src = e.target.result;
                 document.getElementById('controls').style.display = 'block';
                 document.getElementById('originalInfo').textContent = 
-                    `Size: ${(file.size / 1024).toFixed(2)} KB | Type: ${file.type}`;
+                    `Size: ${(file.size / 1024).toFixed(2)} KB | Type: ${file.type.split('/')[1].toUpperCase()}`;
+                document.getElementById('compressedPreview').src = '';
+                document.getElementById('compressedInfo').textContent = '';
+                document.getElementById('savingsInfo').textContent = '';
+                document.getElementById('downloadLink').style.display = 'none';
             };
             reader.readAsDataURL(file);
         });
@@ -247,22 +264,57 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0);
                     
-                    canvas.toBlob((blob) => {
-                        compressedBlob = blob;
-                        const url = URL.createObjectURL(blob);
-                        document.getElementById('compressedPreview').src = url;
-                        document.getElementById('compressedInfo').textContent = 
-                            `Size: ${(blob.size / 1024).toFixed(2)} KB | Savings: ${((1 - blob.size/originalFile.size) * 100).toFixed(1)}%`;
-                        
-                        const downloadLink = document.getElementById('downloadLink');
-                        downloadLink.href = url;
-                        downloadLink.style.display = 'inline-block';
-                        downloadLink.download = `compressed-${originalFile.name}`;
-                    }, originalFile.type, quality);
+                    // Determine output type based on original
+                    let outputType = originalFile.type;
+                    if (outputType === 'image/png') {
+                        // PNG quality parameter works differently
+                        canvas.toBlob((blob) => {
+                            handleCompressedBlob(blob);
+                        }, outputType, quality);
+                    } else {
+                        // JPEG and WebP work with quality parameter
+                        canvas.toBlob((blob) => {
+                            handleCompressedBlob(blob);
+                        }, outputType, quality);
+                    }
                 };
                 img.src = e.target.result;
             };
             reader.readAsDataURL(originalFile);
+        }
+        
+        function handleCompressedBlob(blob) {
+            compressedBlob = blob;
+            const url = URL.createObjectURL(blob);
+            document.getElementById('compressedPreview').src = url;
+            
+            const originalSize = originalFile.size;
+            const compressedSize = blob.size;
+            const savings = ((1 - compressedSize/originalSize) * 100).toFixed(1);
+            
+            document.getElementById('compressedInfo').textContent = 
+                `Size: ${(compressedSize / 1024).toFixed(2)} KB`;
+            
+            if (savings > 0) {
+                document.getElementById('savingsInfo').textContent = 
+                    `✨ Saved ${savings}% (${((originalSize - compressedSize) / 1024).toFixed(2)} KB)`;
+                document.getElementById('savingsInfo').style.color = '#28a745';
+            } else {
+                document.getElementById('savingsInfo').textContent = 
+                    `⚠️ Try lower quality for better compression`;
+                document.getElementById('savingsInfo').style.color = '#dc3545';
+            }
+            
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = url;
+            downloadLink.style.display = 'inline-block';
+            
+            // Set filename
+            const originalName = originalFile.name;
+            const lastDot = originalName.lastIndexOf('.');
+            const baseName = lastDot !== -1 ? originalName.substring(0, lastDot) : originalName;
+            const extension = originalName.split('.').pop();
+            downloadLink.download = `${baseName}-compressed.${extension}`;
         }
     </script>
 </body>
