@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevTools Hub - 12+ Free Professional Tools</title>
+    <title>Explore Dev Tools- 12+ Free Professional Tools</title>
     <meta name="description" content="Free professional online tools: Password Generator, JSON Formatter, Image Compressor, Grammar Checker and more. 100% free, no signup.">
     <meta name="keywords" content="developer tools, online tools, free tools, image compressor, grammar checker, password generator">
     <!-- Google Search Console Verification -->
@@ -16,7 +16,16 @@
         }
         
         html {
-            scroll-behavior: smooth;
+            /* Smooth Scroll */
+html {
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch; /* iPhone/iPad ke liye */
+}
+
+body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
         }
         
         body {
@@ -25,12 +34,17 @@
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             min-height: 100vh;
-        }
+    {
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    animation: gradientBG 25s ease infinite; /* 15s se 25s kiya */
+}
         
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         
         .container {
@@ -280,6 +294,18 @@
             margin-bottom: 12px !important;
             line-height: 1.4 !important;
             color: #4a5568 !important;
+            .tool-card {
+    /* Pehle se existing properties */
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px !important;
+    padding: 20px !important;
+    
+    /* ✅  - Hardware acceleration */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+        }
         }
         
         .tool-tag {
@@ -450,7 +476,19 @@
                 min-width: calc(50% - 10px);
             }
         }
-    </style>
+    </style> 
+    
+/* <style>  */
+html {
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch; /* iOS ke liye */
+}
+
+body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+}
 </head>
 <body>
     <div class="container">
@@ -458,7 +496,7 @@
         <header class="site-header">
             <div class="logo">
                 <span class="logo-icon">🛠️</span>
-                <span class="site-title">DevTools Hub</span>
+                <span class="site-title">Explore Dev Tools</span>
             </div>
             <nav class="nav-menu">
                 <a href="#tools" class="nav-item">Tools</a>
@@ -469,7 +507,11 @@
 
         <!-- Hero Section -->
         <section class="hero-section">
-            <h1 class="hero-title">🚀 12+ Free Developer Tools</h1>
+      transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    }
+            <h1 class="hero-title">🚀 Explore Dev Tools- 12+ Free Developer Tools</h1>
             <p class="hero-subtitle">Professional-grade tools that run in your browser. No signup, no tracking, completely free.</p>
             <a href="#tools" class="cta-button" style="margin-top: 20px;">✨ Explore All Tools</a>
             
@@ -610,7 +652,7 @@
         <!-- Features Section -->
         <section class="features-section">
             <div class="section-title">
-                <h2>Why Choose DevTools Hub?</h2>
+                <h2>Why Choose Explore Dev Tools?</h2>
                 <p>Built with ❤️ for developers, designers, and creators</p>
             </div>
 
@@ -634,6 +676,14 @@
                     <div class="feature-icon">💯</div>
                     <h4>Completely Free</h4>
                     <p>No hidden costs, forever free</p>
+    .feature-card {
+    /* Pehle se existing properties */
+    
+    /* ✅ */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    }
                 </div>
             </div>
         </section>
@@ -644,88 +694,7 @@
         </section>
 
         <!-- Footer -->
-<footer class="footer">
-    <div class="footer-content">
-        <!-- Company Info -->
-        <div class="footer-col">
-            <h4>🏢 DevTools Hub</h4>
-            <ul>
-                <li><a href="index.html">🏠 Home</a></li>
-                <li><a href="#tools">🛠️ All Tools</a></li>
-                <li><a href="about.html">📖 About Us</a></li>
-                <li><a href="contact.html">📬 Contact</a></li>
-                <li><a href="blog.html">📝 Blog</a></li>
-            </ul>
-        </div>
-        
-        <!-- Development Tools -->
-        <div class="footer-col">
-            <h4>💻 Development</h4>
-            <ul>
-                <li><a href="json-formatter.html">🔄 JSON Formatter</a></li>
-                <li><a href="base64.html">🔤 Base64 Encoder</a></li>
-            </ul>
-        </div>
-        
-        <!-- Image Tools -->
-        <div class="footer-col">
-            <h4>🖼️ Image Tools</h4>
-            <ul>
-                <li><a href="image-resizer.html">📏 Image Resizer</a></li>
-                <li><a href="image-compressor.html">🗜️ Image Compressor</a></li>
-                <li><a href="background-remover.html">✨ Background Remover</a></li>
-            </ul>
-        </div>
-        
-        <!-- Text Tools -->
-        <div class="footer-col">
-            <h4>📝 Text Tools</h4>
-            <ul>
-                <li><a href="word-counter.html">📊 Word Counter</a></li>
-                <li><a href="grammar-checker.html">✅ Grammar Checker</a></li>
-            </ul>
-        </div>
-        
-        <!-- Utility Tools -->
-        <div class="footer-col">
-            <h4>🔧 Utilities</h4>
-            <ul>
-                <li><a href="password-generator.html">🔐 Password Generator</a></li>
-                <li><a href="qr-generator.html">🏷️ QR Generator</a></li>
-                <li><a href="color-converter.html">🎨 Color Converter</a></li>
-                <li><a href="unit-converter.html">📏 Unit Converter</a></li>
-                <li><a href="pdf-to-jpg.html">📄 PDF to JPG</a></li>
-            </ul>
-        </div>
-        
-        <!-- Legal & Info -->
-        <div class="footer-col">
-            <h4>⚖️ Legal</h4>
-            <ul>
-                <li><a href="privacy.html">🔒 Privacy Policy</a></li>
-                <li><a href="terms.html">📜 Terms of Use</a></li>
-                <li><a href="cookies.html">🍪 Cookie Policy</a></li>
-            </ul>
-        </div>
-        
-        <!-- Connect -->
-        <div class="footer-col">
-            <h4>📬 Connect</h4>
-            <ul>
-                <li><a href="contact.html">📧 Contact Us</a></li>
-                <li><a href="mailto:citybreaks2019@gmail.com">✉️ Email</a></li>
-                <li><a href="#" target="_blank">🐦 Twitter</a></li>
-                <li><a href="#" target="_blank">💼 LinkedIn</a></li>
-                <li><a href="#" target="_blank">📘 Facebook</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <!-- Footer Bottom -->
-    <div class="footer-bottom">
-        <p>© 2026 DevTools Hub. All 12 tools are 100% free and open source.</p>
-        <p style="margin-top: 10px; font-size: 0.9em;">Made with ❤️ for developers everywhere | <a href="blog.html">Visit our Blog</a></p>
-    </div>
+<    </div>
 </footer>
         <processing happens in your browser.</p>
             </div>
@@ -773,3 +742,94 @@
     </script>
 </body>
 </html>
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <!-- Company Info -->
+        <div class="footer-col">
+            <h4>🏢 ExploreDevTools</h4>
+            <ul>
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="#tools">🛠️ All Tools</a></li>
+                <li><a href="about.html">📖 About Us</a></li>
+                <li><a href="contact.html">📬 Contact</a></li>
+            </ul>
+        </div>
+        
+        <!-- Blog Section - NEW -->
+        <div class="footer-col">
+            <h4>📝 Blog</h4>
+            <ul>
+                <li><a href="blog.html">📚 All Posts</a></li>
+                <li><a href="blog-password-tips.html">🔐 Password Tips</a></li>
+                <li><a href="blog-image-compression.html">🖼️ Image Compression</a></li>
+                <li><a href="blog-grammar-tips.html">📝 Grammar Guide</a></li>
+                <li><a href="blog.html" style="color: #ffd700; font-weight: bold;">✨ Visit Our Blog →</a></li>
+            </ul>
+        </div>
+        
+        <!-- Development Tools -->
+        <div class="footer-col">
+            <h4>💻 Development</h4>
+            <ul>
+                <li><a href="json-formatter.html">🔄 JSON Formatter</a></li>
+                <li><a href="base64.html">🔤 Base64 Encoder</a></li>
+            </ul>
+        </div>
+        
+        <!-- Image Tools -->
+        <div class="footer-col">
+            <h4>🖼️ Image Tools</h4>
+            <ul>
+                <li><a href="image-resizer.html">📏 Image Resizer</a></li>
+                <li><a href="image-compressor.html">🗜️ Image Compressor</a></li>
+                <li><a href="background-remover.html">✨ Background Remover</a></li>
+            </ul>
+        </div>
+        
+        <!-- Text Tools -->
+        <div class="footer-col">
+            <h4>📝 Text Tools</h4>
+            <ul>
+                <li><a href="word-counter.html">📊 Word Counter</a></li>
+                <li><a href="grammar-checker.html">✅ Grammar Checker</a></li>
+            </ul>
+        </div>
+        
+        <!-- Utility Tools -->
+        <div class="footer-col">
+            <h4>🔧 Utilities</h4>
+            <ul>
+                <li><a href="password-generator.html">🔐 Password Generator</a></li>
+                <li><a href="qr-generator.html">🏷️ QR Generator</a></li>
+                <li><a href="color-converter.html">🎨 Color Converter</a></li>
+                <li><a href="unit-converter.html">📏 Unit Converter</a></li>
+                <li><a href="pdf-to-jpg.html">📄 PDF to JPG</a></li>
+            </ul>
+        </div>
+        
+        <!-- Legal & Connect -->
+        <div class="footer-col">
+            <h4>⚖️ Legal</h4>
+            <ul>
+                <li><a href="privacy.html">🔒 Privacy Policy</a></li>
+                <li><a href="terms.html">📜 Terms of Use</a></li>
+                <li><a href="cookies.html">🍪 Cookie Policy</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-col">
+            <h4>📬 Connect</h4>
+            <ul>
+                <li><a href="contact.html">📧 Contact Us</a></li>
+                <li><a href="mailto:hello@exploredevtools.com">✉️ hello@exploredevtools.com</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <p>© 2026 ExploreDevTools. All 12 tools are 100% free and open source.</p>
+        <p style="margin-top: 10px; font-size: 0.9em;">Made with ❤️ for developers everywhere | <a href="blog.html" style="color: #ffd700; font-weight: bold;">📚 Explore Our Blog</a></p>
+    </div>
+</footer>
