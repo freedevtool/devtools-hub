@@ -429,6 +429,45 @@
             
             .cat-btn {
                 min-width: calc(50% - 10px);
+                /* ===== LOGO MEDIA QUERIES - ADD THIS HERE ===== */
+
+/* Tablet ke liye */
+@media (max-width: 768px) {
+    .logo img {
+        height: 45px !important;  /* Mobile pe logo chhota */
+    }
+    
+    .logo {
+        gap: 10px !important;
+    }
+    
+    .site-title {
+        font-size: 1.2em !important;
+    }
+}
+
+/* Mobile ke liye */
+@media (max-width: 480px) {
+    .logo img {
+        height: 35px !important;  /* Chhote mobile pe aur chhota */
+    }
+    
+    .site-title {
+        font-size: 1em !important;
+    }
+}
+
+/* Small mobile ke liye */
+@media (max-width: 360px) {
+    .logo {
+        flex-direction: column;  /* Logo upar, text neeche */
+        gap: 5px !important;
+    }
+    
+    .logo img {
+        height: 40px !important;
+    }
+}
             }
         }
     </style>
@@ -438,9 +477,12 @@
         <!-- Header -->
         <header class="site-header">
             <div class="logo">
-    <img src="logo.png" alt="Logo" style="height: 50px; width: auto; margin-right: 10px;">
+    <img src="logo.png" alt="Logo" style="height: 60px; width: auto; margin-right: 15px;">
     <span class="site-title">ExploreDevTools</span>
 </div>
+    
+    }
+}
             </div>
             <nav class="nav-menu">
                 <a href="#tools" class="nav-item">Tools</a>
