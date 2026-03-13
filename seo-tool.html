@@ -550,52 +550,98 @@
     <script>
         // Your existing JavaScript remains exactly the same
         const keywordDatabase = {
-            "seo tools": {
-                volume: "12,500",
-                cpc: "$8.50",
-                competition: "High",
-                difficulty: 78,
-                trend: "+15%",
-                related: [
-                    { keyword: "best seo tools", volume: "4,200" },
-                    { keyword: "free seo tools", volume: "8,900" },
-                    { keyword: "seo tools list", volume: "2,300" },
-                    { keyword: "seo tools 2026", volume: "1,800" }
-                ],
-                questions: [
-                    "What are the best seo tools for beginners?",
-                    "How to use seo tools effectively?",
-                    "Which seo tools are free?"
-                ]
-            },
-            "content marketing": {
-                volume: "18,200",
-                cpc: "$12.50",
-                competition: "High",
-                difficulty: 72,
-                trend: "+8%",
-                related: [
-                    { keyword: "content marketing strategy", volume: "6,500" },
-                    { keyword: "content marketing examples", volume: "3,200" }
-                ],
-                questions: [
-                    "What is content marketing?",
-                    "How to create a content marketing strategy?"
-                ]
-            },
-            "keyword research": {
-                volume: "8,900",
-                cpc: "$9.75",
-                competition: "Medium",
-                difficulty: 65,
-                trend: "+12%",
-                related: [
-                    { keyword: "keyword research tool", volume: "5,200" },
-                    { keyword: "google keyword planner", volume: "22,000" }
-                ],
-                questions: [
-                    "How to do keyword research?",
-                    "What are the best keyword research tools?"
+    "seo tools": {
+        volume: "12,500",
+        cpc: "₹45",      // Medium-high competition
+        competition: "High",
+        difficulty: 78,
+        trend: "+15%",
+        related: [
+            { keyword: "best seo tools", volume: "4,200" },
+            { keyword: "free seo tools", volume: "8,900" },
+            { keyword: "seo tools list", volume: "2,300" },
+            { keyword: "seo tools 2026", volume: "1,800" }
+        ],
+        questions: [
+            "What are the best seo tools for beginners?",
+            "How to use seo tools effectively?",
+            "Which seo tools are free?"
+        ]
+    },
+    "content marketing": {
+        volume: "18,200",
+        cpc: "₹55",       // High competition
+        competition: "High",
+        difficulty: 72,
+        trend: "+8%",
+        related: [
+            { keyword: "content marketing strategy", volume: "6,500" },
+            { keyword: "content marketing examples", volume: "3,200" }
+        ],
+        questions: [
+            "What is content marketing?",
+            "How to create a content marketing strategy?"
+        ]
+    },
+    "keyword research": {
+        volume: "8,900",
+        cpc: "₹25",       // Medium competition
+        competition: "Medium",
+        difficulty: 65,
+        trend: "+12%",
+        related: [
+            { keyword: "keyword research tool", volume: "5,200" },
+            { keyword: "google keyword planner", volume: "22,000" }
+        ],
+        questions: [
+            "How to do keyword research?",
+            "What are the best keyword research tools?"
+        ]
+    },
+    "digital marketing": {
+        volume: "22,000",
+        cpc: "₹35",
+        competition: "High",
+        difficulty: 68,
+        trend: "+10%",
+        related: [
+            { keyword: "digital marketing strategy", volume: "8,500" },
+            { keyword: "digital marketing course", volume: "14,000" }
+        ],
+        questions: [
+            "What is digital marketing?",
+            "How to start digital marketing?"
+        ]
+    },
+    "local seo": {
+        volume: "6,200",
+        cpc: "₹15",       // Low-medium competition
+        competition: "Medium",
+        difficulty: 45,
+        trend: "+22%",
+        related: [
+            { keyword: "local seo services", volume: "3,100" },
+            { keyword: "local seo tips", volume: "1,800" }
+        ],
+        questions: [
+            "What is local SEO?",
+            "How to improve local SEO?"
+        ]
+    },
+    "ecommerce seo": {
+        volume: "4,800",
+        cpc: "₹85",       // High competition (commercial)
+        competition: "High",
+        difficulty: 82,
+        trend: "+18%",
+        related: [
+            { keyword: "ecommerce seo tips", volume: "2,200" },
+            { keyword: "shopify seo", volume: "3,600" }
+        ],
+        questions: [
+            "How to do SEO for ecommerce?",
+            "Best ecommerce SEO practices?"
+            
                 ]
             }
         };
@@ -621,16 +667,56 @@
             }, 1500);
         }
 
-        function generateMockData(keyword) {
-            const randomVolume = Math.floor(Math.random() * 15000) + 1000;
-            const randomDifficulty = Math.floor(Math.random() * 80) + 10;
-            
-            return {
-                volume: randomVolume.toLocaleString(),
-                cpc: "$" + (Math.random() * 15 + 2).toFixed(2),
-                competition: ["Low", "Medium", "High"][Math.floor(Math.random() * 3)],
-                difficulty: randomDifficulty,
-                trend: (Math.random() * 30 - 5).toFixed(0) + "%",
+         function generateMockData(keyword) {
+    const randomVolume = Math.floor(Math.random() * 15000) + 1000;
+    const randomDifficulty = Math.floor(Math.random() * 80) + 10;
+    
+    // Realistic Indian CPC - Ab aur kam kiya
+    let cpcValue;
+    if (randomDifficulty > 70) {
+        cpcValue = Math.floor(Math.random() * 80) + 40;   // High competition: ₹40-120
+    } else if (randomDifficulty > 40) {
+        cpcValue = Math.floor(Math.random() * 30) + 10;   // Medium competition: ₹10-40
+    } else {
+        cpcValue = Math.floor(Math.random() * 8) + 2;      // Low competition: ₹2-10
+    }
+    
+    return {
+        volume: randomVolume.toLocaleString(),
+        cpc: "₹" + cpcValue,
+        competition: ["Low", "Medium", "High"][Math.floor(Math.random() * 3)],
+        difficulty: randomDifficulty,
+        trend: (Math.random() * 30 - 5).toFixed(0) + "%",
+        related: [
+            { keyword: "best " + keyword, volume: Math.floor(randomVolume * 0.6) },
+            { keyword: "free " + keyword, volume: Math.floor(randomVolume * 0.7) },
+            { keyword: keyword + " tips", volume: Math.floor(randomVolume * 0.4) }
+        ],
+        questions: [
+            "What is " + keyword + "?",
+            "How to use " + keyword + "?",
+            keyword + " benefits?"
+        ]
+    };
+}
+    }
+    
+    return {
+        volume: randomVolume.toLocaleString(),
+        cpc: "₹" + cpcValue,
+        competition: ["Low", "Medium", "High"][Math.floor(Math.random() * 3)],
+        difficulty: randomDifficulty,
+        trend: (Math.random() * 30 - 5).toFixed(0) + "%",
+        related: [
+            { keyword: "best " + keyword, volume: Math.floor(randomVolume * 0.6) },
+            { keyword: "free " + keyword, volume: Math.floor(randomVolume * 0.7) }
+        ],
+        questions: [
+            "What is " + keyword + "?",
+            "How to use " + keyword + "?"
+        ]
+    };
+}
                 related: [
                     { keyword: "best " + keyword, volume: Math.floor(randomVolume * 0.6) },
                     { keyword: "free " + keyword, volume: Math.floor(randomVolume * 0.7) }
