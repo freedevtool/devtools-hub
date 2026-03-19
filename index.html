@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>100+ Free Online Tools – GST, EMI, AI, image compressor & Image Tools</title>
-<meta name="description" content="Free online tools: GST Calculator, EMI Calculator, Image Compressor, Grammar Checker, AI Tools and more. Fast, secure, no signup.">
+<title>Free Online Tools – GST, EMI, image compressor AI tools & More</title>
+<meta name="description" content="Free online tools: GST Calculator, EMI Calculator, AI tools and more. Fast, secure, no signup.">
 
 <link rel="icon" href="/favicon.png">
 
-<style>
+<!-- MODERN FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  *{margin:0;padding:0;box-sizing:border-box;}
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
-font-family:Arial, sans-serif;
+font-family:'Poppins',sans-serif;
 background:#f8f9fc;
 color:#1e293b;
 }
@@ -26,44 +28,60 @@ padding:20px;
 }
 
 /* HEADER */
-header{
+.header{
+position:relative;
 display:flex;
 align-items:center;
-gap:15px;
-margin-bottom:30px;
-position:relative;
+justify-content:center;
+margin-bottom:20px;
 }
 
+/* MENU ICON */
 .menu-icon{
-font-size:28px;
+position:absolute;
+left:10px;
+font-size:26px;
 cursor:pointer;
 color:#6c5ce7;
 }
 
-/* LOGO */
-.logo h2{
+/* CENTER LOGO */
+.logo-center{
+text-align:center;
+}
+
+.logo-center img{
+height:60px;
+display:block;
+margin:auto;
+}
+
+.logo-center h1{
+font-size:1.6em;
+margin-top:5px;
 color:#6c5ce7;
+font-weight:700;
 }
 
 /* DROPDOWN */
 .mobile-menu{
 position:absolute;
 top:60px;
-left:0;
+left:10px;
 background:#fff;
-color:#333;
 padding:15px;
 border-radius:10px;
 display:none;
 width:240px;
 box-shadow:0 10px 30px rgba(0,0,0,0.1);
+z-index:999;
 }
 
 .mobile-menu a{
 display:block;
 padding:10px;
-color:#333;
 text-decoration:none;
+color:#333;
 border-bottom:1px solid #eee;
 }
 
@@ -78,7 +96,7 @@ margin:40px 0;
 }
 
 .hero h1{
-font-size:2.5em;
+font-size:2.3em;
 color:#6c5ce7;
 }
 
@@ -104,7 +122,7 @@ gap:20px;
 margin-top:20px;
 }
 
-/* TOOL CARD */
+/* CARD */
 .tool-card{
 background:#fff;
 border-radius:12px;
@@ -121,11 +139,6 @@ transform:translateY(-5px);
 box-shadow:0 10px 25px rgba(108,92,231,0.2);
 }
 
-.tool-card h3{
-margin:10px 0;
-}
-
-/* TAG */
 .tag{
 background:#6c5ce7;
 color:#fff;
@@ -159,7 +172,6 @@ margin:5px 0;
 footer a:hover{
 color:#ffd700;
 }
-
 </style>
 </head>
 
@@ -168,16 +180,15 @@ color:#ffd700;
 <div class="container">
 
 <!-- HEADER -->
-<header>
+<header class="header">
 
 <div class="menu-icon" onclick="toggleMenu()">☰</div>
 
-<div class="logo">
-<img src="logo.png">
-<h2>ExploreDevTools</h2>
+<div class="logo-center">
+<img src="logo.png" alt="logo">
+<h1>ExploreDevTools</h1>
 </div>
 
-<!-- DROPDOWN MENU -->
 <div id="mobileMenu" class="mobile-menu">
 <a href="index.html">Home</a>
 <a href="#tools">All Tools</a>
@@ -195,7 +206,7 @@ color:#ffd700;
 <!-- HERO -->
 <div class="hero">
 <h1>🚀 Free Online Tools</h1>
-<p>GST, EMI, AI, Image & Developer Tools – 100% Free</p>
+<p>GST, EMI, AI, Image compressor & free Developer Tools – 100% Free</p>
 </div>
 
 <!-- POPULAR -->
@@ -216,14 +227,12 @@ color:#ffd700;
 
 <div class="tools-grid">
 
-<!-- NEW -->
 <a href="gst-calculator.html" class="tool-card"><h3>GST Calculator</h3><span class="tag">Trending</span></a>
 <a href="emi-calculator.html" class="tool-card"><h3>EMI Calculator</h3><span class="tag">Finance</span></a>
-<a href="paraphrasing-ai-tool.html" class="tool-card"><h3>Paraphrasing Tool</h3><span class="tag">AI</span></a>
-<a href="ai-caption-generator.html" class="tool-card"><h3>AI Caption Generator</h3><span class="tag">AI</span></a>
-<a href="text-case-converter.html" class="tool-card"><h3>Case Converter</h3><span class="tag">Text</span></a>
+<a href="paraphrasing-ai-tool.html" class="tool-card"><h3>Paraphrasing Tool</h3></a>
+<a href="ai-caption-generator.html" class="tool-card"><h3>AI Caption Generator</h3></a>
+<a href="text-case-converter.html" class="tool-card"><h3>Case Converter</h3></a>
 
-<!-- EXISTING -->
 <a href="json-formatter.html" class="tool-card"><h3>JSON Formatter</h3></a>
 <a href="base64.html" class="tool-card"><h3>Base64 Encoder</h3></a>
 <a href="image-resizer.html" class="tool-card"><h3>Image Resizer</h3></a>
@@ -280,7 +289,7 @@ color:#ffd700;
 </div>
 
 <p style="text-align:center;margin-top:20px;">
-© 2026 ExploreDevTools | All Rights Reserved
+© 2026 ExploreDevTools
 </p>
 
 </footer>
