@@ -1,173 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>GST Calculator</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-font-family:'Poppins',sans-serif;
-background:#f5f6ff;
-}
-
-/* TOP NAV */
-.top-bar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#6c5ce7;
-padding:12px 15px;
-color:#fff;
-}
-
-/* BUTTONS */
-.nav-btn{
-background:#fff;
-color:#6c5ce7;
-padding:8px 14px;
-border:none;
-border-radius:8px;
-font-weight:600;
-cursor:pointer;
-text-decoration:none;
-}
-
-.nav-btn:hover{
-background:#f1f1ff;
-}
-
-/* HEADING */
-.title{
-text-align:center;
-margin:20px 0;
-font-size:1.8em;
-color:#6c5ce7;
-}
-
-/* CARD */
-.container{
-max-width:400px;
-margin:auto;
-background:#fff;
-padding:25px;
-border-radius:15px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-/* INPUTS */
-input,select{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-/* BUTTON */
-.calc-btn{
-width:100%;
-padding:12px;
-background:#6c5ce7;
-color:#fff;
-border:none;
-border-radius:8px;
-font-weight:600;
-cursor:pointer;
-}
-
-/* RESULT */
-.result{
-margin-top:15px;
-font-size:1.3em;
-color:#333;
-}
-
-/* GST TABS */
-.gst-tabs{
-display:flex;
-gap:10px;
-margin:10px 0;
-}
-
-.gst-tabs button{
-flex:1;
-padding:10px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-background:#eee;
-}
-
-.gst-tabs button.active{
-background:#6c5ce7;
-color:#fff;
-}
+body{font-family:Poppins;background:#f5f6ff;margin:0;}
+.top-bar{display:flex;justify-content:space-between;background:#6c5ce7;padding:12px;}
+.nav-btn{background:#fff;color:#6c5ce7;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;}
+.title{text-align:center;margin:20px;color:#6c5ce7;}
+.container{max-width:400px;margin:auto;background:#fff;padding:25px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
+input{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ddd;}
+button{width:100%;padding:12px;background:#6c5ce7;color:#fff;border:none;border-radius:8px;}
+.tabs{display:flex;gap:8px;}
+.tabs button{flex:1;background:#eee;}
+.tabs button.active{background:#6c5ce7;color:#fff;}
+.result{margin-top:15px;}
 </style>
 </head>
-
 <body>
 
-<!-- NAV -->
 <div class="top-bar">
 <a href="index.html" class="nav-btn">🏠 Home</a>
-<button onclick="goBack()" class="nav-btn">⬅ Back</button>
+<button onclick="history.back()" class="nav-btn">⬅ Back</button>
 </div>
 
 <h2 class="title">GST Calculator</h2>
 
 <div class="container">
+<input id="amt" placeholder="Enter Amount">
 
-<input type="number" id="amount" placeholder="Enter Amount">
-
-<div class="gst-tabs">
-<button onclick="setGST(5,this)">5%</button>
-<button onclick="setGST(12,this)">12%</button>
-<button onclick="setGST(18,this)" class="active">18%</button>
-<button onclick="setGST(28,this)">28%</button>
+<div class="tabs">
+<button onclick="set(5,this)">5%</button>
+<button onclick="set(12,this)">12%</button>
+<button onclick="set(18,this)" class="active">18%</button>
+<button onclick="set(28,this)">28%</button>
 </div>
 
-<button class="calc-btn" onclick="calculate()">Calculate GST</button>
+<button onclick="calc()">Calculate</button>
+<button onclick="reset()">Clear</button>
 
-<div class="result" id="result"></div>
-
+<div class="result" id="res"></div>
 </div>
 
 <script>
-let gstRate = 18;
-
-function setGST(rate,el){
-gstRate = rate;
-
-// active tab highlight
-document.querySelectorAll(".gst-tabs button").forEach(btn=>btn.classList.remove("active"));
-el.classList.add("active");
-}
-
-function calculate(){
-let amt = document.getElementById("amount").value;
-
-if(!amt){
-alert("Enter amount");
-return;
-}
-
-let gst = amt * gstRate / 100;
-let total = parseFloat(amt) + gst;
-
-document.getElementById("result").innerHTML =
-"GST: ₹"+gst.toFixed(2)+"<br>Total: ₹"+total.toFixed(2);
-}
-
-function goBack(){
-window.history.back();
-}
+let rate=18;
+function set(r,e){rate=r;document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("active"));e.classList.add("active");}
+function calc(){let a=amt.value;if(!a)return;let g=a*rate/100;res.innerHTML="GST: ₹"+g.toFixed(2)+"<br>Total: ₹"+(parseFloat(a)+g).toFixed(2);}
+function reset(){amt.value="";res.innerHTML="";}
 </script>
 
 </body>
