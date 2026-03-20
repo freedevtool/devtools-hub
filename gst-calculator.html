@@ -8,13 +8,77 @@ body{font-family:Poppins;background:#f5f6ff;margin:0;}
 .top-bar{display:flex;justify-content:space-between;background:#6c5ce7;padding:12px;}
 .nav-btn{background:#fff;color:#6c5ce7;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;}
 .title{text-align:center;margin:20px;color:#6c5ce7;}
-.container{max-width:400px;margin:auto;background:#fff;padding:25px;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.1);}
-input{width:100%;padding:12px;margin:10px 0;border-radius:8px;border:1px solid #ddd;}
-button{width:100%;padding:12px;background:#6c5ce7;color:#fff;border:none;border-radius:8px;}
-.tabs{display:flex;gap:8px;}
-.tabs button{flex:1;background:#eee;}
-.tabs button.active{background:#6c5ce7;color:#fff;}
-.result{margin-top:15px;}
+
+  /* CARD */
+.container{
+max-width:400px;
+margin:auto;
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+/* INPUT */
+input{
+width:100%;
+padding:14px;
+margin-bottom:15px;
+border-radius:10px;
+border:1px solid #ddd;
+font-size:16px;
+}
+
+/* GST TABS FIX */
+.tabs{
+display:flex;
+gap:10px;
+margin-bottom:15px;
+}
+
+.tabs button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+background:#f1f1f1;
+color:#333;
+font-weight:600;
+transition:0.2s;
+}
+
+.tabs button.active{
+background:#6c5ce7;
+color:#fff;
+}
+
+/* BUTTONS FIX */
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#6c5ce7;
+color:#fff;
+font-weight:600;
+font-size:15px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
+}
+
+/* RESULT */
+.result{
+margin-top:20px;
+font-size:1.2em;
+line-height:1.6;
+}
+  
 </style>
 </head>
 <body>
