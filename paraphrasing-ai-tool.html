@@ -2,45 +2,73 @@
 
 <html>
 <head>
-<title>Premium Paraphrasing Tool</title>
+<title>AI Paraphraser Tool</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
 body{
-  font-family:Poppins, Arial;
-  background:#eef1ff;
   margin:0;
-  text-align:center;
+  font-family:Arial, sans-serif;
+  background:#f4f6ff;
 }
 
-.container{
-  max-width:700px;
-  margin:40px auto;
+/* HEADER */
+.header{
+  background:#6c5ce7;
+  color:#fff;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header h2{margin:0;}
+
+.header button{
   background:#fff;
-  padding:25px;
-  border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  color:#6c5ce7;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
 }
 
-h2{color:#6c5ce7;}
+/* MAIN */
+.container{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+/* BOX */
+.box{
+  flex:1;
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
 
 textarea{
   width:100%;
-  height:130px;
-  padding:12px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  margin-bottom:10px;
+  height:200px;
+  border:none;
+  outline:none;
+  resize:none;
+  font-size:14px;
 }
 
-.controls{
+/* TOOLBAR */
+.toolbar{
   display:flex;
   justify-content:space-between;
   margin-bottom:10px;
 }
 
-select,button{
-  padding:10px;
-  border-radius:8px;
+select, button{
+  padding:8px;
+  border-radius:6px;
   border:none;
 }
 
@@ -52,56 +80,85 @@ button{
 
 button:hover{opacity:0.9;}
 
-#output{
-  margin-top:15px;
-  background:#f9f9ff;
-  padding:15px;
-  border-radius:10px;
-  min-height:80px;
-}
-
-.tools{
+.actions{
   margin-top:10px;
+  display:flex;
+  justify-content:space-between;
 }
 
-.small{
+/* FOOTER */
+.stats{
   font-size:12px;
   color:#777;
+  margin-top:8px;
 }
+
+/* MOBILE */
+@media(max-width:768px){
+  .container{
+    flex-direction:column;
+  }
+}
+
 </style>
 
 </head>
 
 <body>
 
+<div class="header">
+  <h2>🚀 Paraphraser SaaS Tool</h2>
+  <button onclick="history.back()">⬅ Back</button>
+</div>
+
 <div class="container">
 
-<h2>✨ Premium Paraphrasing Tool</h2>
+  <!-- INPUT -->
 
-<textarea id="input" placeholder="Enter your text..."></textarea>
+  <div class="box">
+    <div class="toolbar">
+      <select id="mode">
+        <option value="standard">Standard</option>
+        <option value="formal">Formal</option>
+        <option value="casual">Casual</option>
+        <option value="seo">SEO</option>
+      </select>
 
-<div class="controls">
-  <select id="mode">
-    <option value="standard">Standard</option>
-    <option value="formal">Formal</option>
-    <option value="casual">Casual</option>
-    <option value="seo">SEO</option>
-  </select>
-
-<button onclick="paraphrase()">Rewrite</button>
-
+```
+  <button onclick="paraphrase()">Rewrite</button>
 </div>
 
-<div class="tools">
-  <button onclick="copyText()">Copy</button>
+<textarea id="input" placeholder="Paste your text here..."></textarea>
+
+<div class="actions">
   <button onclick="resetText()">Clear</button>
+  <button onclick="copyInput()">Copy</button>
 </div>
 
-<div id="output"></div>
+<div class="stats">
+  Words: <span id="inputCount">0</span>
+</div>
+```
 
-<p class="small">
-Words: <span id="wordCount">0</span>
-</p>
+  </div>
+
+  <!-- OUTPUT -->
+
+  <div class="box">
+    <div class="toolbar">
+      <span>Output</span>
+      <button onclick="copyOutput()">Copy</button>
+    </div>
+
+```
+<textarea id="output" placeholder="Rewritten text will appear here..."></textarea>
+
+<div class="stats">
+  Words: <span id="outputCount">0</span>
+</div>
+```
+
+  </div>
 
 </div>
 
@@ -127,90 +184,75 @@ const synonyms = {
 function getSynonym(word){
   let clean = word.toLowerCase().replace(/[.,!?]/g,"");
   let list = synonyms[clean];
-  if(list){
-    return list[Math.floor(Math.random()*list.length)];
-  }
-  return clean;
+  return list ? list[Math.floor(Math.random()*list.length)] : clean;
 }
 
 function applyTone(text,mode){
   if(mode==="formal"){
-    return text.replace("I ","I would ").replace("was","had been");
+    return text.replace(/\bI\b/g,"I would").replace(/\bwas\b/g,"had been");
   }
   if(mode==="casual"){
     return text + " 🙂";
   }
   if(mode==="seo"){
-    return text + " (optimized content)";
+    return text + " - optimized content";
   }
   return text;
 }
 
-function restructure(sentence){
-  let words = sentence.split(" ");
-  if(words.length > 7){
-    let mid = Math.floor(words.length/2);
-    return words.slice(mid).join(" ") + " " + words.slice(0,mid).join(" ");
-  }
-  return sentence;
-}
-
-function clean(text){
-  text = text.replace(/\s+/g," ");
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
 function paraphrase(){
-
-  let input = document.getElementById("input").value;
+  let input = document.getElementById("input").value.trim();
   let mode = document.getElementById("mode").value;
-  let output = document.getElementById("output");
 
   if(!input){
-    output.innerText="Enter text first!";
+    alert("Enter text first");
     return;
   }
 
-  output.innerText="Rewriting...";
+  let words = input.split(" ");
 
-  setTimeout(()=>{
+  let result = words.map(word=>{
+    let punc = word.match(/[.,!?]/g) || "";
+    let newWord = getSynonym(word);
 
-    let words = input.split(" ");
+    if(word[0]===word[0].toUpperCase()){
+      newWord = newWord.charAt(0).toUpperCase()+newWord.slice(1);
+    }
 
-    let replaced = words.map(word=>{
-      let punc = word.match(/[.,!?]/g) || "";
-      let newWord = getSynonym(word);
+    return newWord + punc;
+  }).join(" ");
 
-      if(word[0]===word[0].toUpperCase()){
-        newWord = newWord.charAt(0).toUpperCase()+newWord.slice(1);
-      }
+  result = applyTone(result,mode);
 
-      return newWord + punc;
-    }).join(" ");
+  document.getElementById("output").value = result;
 
-    let structured = restructure(replaced);
-    let toned = applyTone(structured,mode);
-    let finalText = clean(toned);
-
-    output.innerText = finalText;
-
-    document.getElementById("wordCount").innerText =
-      finalText.split(" ").length;
-
-  },500);
+  updateCounts();
 }
 
-function copyText(){
-  let text = document.getElementById("output").innerText;
-  navigator.clipboard.writeText(text);
-  alert("Copied!");
+function updateCounts(){
+  document.getElementById("inputCount").innerText =
+    document.getElementById("input").value.split(" ").filter(w=>w).length;
+
+  document.getElementById("outputCount").innerText =
+    document.getElementById("output").value.split(" ").filter(w=>w).length;
 }
 
 function resetText(){
   document.getElementById("input").value="";
-  document.getElementById("output").innerText="";
-  document.getElementById("wordCount").innerText="0";
+  document.getElementById("output").value="";
+  updateCounts();
 }
+
+function copyInput(){
+  navigator.clipboard.writeText(document.getElementById("input").value);
+}
+
+function copyOutput(){
+  navigator.clipboard.writeText(document.getElementById("output").value);
+}
+
+// live word count
+document.getElementById("input").addEventListener("input",updateCounts);
 
 </script>
 
