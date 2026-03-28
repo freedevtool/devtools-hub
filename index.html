@@ -188,6 +188,23 @@ margin:5px 0;
 footer a:hover{
 color:#ffd700;
 }
+  <h2>Caption Generator</h2>
+
+<textarea id="captionInput"></textarea><br><br>
+
+<button onclick="generateCaption()">Generate Caption</button>
+
+<p id="captionOutput"></p>
+  <hr>
+
+<h2>Paraphrasing Tool</h2>
+
+<textarea id="paraInput"></textarea><br><br>
+
+<button onclick="paraphraseText()">Paraphrase</button>
+
+<p id="paraOutput"></p>
+  
 </style>
 </head>
 
@@ -317,6 +334,8 @@ function toggleMenu(){
 let menu=document.getElementById("mobileMenu");
 menu.style.display=(menu.style.display==="block")?"none":"block";
 }
+
+  <script src="script.js"></script>
 </script>
 
 </body>
