@@ -49,12 +49,38 @@ color:#fff;font-weight:600;
 </div>
 
 <script>
-function para(){
-output.innerText=input.value.split(" ").reverse().join(" ");
+async function para() {
+  const text = document.getElementById("input").value;
+  const outputDiv = document.getElementById("output");
+
+  if (!text) {
+    outputDiv.innerText = "Please enter text";
+    return;
+  }
+
+  outputDiv.innerText = "Processing...";
+
+  try {
+    const res = await fetch("/api/paraphrase", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: text })
+    });
+
+    const data = await res.json();
+
+    outputDiv.innerText = data.result || "No response from API";
+
+  } catch (error) {
+    outputDiv.innerText = "Error: API not working";
+  }
 }
-function reset(){
-input.value="";
-output.innerText="";
+
+function reset() {
+  document.getElementById("input").value = "";
+  document.getElementById("output").innerText = "";
 }
 </script>
 
