@@ -1,87 +1,217 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-<title>Paraphrasing Tool</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<title>Premium Paraphrasing Tool</title>
+
 <style>
-body{font-family:Poppins;background:#f5f6ff;margin:0;text-align:center;}
-.top-bar{display:flex;justify-content:space-between;background:#6c5ce7;padding:12px;}
-.nav-btn{background:#fff;color:#6c5ce7;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:600;}
-
-.title{margin:20px;color:#6c5ce7;}
-
-.container{
-max-width:500px;margin:auto;background:#fff;padding:25px;
-border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.1);
+body{
+  font-family:Poppins, Arial;
+  background:#eef1ff;
+  margin:0;
+  text-align:center;
 }
 
+.container{
+  max-width:700px;
+  margin:40px auto;
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+h2{color:#6c5ce7;}
+
 textarea{
-width:100%;height:150px;padding:12px;
-border-radius:10px;border:1px solid #ddd;margin-bottom:15px;
+  width:100%;
+  height:130px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  margin-bottom:10px;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+select,button{
+  padding:10px;
+  border-radius:8px;
+  border:none;
 }
 
 button{
-width:100%;padding:14px;margin-top:10px;
-border:none;border-radius:10px;background:#6c5ce7;
-color:#fff;font-weight:600;
+  background:#6c5ce7;
+  color:#fff;
+  cursor:pointer;
 }
 
-.result{margin-top:20px;}
+button:hover{opacity:0.9;}
+
+#output{
+  margin-top:15px;
+  background:#f9f9ff;
+  padding:15px;
+  border-radius:10px;
+  min-height:80px;
+}
+
+.tools{
+  margin-top:10px;
+}
+
+.small{
+  font-size:12px;
+  color:#777;
+}
 </style>
+
 </head>
 
 <body>
 
-<div class="top-bar">
-<a href="index.html" class="nav-btn">🏠 Home</a>
-<button onclick="history.back()" class="nav-btn">⬅ Back</button>
+<div class="container">
+
+<h2>✨ Premium Paraphrasing Tool</h2>
+
+<textarea id="input" placeholder="Enter your text..."></textarea>
+
+<div class="controls">
+  <select id="mode">
+    <option value="standard">Standard</option>
+    <option value="formal">Formal</option>
+    <option value="casual">Casual</option>
+    <option value="seo">SEO</option>
+  </select>
+
+<button onclick="paraphrase()">Rewrite</button>
+
 </div>
 
-<h2 class="title">Paraphrasing Tool</h2>
+<div class="tools">
+  <button onclick="copyText()">Copy</button>
+  <button onclick="resetText()">Clear</button>
+</div>
 
-<div class="container">
-<textarea id="input" placeholder="Enter text..."></textarea>
+<div id="output"></div>
 
-<button onclick="para()">Rewrite</button>
-<button onclick="reset()">Clear</button>
+<p class="small">
+Words: <span id="wordCount">0</span>
+</p>
 
-<div class="result" id="output"></div>
 </div>
 
 <script>
-async function para() {
-  const text = document.getElementById("input").value;
-  const outputDiv = document.getElementById("output");
 
-  if (!text) {
-    outputDiv.innerText = "Please enter text";
+// synonyms
+const synonyms = {
+  "quick":["fast","rapid"],
+  "happy":["joyful","pleased"],
+  "big":["large","huge"],
+  "small":["tiny","compact"],
+  "good":["excellent","great"],
+  "bad":["poor","unpleasant"],
+  "buy":["purchase","acquire"],
+  "car":["vehicle","automobile"],
+  "train":["railway","locomotive"],
+  "enjoying":["experiencing","loving"],
+  "travel":["journey","trip"],
+  "tea":["beverage","drink"],
+  "moving":["traveling","running"]
+};
+
+function getSynonym(word){
+  let clean = word.toLowerCase().replace(/[.,!?]/g,"");
+  let list = synonyms[clean];
+  if(list){
+    return list[Math.floor(Math.random()*list.length)];
+  }
+  return clean;
+}
+
+function applyTone(text,mode){
+  if(mode==="formal"){
+    return text.replace("I ","I would ").replace("was","had been");
+  }
+  if(mode==="casual"){
+    return text + " 🙂";
+  }
+  if(mode==="seo"){
+    return text + " (optimized content)";
+  }
+  return text;
+}
+
+function restructure(sentence){
+  let words = sentence.split(" ");
+  if(words.length > 7){
+    let mid = Math.floor(words.length/2);
+    return words.slice(mid).join(" ") + " " + words.slice(0,mid).join(" ");
+  }
+  return sentence;
+}
+
+function clean(text){
+  text = text.replace(/\s+/g," ");
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function paraphrase(){
+
+  let input = document.getElementById("input").value;
+  let mode = document.getElementById("mode").value;
+  let output = document.getElementById("output");
+
+  if(!input){
+    output.innerText="Enter text first!";
     return;
   }
 
-  outputDiv.innerText = "Processing...";
+  output.innerText="Rewriting...";
 
-  try {
-    const res = await fetch("/api/paraphrase", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ text: text })
-    });
+  setTimeout(()=>{
 
-    const data = await res.json();
+    let words = input.split(" ");
 
-    outputDiv.innerText = data.result || "No response from API";
+    let replaced = words.map(word=>{
+      let punc = word.match(/[.,!?]/g) || "";
+      let newWord = getSynonym(word);
 
-  } catch (error) {
-    outputDiv.innerText = "Error: API not working";
-  }
+      if(word[0]===word[0].toUpperCase()){
+        newWord = newWord.charAt(0).toUpperCase()+newWord.slice(1);
+      }
+
+      return newWord + punc;
+    }).join(" ");
+
+    let structured = restructure(replaced);
+    let toned = applyTone(structured,mode);
+    let finalText = clean(toned);
+
+    output.innerText = finalText;
+
+    document.getElementById("wordCount").innerText =
+      finalText.split(" ").length;
+
+  },500);
 }
 
-function reset() {
-  document.getElementById("input").value = "";
-  document.getElementById("output").innerText = "";
+function copyText(){
+  let text = document.getElementById("output").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Copied!");
 }
+
+function resetText(){
+  document.getElementById("input").value="";
+  document.getElementById("output").innerText="";
+  document.getElementById("wordCount").innerText="0";
+}
+
 </script>
 
 </body>
