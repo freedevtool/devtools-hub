@@ -1,4 +1,4 @@
-const API_URL = "https://ai-tools-backend.onrender.com";
+const API_URL = "https://ai-tools-backend-wkam.onrender.com";
 
 async function generateCaption() {
   const input = document.getElementById("captionInput").value;
