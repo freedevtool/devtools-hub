@@ -1,31 +1,62 @@
+const API_URL = "https://ai-tools-backend.onrender.com";
+
 async function generateCaption() {
   const input = document.getElementById("captionInput").value;
 
-  const res = await fetch("/api/caption", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ prompt: input })
-  });
+  if (!input) {
+    document.getElementById("captionOutput").innerText = "Enter text!";
+    return;
+  }
 
-  const data = await res.json();
+  document.getElementById("captionOutput").innerText = "Loading...";
 
-  document.getElementById("captionOutput").innerText =
-    data.choices[0].message.content;
+  try {
+    const res = await fetch(`${API_URL}/caption`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt: input })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("captionOutput").innerText =
+      data.result || "No response";
+
+  } catch (err) {
+    document.getElementById("captionOutput").innerText =
+      "Error connecting API";
+  }
 }
+
+
 async function paraphraseText() {
   const input = document.getElementById("paraInput").value;
 
-  const res = await fetch("/api/paraphrase", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text: input })
-  });
+  if (!input) {
+    document.getElementById("paraOutput").innerText = "Enter text!";
+    return;
+  }
 
-  const data = await res.json();
+  document.getElementById("paraOutput").innerText = "Loading...";
 
-  document.getElementById("paraOutput").innerText = data.result;
-    }
+  try {
+    const res = await fetch(`${API_URL}/paraphrase`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: input })
+    });
+
+    const data = await res.json();
+
+    document.getElementById("paraOutput").innerText =
+      data.result || "No response";
+
+  } catch (err) {
+    document.getElementById("paraOutput").innerText =
+      "Error connecting API";
+  }
+}
