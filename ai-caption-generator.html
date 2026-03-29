@@ -103,59 +103,28 @@ button {
 </div>
 
 <script>
+function generateCaption(){
 
-async function generate() {
-  const text = document.getElementById("input").value;
+  let input = document.getElementById("input").value;
+  let output = document.getElementById("output");
 
-  if (!text) {
-    alert("Enter topic");
-    return;
-  }
+  output.innerText = "Loading...";
 
-  document.getElementById("loading").innerText = "Generating... 🔥";
-  document.getElementById("output").innerHTML = "";
-
-  try {
-    const res = await fetch("/api/caption", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ text })
-    });
-
-    const data = await res.json();
-    console.log(data); // debug
-
-    if (!res.ok) {
-      throw new Error(data.error || "API Error");
-    }
-
-    document.getElementById("loading").innerText = "";
-
-    const captions = data.captions.split("\n").filter(c => c.trim() !== "");
-
-    document.getElementById("output").innerHTML =
-      captions.map(c => `
-        <div class="card">
-          ${c}
-          <br>
-          <button class="copy-btn" onclick="copy(this)">Copy</button>
-        </div>
-      `).join("");
-
-  } catch (err) {
-    document.getElementById("loading").innerText = "❌ API Error";
-    console.error(err);
-  }
+  fetch("https://ai-tools-backend-wkam.onrender.com", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ prompt: input })
+  })
+  .then(res => res.json())
+  .then(data => {
+    output.innerText = data.result;
+  })
+  .catch(err => {
+    output.innerText = "Error!";
+  });
 }
-
-function copy(btn) {
-  const text = btn.parentElement.innerText.replace("Copy", "");
-  navigator.clipboard.writeText(text);
-  btn.innerText = "Copied!";
-}
-
 </script>
 
 </body>
