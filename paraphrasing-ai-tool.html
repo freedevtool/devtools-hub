@@ -127,7 +127,7 @@ button:hover{opacity:0.9;}
   <button onclick="paraphraseText()">Rewrite</button>
 </div>
 
-<textarea id="input" placeholder="Paste your text here..."></textarea>
+<textarea id="paraInput" placeholder="Paste your text here..."></textarea>
 
 <div class="actions">
   <button onclick="resetText()">Clear</button>
@@ -147,47 +147,14 @@ button:hover{opacity:0.9;}
     </div>
 
 ```
-<textarea id="output" placeholder="Rewritten text will appear here..."></textarea>
+<textarea id="paraOutput" placeholder="Rewritten text will appear here..."></textarea>
 
 <div class="stats">
   Words: <span id="outputCount">0</span>
 </div>
 ```
 
-  </div>
-
 </div>
-  
-<script>
-function paraphrase(){
-
-  let input = document.getElementById("input").value;
-  let output = document.getElementById("output");
-
-  if(!input){
-    output.value = "Enter text first!";
-    return;
-  }
-
-  output.value = "Loading...";
-
-  fetch("https://ai-tools-backend-wkam.onrender.com", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ text: input })
-  })
-  .then(res => res.json())
-  .then(data => {
-    output.value = data.result;
-  })
-  .catch(err => {
-    output.value = "Error: API not working";
-  });
-}
-console.log("fix");
-</script>
 
 <script src="script.js"></script>
 </body>
