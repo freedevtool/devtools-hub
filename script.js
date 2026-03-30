@@ -58,5 +58,8 @@ async function paraphraseText() {
   } catch (err) {
     document.getElementById("paraOutput").innerText =
       "Error connecting API";
+    const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
   }
 }
