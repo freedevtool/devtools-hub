@@ -102,30 +102,6 @@ button {
 
 </div>
 
-<script>
-function generateCaption(){
-
-  let input = document.getElementById("input").value;
-  let output = document.getElementById("output");
-
-  output.innerText = "Loading...";
-
-  fetch("https://ai-tools-backend-wkam.onrender.com", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ prompt: input })
-  })
-  .then(res => res.json())
-  .then(data => {
-    output.innerText = data.result;
-  })
-  .catch(err => {
-    output.innerText = "Error!";
-  });
-}
-</script>
 
 <script src="script.js"></script>
   
