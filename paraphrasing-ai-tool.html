@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-
 <html>
 <head>
 <title>AI Paraphraser Tool</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-
 body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f4f6ff;
 }
 
-/* HEADER */
 .header{
   background:#6c5ce7;
   color:#fff;
@@ -23,139 +20,63 @@ body{
   align-items:center;
 }
 
-.header h2{margin:0;}
-
-.header button{
-  background:#fff;
-  color:#6c5ce7;
-  border:none;
-  padding:8px 12px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* MAIN */
 .container{
   display:flex;
   gap:20px;
   padding:20px;
 }
 
-/* BOX */
 .box{
   flex:1;
   background:#fff;
   padding:15px;
   border-radius:12px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
 textarea{
   width:100%;
   height:200px;
-  border:none;
-  outline:none;
-  resize:none;
-  font-size:14px;
 }
-
-/* TOOLBAR */
-.toolbar{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-select, button{
-  padding:8px;
-  border-radius:6px;
-  border:none;
-}
-
 button{
+  padding:10px;
+  margin-top:10px;
   background:#6c5ce7;
   color:#fff;
-  cursor:pointer;
+  border:none;
 }
-
-button:hover{opacity:0.9;}
-
-.actions{
-  margin-top:10px;
-  display:flex;
-  justify-content:space-between;
-}
-
-/* FOOTER */
-.stats{
-  font-size:12px;
-  color:#777;
-  margin-top:8px;
-}
-
-/* MOBILE */
-@media(max-width:768px){
-  .container{
-    flex-direction:column;
-  }
-}
-
 </style>
-
 </head>
 
 <body>
 
 <div class="header">
-  <h2>🚀 Paraphraser SaaS Tool</h2>
+  <h2>🚀 Paraphraser Tool</h2>
   <button onclick="history.back()">⬅ Back</button>
 </div>
 
 <div class="container">
 
-  <!-- INPUT -->
+<!-- INPUT -->
+<div class="box">
+  <h3>Input</h3>
+  <!-- ✅ FIXED ID -->
+  <textarea id="paraInput" placeholder="Enter text..."></textarea>
 
-  <div class="box">
-    <div class="toolbar">
-      <select id="mode">
-        <option value="standard">Standard</option>
-        <option value="formal">Formal</option>
-        <option value="casual">Casual</option>
-        <option value="seo">SEO</option>
-      </select>
-
+  <!-- ✅ FIXED BUTTON -->
   <button onclick="paraphraseText()">Rewrite</button>
 </div>
 
-<textarea id="paraInput" placeholder="Paste your text here..."></textarea>
-
-<div class="actions">
-  <button onclick="resetText()">Clear</button>
-  <button onclick="copyInput()">Copy</button>
+<!-- OUTPUT -->
+<div class="box">
+  <h3>Output</h3>
+  <!-- ✅ FIXED ID -->
+  <textarea id="paraOutput" placeholder="Result will appear here..."></textarea>
 </div>
-
-<div class="stats">
-  Words: <span id="inputCount">0</span>
-</div>
-
-  <!-- OUTPUT -->
-
-  <div class="box">
-    <div class="toolbar">
-      <span>Output</span>
-      <button onclick="copyOutput()">Copy</button>
-    </div>
-
-```
-<textarea id="paraOutput" placeholder="Rewritten text will appear here..."></textarea>
-
-<div class="stats">
-  Words: <span id="outputCount">0</span>
-</div>
-```
 
 </div>
 
+<!-- ✅ REQUIRED -->
 <script src="script.js"></script>
+
 </body>
 </html>
