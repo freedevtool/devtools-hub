@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Paraphraser</title>
+<style>
+body{font-family:Arial;background:#764ba2;color:#fff;padding:20px;}
+.container{background:#fff;color:#000;padding:20px;border-radius:10px;max-width:800px;margin:auto;}
+textarea,button,select{width:100%;margin-top:10px;padding:10px;border-radius:8px;}
+.card{background:#f4f6ff;padding:10px;margin-top:10px;border-radius:8px;}
+</style>
+</head>
+
+<body>
+
+<a href="index.html">⬅ Back</a>
+
+<div class="container">
+<h2>AI Paraphraser Tool</h2>
+
+<select id="mode">
+<option value="standard">Standard</option>
+<option value="formal">Formal</option>
+<option value="casual">Casual</option>
+</select>
+
+<textarea id="input" placeholder="Enter text"></textarea>
+<button onclick="rewrite()">Rewrite</button>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+
+// synonym dictionary
+const synonyms = {
+"i":"I",
+"am":["am","was"],
+"travel":["traveling","journeying","exploring"],
+"train":["train","rail"],
+"enjoy":["enjoying","loving","having fun"],
+"tea":["tea","a cup of tea","hot tea"]
+};
+
+// grammar correction
+function cleanSentence(text){
+return text
+.replace(/\bi\b/g,"I")
+.replace(/\s+/g," ")
+.trim();
+}
+
+// smarter rewrite
+function generateVariation(text,mode){
+let words = text.split(" ");
+
+let newWords = words.map(w=>{
+let key = w.toLowerCase();
+if(synonyms[key]){
+let val = synonyms[key];
+if(Array.isArray(val)){
+return val[Math.floor(Math.random()*val.length)];
+}
+return val;
+}
+return w;
+});
+
+let sentence = newWords.join(" ");
+
+if(mode=="formal"){
+sentence = "It can be stated that " + sentence;
+}
+if(mode=="casual"){
+sentence = "Honestly, " + sentence;
+}
+
+return cleanSentence(sentence);
+}
+
+// MAIN FUNCTION
+function rewrite(){
+let input = document.getElementById("input").value;
+let mode = document.getElementById("mode").value;
+let out = document.getElementById("output");
+
+out.innerHTML = "";
+
+if(!input){
+out.innerHTML = "Enter text!";
+return;
+}
+
+// generate 3 different outputs
+for(let i=0;i<3;i++){
+let result = generateVariation(input,mode);
+
+out.innerHTML += `<div class="card">${result}</div>`;
+}
+}
+</script>
+
+</body>
+</html>
