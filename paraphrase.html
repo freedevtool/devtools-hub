@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>AI Paraphraser</title>
+<title>AI Paraphraser Pro</title>
 
 <style>
 body {
@@ -30,7 +30,6 @@ textarea {
   padding:12px;
   border-radius:10px;
   border:1px solid #ddd;
-  margin-top:10px;
 }
 
 button {
@@ -62,20 +61,12 @@ button {
   padding:5px 10px;
   color:white;
   border-radius:6px;
-  cursor:pointer;
 }
 
-.top-bar {
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
-}
-
-.top-bar button {
-  width:auto;
-  padding:8px 12px;
-  background:#eee;
-  color:#333;
+.stats {
+  font-size:12px;
+  margin-top:5px;
+  color:#666;
 }
 </style>
 
@@ -85,16 +76,11 @@ button {
 
 <div class="container">
 
-<div class="top-bar">
-<button onclick="history.back()">⬅ Back</button>
-<button onclick="clearText()">Clear</button>
-</div>
+<h2>🚀 AI Paraphraser Pro</h2>
 
-<h2>🚀 AI Paraphraser Tool</h2>
+<textarea id="input" placeholder="Paste your paragraph here..."></textarea>
 
-<textarea id="input" placeholder="Enter your text here..."></textarea>
-
-<button onclick="rewrite()">✨ Rewrite Now</button>
+<button onclick="rewrite()">✨ Generate Smart Variations</button>
 
 <div id="output"></div>
 
@@ -102,65 +88,108 @@ button {
 
 <script>
 
-// 🔥 sentence restructuring
-function shuffleStructure(words){
-  if(words.length < 5) return words.join(" ");
-
-  return words.slice(1).join(" ") + " " + words[0];
-}
-
-// 🔥 variation builder
-function buildVariation(text, type){
-  let words = text.split(" ");
-
-  let sentence = "";
-
-  if(type === 1){
-    // reorder
-    sentence = shuffleStructure(words);
-  }
-
-  if(type === 2){
-    // add descriptive tone
-    sentence = "Interestingly, " + text;
-  }
-
-  if(type === 3){
-    // change tense style slightly
-    sentence = text.replace("am","was").replace("is","was");
-  }
-
-  // grammar fix
-  sentence = sentence
+// 🔥 grammar correction
+function fixGrammar(text){
+  return text
     .replace(/\bi\b/g,"I")
     .replace(/\s+/g," ")
+    .replace(/\s\./g,".")
     .trim();
-
-  return sentence.charAt(0).toUpperCase() + sentence.slice(1);
 }
 
-// 🔥 MAIN FUNCTION
+// 🔥 sentence split
+function splitSentences(text){
+  return text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+}
+
+// 🔥 synonym engine
+const dict = {
+  "traveling":["journeying","exploring","moving"],
+  "enjoying":["liking","experiencing","loving"],
+  "train":["railway","train ride"],
+  "good":["great","excellent","fantastic"],
+  "coffee":["brew","espresso"]
+};
+
+// 🔥 replace words smartly
+function replaceWords(sentence){
+  return sentence.split(" ").map(w=>{
+    let key = w.toLowerCase();
+    if(dict[key]){
+      return dict[key][Math.floor(Math.random()*dict[key].length)];
+    }
+    return w;
+  }).join(" ");
+}
+
+// 🔥 restructure sentence
+function restructure(sentence){
+  let words = sentence.split(" ");
+  if(words.length > 5){
+    return words.slice(2).join(" ") + " " + words.slice(0,2).join(" ");
+  }
+  return sentence;
+}
+
+// 🔥 expand sentence
+function expand(sentence){
+  return "In simple terms, " + sentence;
+}
+
+// 🔥 shorten sentence
+function shorten(sentence){
+  return sentence.split(" ").slice(0, Math.ceil(sentence.split(" ").length * 0.8)).join(" ");
+}
+
+// 🔥 build variation
+function createVersion(text,type){
+  let sentences = splitSentences(text);
+
+  let result = sentences.map(s=>{
+    s = fixGrammar(s);
+
+    if(type === 1){
+      return replaceWords(s);
+    }
+
+    if(type === 2){
+      return restructure(replaceWords(s));
+    }
+
+    if(type === 3){
+      return expand(shorten(replaceWords(s)));
+    }
+
+  });
+
+  return result.join(". ") + ".";
+}
+
+// 🔥 MAIN
 function rewrite(){
   let input = document.getElementById("input").value;
-  let output = document.getElementById("output");
+  let out = document.getElementById("output");
 
-  output.innerHTML = "";
+  out.innerHTML = "";
 
   if(!input){
-    output.innerHTML = "Enter text!";
+    out.innerHTML = "Enter text!";
     return;
   }
 
-  let v1 = buildVariation(input,1);
-  let v2 = buildVariation(input,2);
-  let v3 = buildVariation(input,3);
+  let v1 = createVersion(input,1);
+  let v2 = createVersion(input,2);
+  let v3 = createVersion(input,3);
 
   let results = [v1,v2,v3];
 
   results.forEach(r=>{
-    output.innerHTML += `
+    let wordCount = r.split(" ").length;
+
+    out.innerHTML += `
       <div class="card">
         ${r}
+        <div class="stats">Words: ${wordCount}</div>
         <button class="copy-btn" onclick="copyText(this)">Copy</button>
       </div>
     `;
@@ -172,12 +201,6 @@ function copyText(btn){
   let text = btn.parentElement.innerText.replace("Copy","");
   navigator.clipboard.writeText(text);
   btn.innerText = "Copied!";
-}
-
-// 🔥 CLEAR
-function clearText(){
-  document.getElementById("input").value="";
-  document.getElementById("output").innerHTML="";
 }
 
 </script>
