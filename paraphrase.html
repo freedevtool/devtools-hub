@@ -7,16 +7,32 @@
 body {
   font-family: 'Segoe UI', sans-serif;
   background: linear-gradient(135deg,#667eea,#764ba2);
-  padding:20px;
+  margin:0;
 }
 
+/* NAVBAR */
+.navbar {
+  background:#fff;
+  padding:12px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.navbar a {
+  text-decoration:none;
+  color:#6c5ce7;
+  font-weight:bold;
+}
+
+/* MAIN */
 .container {
   max-width:900px;
-  margin:auto;
+  margin:20px auto;
   background:#fff;
   padding:25px;
   border-radius:15px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 h2 {
@@ -32,7 +48,7 @@ textarea {
   border:1px solid #ddd;
 }
 
-button {
+button.main-btn {
   width:100%;
   padding:14px;
   margin-top:10px;
@@ -44,6 +60,7 @@ button {
   cursor:pointer;
 }
 
+/* OUTPUT */
 .card {
   background:#f4f6ff;
   padding:15px;
@@ -52,20 +69,27 @@ button {
   position:relative;
 }
 
+.card-text {
+  white-space:pre-wrap;
+  line-height:1.6;
+  margin-right:60px;
+}
+
 .copy-btn {
   position:absolute;
   right:10px;
   top:10px;
   background:#22c55e;
   border:none;
-  padding:5px 10px;
+  padding:6px 10px;
   color:white;
   border-radius:6px;
+  cursor:pointer;
 }
 
 .stats {
   font-size:12px;
-  margin-top:5px;
+  margin-top:8px;
   color:#666;
 }
 </style>
@@ -74,13 +98,19 @@ button {
 
 <body>
 
+<!-- NAVBAR -->
+<div class="navbar">
+  <a href="index.html">⬅ Back to Home</a>
+  <span>AI Paraphraser Pro</span>
+</div>
+
 <div class="container">
 
-<h2>🚀 AI Paraphraser Pro</h2>
+<h2>✨ Smart Paraphrasing Tool</h2>
 
-<textarea id="input" placeholder="Paste your paragraph here..."></textarea>
+<textarea id="input" placeholder="Paste your text..."></textarea>
 
-<button onclick="rewrite()">✨ Generate Smart Variations</button>
+<button class="main-btn" onclick="rewrite()">Generate Variations</button>
 
 <div id="output"></div>
 
@@ -88,30 +118,28 @@ button {
 
 <script>
 
-// 🔥 grammar correction
+// 🔥 grammar fix
 function fixGrammar(text){
   return text
     .replace(/\bi\b/g,"I")
     .replace(/\s+/g," ")
-    .replace(/\s\./g,".")
     .trim();
 }
 
-// 🔥 sentence split
+// 🔥 split sentences
 function splitSentences(text){
-  return text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  return text.split(/[.!?]+/).filter(s=>s.trim());
 }
 
-// 🔥 synonym engine
+// 🔥 synonyms
 const dict = {
   "traveling":["journeying","exploring","moving"],
-  "enjoying":["liking","experiencing","loving"],
-  "train":["railway","train ride"],
-  "good":["great","excellent","fantastic"],
-  "coffee":["brew","espresso"]
+  "enjoying":["loving","experiencing"],
+  "good":["great","excellent"],
+  "coffee":["espresso","brew"]
 };
 
-// 🔥 replace words smartly
+// 🔥 replace words
 function replaceWords(sentence){
   return sentence.split(" ").map(w=>{
     let key = w.toLowerCase();
@@ -122,43 +150,30 @@ function replaceWords(sentence){
   }).join(" ");
 }
 
-// 🔥 restructure sentence
+// 🔥 restructure
 function restructure(sentence){
   let words = sentence.split(" ");
-  if(words.length > 5){
+  if(words.length > 6){
     return words.slice(2).join(" ") + " " + words.slice(0,2).join(" ");
   }
   return sentence;
 }
 
-// 🔥 expand sentence
+// 🔥 expand
 function expand(sentence){
-  return "In simple terms, " + sentence;
+  return "In a simple way, " + sentence;
 }
 
-// 🔥 shorten sentence
-function shorten(sentence){
-  return sentence.split(" ").slice(0, Math.ceil(sentence.split(" ").length * 0.8)).join(" ");
-}
-
-// 🔥 build variation
+// 🔥 create variation
 function createVersion(text,type){
   let sentences = splitSentences(text);
 
   let result = sentences.map(s=>{
     s = fixGrammar(s);
 
-    if(type === 1){
-      return replaceWords(s);
-    }
-
-    if(type === 2){
-      return restructure(replaceWords(s));
-    }
-
-    if(type === 3){
-      return expand(shorten(replaceWords(s)));
-    }
+    if(type===1) return replaceWords(s);
+    if(type===2) return restructure(replaceWords(s));
+    if(type===3) return expand(replaceWords(s));
 
   });
 
@@ -177,28 +192,28 @@ function rewrite(){
     return;
   }
 
-  let v1 = createVersion(input,1);
-  let v2 = createVersion(input,2);
-  let v3 = createVersion(input,3);
+  let versions = [
+    createVersion(input,1),
+    createVersion(input,2),
+    createVersion(input,3)
+  ];
 
-  let results = [v1,v2,v3];
-
-  results.forEach(r=>{
-    let wordCount = r.split(" ").length;
+  versions.forEach((text,index)=>{
+    let wordCount = text.split(" ").length;
 
     out.innerHTML += `
       <div class="card">
-        ${r}
+        <div class="card-text" id="text${index}">${text}</div>
+        <button class="copy-btn" onclick="copyText('text${index}', this)">Copy</button>
         <div class="stats">Words: ${wordCount}</div>
-        <button class="copy-btn" onclick="copyText(this)">Copy</button>
       </div>
     `;
   });
 }
 
-// 🔥 COPY
-function copyText(btn){
-  let text = btn.parentElement.innerText.replace("Copy","");
+// 🔥 PERFECT COPY (NO CUT BUG)
+function copyText(id, btn){
+  let text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text);
   btn.innerText = "Copied!";
 }
