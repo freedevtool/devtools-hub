@@ -2,29 +2,99 @@
 <html>
 <head>
 <title>AI Paraphraser</title>
+
 <style>
-body{font-family:Arial;background:#764ba2;color:#fff;padding:20px;}
-.container{background:#fff;color:#000;padding:20px;border-radius:10px;max-width:800px;margin:auto;}
-textarea,button,select{width:100%;margin-top:10px;padding:10px;border-radius:8px;}
-.card{background:#f4f6ff;padding:10px;margin-top:10px;border-radius:8px;}
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  padding:20px;
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  background:#fff;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align:center;
+  color:#6c5ce7;
+}
+
+textarea {
+  width:100%;
+  height:150px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  margin-top:10px;
+}
+
+button {
+  width:100%;
+  padding:14px;
+  margin-top:10px;
+  background:#6c5ce7;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.card {
+  background:#f4f6ff;
+  padding:15px;
+  margin-top:15px;
+  border-radius:10px;
+  position:relative;
+}
+
+.copy-btn {
+  position:absolute;
+  right:10px;
+  top:10px;
+  background:#22c55e;
+  border:none;
+  padding:5px 10px;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.top-bar {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.top-bar button {
+  width:auto;
+  padding:8px 12px;
+  background:#eee;
+  color:#333;
+}
 </style>
+
 </head>
 
 <body>
 
-<a href="index.html">⬅ Back</a>
-
 <div class="container">
-<h2>AI Paraphraser Tool</h2>
 
-<select id="mode">
-<option value="standard">Standard</option>
-<option value="formal">Formal</option>
-<option value="casual">Casual</option>
-</select>
+<div class="top-bar">
+<button onclick="history.back()">⬅ Back</button>
+<button onclick="clearText()">Clear</button>
+</div>
 
-<textarea id="input" placeholder="Enter text"></textarea>
-<button onclick="rewrite()">Rewrite</button>
+<h2>🚀 AI Paraphraser Tool</h2>
+
+<textarea id="input" placeholder="Enter your text here..."></textarea>
+
+<button onclick="rewrite()">✨ Rewrite Now</button>
 
 <div id="output"></div>
 
@@ -32,72 +102,84 @@ textarea,button,select{width:100%;margin-top:10px;padding:10px;border-radius:8px
 
 <script>
 
-// synonym dictionary
-const synonyms = {
-"i":"I",
-"am":["am","was"],
-"travel":["traveling","journeying","exploring"],
-"train":["train","rail"],
-"enjoy":["enjoying","loving","having fun"],
-"tea":["tea","a cup of tea","hot tea"]
-};
+// 🔥 sentence restructuring
+function shuffleStructure(words){
+  if(words.length < 5) return words.join(" ");
 
-// grammar correction
-function cleanSentence(text){
-return text
-.replace(/\bi\b/g,"I")
-.replace(/\s+/g," ")
-.trim();
+  return words.slice(1).join(" ") + " " + words[0];
 }
 
-// smarter rewrite
-function generateVariation(text,mode){
-let words = text.split(" ");
+// 🔥 variation builder
+function buildVariation(text, type){
+  let words = text.split(" ");
 
-let newWords = words.map(w=>{
-let key = w.toLowerCase();
-if(synonyms[key]){
-let val = synonyms[key];
-if(Array.isArray(val)){
-return val[Math.floor(Math.random()*val.length)];
-}
-return val;
-}
-return w;
-});
+  let sentence = "";
 
-let sentence = newWords.join(" ");
+  if(type === 1){
+    // reorder
+    sentence = shuffleStructure(words);
+  }
 
-if(mode=="formal"){
-sentence = "It can be stated that " + sentence;
-}
-if(mode=="casual"){
-sentence = "Honestly, " + sentence;
+  if(type === 2){
+    // add descriptive tone
+    sentence = "Interestingly, " + text;
+  }
+
+  if(type === 3){
+    // change tense style slightly
+    sentence = text.replace("am","was").replace("is","was");
+  }
+
+  // grammar fix
+  sentence = sentence
+    .replace(/\bi\b/g,"I")
+    .replace(/\s+/g," ")
+    .trim();
+
+  return sentence.charAt(0).toUpperCase() + sentence.slice(1);
 }
 
-return cleanSentence(sentence);
-}
-
-// MAIN FUNCTION
+// 🔥 MAIN FUNCTION
 function rewrite(){
-let input = document.getElementById("input").value;
-let mode = document.getElementById("mode").value;
-let out = document.getElementById("output");
+  let input = document.getElementById("input").value;
+  let output = document.getElementById("output");
 
-out.innerHTML = "";
+  output.innerHTML = "";
 
-if(!input){
-out.innerHTML = "Enter text!";
-return;
+  if(!input){
+    output.innerHTML = "Enter text!";
+    return;
+  }
+
+  let v1 = buildVariation(input,1);
+  let v2 = buildVariation(input,2);
+  let v3 = buildVariation(input,3);
+
+  let results = [v1,v2,v3];
+
+  results.forEach(r=>{
+    output.innerHTML += `
+      <div class="card">
+        ${r}
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+      </div>
+    `;
+  });
 }
 
-// generate 3 different outputs
-for(let i=0;i<3;i++){
-let result = generateVariation(input,mode);
+// 🔥 COPY
+function copyText(btn){
+  let text = btn.parentElement.innerText.replace("Copy","");
+  navigator.clipboard.writeText(text);
+  btn.innerText = "Copied!";
+}
 
-out.innerHTML += `<div class="card">${result}</div>`;
+// 🔥 CLEAR
+function clearText(){
+  document.getElementById("input").value="";
+  document.getElementById("output").innerHTML="";
 }
-}
+
 </script>
 
 </body>
