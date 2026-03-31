@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tools Premium</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  padding:20px;
+}
+
+.container {
+  max-width:900px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:15px;
+}
+
+h2 {
+  text-align:center;
+  color:#6c5ce7;
+}
+
+textarea {
+  width:100%;
+  height:120px;
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+}
+
+button {
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  background:#6c5ce7;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.card {
+  background:#f4f6ff;
+  padding:15px;
+  margin-top:10px;
+  border-radius:10px;
+}
+
+.copy-btn {
+  margin-top:8px;
+  background:#22c55e;
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+}
+
+select {
+  margin-top:10px;
+  padding:8px;
+  border-radius:6px;
+}
+
+hr {margin:30px 0;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>🤖 AI Caption Generator</h2>
+
+<select id="captionMode">
+  <option value="general">General</option>
+  <option value="seo">SEO</option>
+  <option value="instagram">Instagram</option>
+</select>
+
+<textarea id="captionInput" placeholder="Enter topic..."></textarea>
+<button onclick="generateCaption()">Generate 5 Captions</button>
+
+<div id="captionOutput"></div>
+
+<hr>
+
+<h2>✍️ AI Paraphraser</h2>
+
+<select id="paraMode">
+  <option value="standard">Standard</option>
+  <option value="formal">Formal</option>
+  <option value="casual">Casual</option>
+</select>
+
+<textarea id="paraInput" placeholder="Enter text..."></textarea>
+<button onclick="paraphraseText()">Rewrite 3 Versions</button>
+
+<div id="paraOutput"></div>
+
+</div>
+
+<script>
+
+// 🔥 SYNONYMS
+const synonyms = {
+  "good":["great","excellent","amazing"],
+  "travel":["journey","trip","explore"],
+  "car":["vehicle","ride","automobile"],
+  "coffee":["brew","espresso","latte"],
+  "enjoy":["love","like","experience"],
+  "big":["huge","massive","large"]
+};
+
+// 🔥 PARAPHRASE LOGIC
+function smartRewrite(text, mode){
+  let words = text.split(" ");
+
+  let output = words.map(word=>{
+    let lower = word.toLowerCase();
+    if(synonyms[lower]){
+      return synonyms[lower][Math.floor(Math.random()*synonyms[lower].length)];
+    }
+    return word;
+  }).join(" ");
+
+  if(mode==="formal"){
+    output = "It can be stated that " + output;
+  }
+  if(mode==="casual"){
+    output = "Honestly, " + output;
+  }
+
+  return output;
+}
+
+// 🔥 PARAPHRASE MULTI
+function paraphraseText(){
+  let text = document.getElementById("paraInput").value;
+  let mode = document.getElementById("paraMode").value;
+
+  let container = document.getElementById("paraOutput");
+  container.innerHTML = "";
+
+  if(!text){
+    container.innerHTML = "Enter text!";
+    return;
+  }
+
+  for(let i=0;i<3;i++){
+    let result = smartRewrite(text, mode);
+
+    container.innerHTML += `
+      <div class="card">
+        ${result}
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+      </div>
+    `;
+  }
+}
+
+// 🔥 CAPTION GENERATOR
+function generateCaption(){
+  let input = document.getElementById("captionInput").value;
+  let mode = document.getElementById("captionMode").value;
+
+  let container = document.getElementById("captionOutput");
+  container.innerHTML = "";
+
+  if(!input){
+    container.innerHTML = "Enter topic!";
+    return;
+  }
+
+  let templates = [];
+
+  if(mode==="seo"){
+    templates = [
+      `Best ${input} services near you`,
+      `Top rated ${input} in your city`,
+      `Affordable ${input} with best quality`,
+      `${input} – trusted by thousands`,
+      `Professional ${input} solutions today`
+    ];
+  }
+  else if(mode==="instagram"){
+    templates = [
+      `🔥 Loving this ${input}! #trending`,
+      `✨ ${input} vibes only 😍`,
+      `🚀 Level up with ${input}`,
+      `💯 ${input} goals!`,
+      `❤️ Can't get enough of ${input}`
+    ];
+  }
+  else{
+    templates = [
+      `Discover the best ${input} today!`,
+      `Experience ${input} like never before`,
+      `Upgrade your life with ${input}`,
+      `Top choice for ${input}`,
+      `The ultimate ${input} experience`
+    ];
+  }
+
+  templates.forEach(caption=>{
+    container.innerHTML += `
+      <div class="card">
+        ${caption}
+        <button class="copy-btn" onclick="copyText(this)">Copy</button>
+      </div>
+    `;
+  });
+}
+
+// 🔥 COPY FUNCTION
+function copyText(btn){
+  let text = btn.parentElement.innerText.replace("Copy","");
+  navigator.clipboard.writeText(text);
+  btn.innerText = "Copied!";
+}
+
+</script>
+
+</body>
+  </html>
