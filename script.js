@@ -30,7 +30,6 @@ async function generateCaption() {
   }
 }
 
-
 async function paraphraseText() {
   const input = document.getElementById("paraInput").value;
 
@@ -58,4 +57,5 @@ async function paraphraseText() {
   } catch (err) {
     document.getElementById("paraOutput").innerText =
       "Error connecting API";
-  });
+  }
+}
