@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AI Caption Generator</title>
+<style>
+body{font-family:Arial;background:#667eea;color:#fff;padding:20px;}
+.container{background:#fff;color:#000;padding:20px;border-radius:10px;max-width:700px;margin:auto;}
+textarea,select,button{width:100%;margin-top:10px;padding:10px;border-radius:8px;}
+.card{background:#f4f6ff;padding:10px;margin-top:10px;border-radius:8px;}
+</style>
+</head>
+
+<body>
+
+<a href="index.html">⬅ Back</a>
+
+<div class="container">
+<h2>AI Caption Generator</h2>
+
+<select id="mode">
+<option value="general">General</option>
+<option value="seo">SEO</option>
+<option value="instagram">Instagram</option>
+</select>
+
+<textarea id="input" placeholder="Enter topic"></textarea>
+<button onclick="generate()">Generate</button>
+
+<div id="output"></div>
+
+</div>
+
+<script>
+function generate(){
+let input = document.getElementById("input").value;
+let mode = document.getElementById("mode").value;
+let out = document.getElementById("output");
+
+out.innerHTML = "";
+
+let templates = [];
+
+if(mode=="seo"){
+templates=[
+`Best ${input} services near you`,
+`Top ${input} provider today`,
+`Affordable ${input} solutions`,
+`${input} trusted by customers`,
+`Professional ${input} services`
+];
+}
+else if(mode=="instagram"){
+templates=[
+`🔥 Loving ${input}!`,
+`✨ ${input} vibes 😍`,
+`🚀 Try ${input} today`,
+`❤️ ${input} goals`,
+`💯 ${input} life`
+];
+}
+else{
+templates=[
+`Discover ${input} today`,
+`Experience ${input} like never before`,
+`Upgrade with ${input}`,
+`Best ${input} choice`,
+`${input} made easy`
+];
+}
+
+templates.forEach(t=>{
+out.innerHTML += `<div class="card">${t}</div>`;
+});
+}
+</script>
+
+</body>
+</html>
