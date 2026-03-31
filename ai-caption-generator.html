@@ -12,7 +12,6 @@ body {
   padding: 20px;
 }
 
-/* BACK BUTTON */
 .back-btn {
   display: inline-block;
   margin-bottom: 15px;
@@ -24,7 +23,6 @@ body {
   font-weight: bold;
 }
 
-/* CONTAINER */
 .container {
   max-width: 700px;
   margin: auto;
@@ -33,13 +31,11 @@ body {
   border-radius: 15px;
 }
 
-/* TITLE */
 .title {
   text-align: center;
   color: #6c5ce7;
 }
 
-/* INPUT */
 textarea {
   width: 100%;
   height: 120px;
@@ -48,7 +44,6 @@ textarea {
   margin-top: 10px;
 }
 
-/* BUTTON */
 button {
   width: 100%;
   padding: 12px;
@@ -60,27 +55,17 @@ button {
   cursor: pointer;
 }
 
-/* CARDS */
-.card {
+.result {
   background: #f4f6ff;
   padding: 15px;
   margin-top: 15px;
   border-radius: 10px;
+  min-height: 80px;
 }
 
 .copy-btn {
   margin-top: 10px;
   background: #22c55e;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  color: white;
-}
-
-/* LOADING */
-.loading {
-  text-align: center;
-  margin-top: 10px;
 }
 </style>
 </head>
@@ -93,18 +78,19 @@ button {
 
 <h2 class="title">🤖 AI Caption Generator</h2>
 
-<textarea id="captionInput"></textarea>
-<div id="captionOutput"></div>
+<!-- ✅ FIXED ID -->
+<textarea id="captionInput" placeholder="Enter topic (e.g. Coffee shop opening)"></textarea>
 
-<button onclick="generateCaption()">🚀 Generate</button>
+<!-- ✅ BUTTON -->
+<button onclick="generateCaption()">🚀 Generate Caption</button>
 
-<div class="loading" id="loading"></div>
-<div id="output"></div>
+<!-- ✅ FIXED ID -->
+<div class="result" id="captionOutput"></div>
 
 </div>
 
-
+<!-- ✅ CONNECT MAIN SCRIPT -->
 <script src="script.js"></script>
-  
+
 </body>
 </html>
