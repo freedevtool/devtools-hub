@@ -210,22 +210,6 @@ color:#ffd700;
   color:#6c5ce7;
   font-size:22px;
 }
-  <h2>Caption Generator</h2>
-
-<textarea id="captionInput"></textarea><br><br>
-
-<button onclick="generateCaption()">Generate Caption</button>
-
-<p id="captionOutput"></p>
-  <hr>
-
-<h2>Paraphrasing Tool</h2>
-
-<textarea id="paraInput"></textarea><br><br>
-
-<button onclick="paraphraseText()">Paraphrase</button>
-
-<p id="paraOutput"></p>
   
 </style>
 </head>
@@ -282,24 +266,23 @@ color:#ffd700;
 
 <div class="tools-grid">
 
-<a href="gst-calculator.html" class="tool-card"><h3>GST Calculator</h3><span class="tag">Trending</span></a>
-<a href="emi-calculator.html" class="tool-card"><h3>EMI Calculator</h3><span class="tag">Finance</span></a>
-<a href="caption.html" class="tool-card"><h3>AI caption generator</h3><span class="tag">Basic AI</span></a>
-<a href="paraphrase.html"class="tool-card"><h3>Paraphrase Tool</h3></a>
-<a href="text-case-converter.html" class="tool-card"><h3>Case Converter</h3></a>
+<a href="gst-calculator.html" class="tool-card"  onclick="trackTool('Gst Calculator')"><h3>GST Calculator</h3><span class="tag">Trending</span></a>
+<a href="emi-calculator.html" class="tool-card" onclick="trackTool('Emi Calculator')"><h3>EMI Calculator</h3><span class="tag">Finance</span></a>
+<a href="caption.html" class="tool-card" onclick="trackTool('Caption Tool')"><h3>AI caption generator</h3><span class="tag">Basic AI</span></a>
+<a href="paraphrase.html"class="tool-card" onclick="trackTool('Paraphrase Tool')"><h3>Paraphrase Tool</h3></a>
+<a href="text-case-converter.html" class="tool-card" onclick="trackTool('Case Converter')"><h3>Case Converter</h3></a>
 
-<a href="json-formatter.html" class="tool-card"><h3>JSON Formatter</h3></a>
-<a href="base64.html" class="tool-card"><h3>Base64 Encoder</h3></a>
-<a href="image-resizer.html" class="tool-card"><h3>Image Resizer</h3></a>
-<a href="image-compressor.html" class="tool-card"><h3>Image Compressor</h3></a>
-<a href="background-remover.html" class="tool-card"><h3>Background Remover</h3></a>
-<a href="word-counter.html" class="tool-card"><h3>Word Counter</h3></a>
-<a href="grammar-checker.html" class="tool-card"><h3>Grammar Checker</h3></a>
-<a href="password-generator.html" class="tool-card"><h3>Password Generator</h3></a>
-<a href="qr-generator.html" class="tool-card"><h3>QR Generator</h3></a>
+<a href="json-formatter.html" class="tool-card" onclick="trackTool('JSON Formatter')"><h3>JSON Formatter</h3></a>
+<a href="image-resizer.html" class="tool-card" onclick="trackTool('Image Resizer')"><h3>Image Resizer</h3></a>
+<a href="image-compressor.html" class="tool-card" onclick="trackTool('Image Compressor')"><h3>Image Compressor</h3></a>
+<a href="background-remover.html" class="tool-card" onclick="trackTool('Background Remover')"><h3>Background Remover</h3></a>
+<a href="word-counter.html" class="tool-card" onclick="trackTool('Word Counter')"><h3>Word Counter</h3></a>
+<a href="grammar-checker.html" class="tool-card" onclick="trackTool('Grammar Checker')"><h3>Grammar Checker</h3></a>
+<a href="password-generator.html" class="tool-card" onclick="trackTool('Password Generator')"><h3>Password Generator</h3></a>
+<a href="qr-generator.html" class="tool-card" onclick="trackTool('QR Generator')"><h3>QR Generator</h3></a>
 <a href="unit-converter.html" class="tool-card"><h3>Unit Converter</h3></a>
-<a href="pdf-to-jpg.html" class="tool-card"><h3>PDF to JPG</h3></a>
-<a href="seo-tool.html" class="tool-card"><h3>SEO Tool</h3></a>
+<a href="pdf-to-jpg.html" class="tool-card" onclick="trackTool('PDF to JPG')"><h3>PDF to JPG</h3></a>
+<a href="seo-tool.html" class="tool-card" onclick="trackTool('SEO Tool')"><h3>SEO Tool</h3></a>
   
 </div>
 </div>
@@ -336,11 +319,11 @@ color:#ffd700;
 
 <div>
 <h3>Tools</h3>
-<a href="gst-calculator.html" onclick="trackTool('Gst Calculator')">
-<a href="emi-calculator.html" onclick="trackTool('Emi calculator')">
-<a href="caption.html" onclick="trackTool('Caption Tool')">
-<a href="paraphrase.html" onclick="trackTool('Paraphrase Tool')">
-<a href="text-case-converter.html" onclick="trackTool('Text Case converter')">
+<a href="gst-calculator.html" onclick="trackTool('Gst Calculator')">Gst Calculator</a>
+<a href="emi-calculator.html" onclick="trackTool('Emi calculator')">Emi Calculator</a>
+<a href="caption.html" onclick="trackTool('Caption Tool')">Caption Tool</a>
+<a href="paraphrase.html" onclick="trackTool('Paraphrase Tool')">Paraphrase Tool</a>
+<a href="text-case-converter.html" onclick="trackTool('Text Case converter')">Text Case Converter</a>
 </div>
 
 <div>
