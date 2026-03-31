@@ -188,6 +188,28 @@ margin:5px 0;
 footer a:hover{
 color:#ffd700;
 }
+  .analytics-strip {
+  display:flex;
+  gap:15px;
+  overflow-x:auto;
+  padding:15px 10px;
+  margin-top:20px;
+}
+
+.stat {
+  min-width:180px;
+  background:#fff;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+.stat h3 {
+  margin:0;
+  color:#6c5ce7;
+  font-size:22px;
+}
   <h2>Caption Generator</h2>
 
 <textarea id="captionInput"></textarea><br><br>
@@ -278,6 +300,28 @@ color:#ffd700;
 <a href="unit-converter.html" class="tool-card"><h3>Unit Converter</h3></a>
 <a href="pdf-to-jpg.html" class="tool-card"><h3>PDF to JPG</h3></a>
 <a href="seo-tool.html" class="tool-card"><h3>SEO Tool</h3></a>
+  
+<div class="analytics-strip">
+
+  <div class="stat">
+    <h3 id="users">0</h3>
+    <p>Users</p>
+  </div>
+
+  <div class="stat">
+    <h3 id="totalClicks">0</h3>
+    <p>Total Usage</p>
+  </div>
+
+  <div class="stat">
+    <h3 id="mostUsed">-</h3>
+    <p>Most Used</p>
+  </div>
+
+  <div class="stat">
+    <h3 id="trending">-</h3>
+    <p>Trending Tool</p>
+  </div>
 
 </div>
 </div>
@@ -289,11 +333,11 @@ color:#ffd700;
 
 <div>
 <h3>Tools</h3>
-<a href="gst-calculator.html">GST Calculator</a>
-<a href="emi-calculator.html">EMI Calculator</a>
-<a href="caption.html">AI Caption Generator</a>
-<a href="paraphrase.html">AI Paraphrasing Tool</a>
-<a href="text-case-converter.html">Case Converter</a>
+<a href="gst-calculator.html" onclick="trackTool('Gst Calculator')">
+<a href="emi-calculator.html" onclick="trackTool('Emi calculator')">
+<a href="caption.html" onclick="trackTool('Caption Tool')">
+<a href="paraphrase.html" onclick="trackTool('Paraphrase Tool')">
+<a href="text-case-converter.html" onclick="trackTool('Text Case converter')">
 </div>
 
 <div>
@@ -336,6 +380,49 @@ menu.style.display=(menu.style.display==="block")?"none":"block";
 }
 
 </script>
+  
+  <script>
 
+// USERS COUNT
+let users = localStorage.getItem("users") || 0;
+users++;
+localStorage.setItem("users", users);
+
+// TOOL USAGE DATA
+let usage = JSON.parse(localStorage.getItem("usage")) || {};
+
+// TRACK TOOL CLICK (CALL THIS ON EVERY TOOL)
+function trackTool(tool){
+  if(!usage[tool]) usage[tool] = 0;
+  usage[tool]++;
+  localStorage.setItem("usage", JSON.stringify(usage));
+}
+
+// UPDATE UI
+function updateStats(){
+
+  document.getElementById("users").innerText = users;
+
+  let total = 0;
+  let maxTool = "-";
+  let max = 0;
+
+  for(let key in usage){
+    total += usage[key];
+
+    if(usage[key] > max){
+      max = usage[key];
+      maxTool = key;
+    }
+  }
+
+  document.getElementById("totalClicks").innerText = total;
+  document.getElementById("mostUsed").innerText = maxTool;
+  document.getElementById("trending").innerText = maxTool;
+}
+
+updateStats();
+
+</script>
 </body>
 </html>
