@@ -4,9 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>100+Free Online Tools for students and developers</title>
+<title>100+ Free Online Tools for Students & Developers – GST Calculator, EMI Calculator, AI Tools & More</title>
+
+<meta name="description" content="Free online tools: GST Calculator, EMI Calculator, AI tools, image compressor, developer tools & more. Fast, secure, no signup required.">
 
 <link rel="icon" href="/favicon.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -79,6 +82,7 @@ text-decoration:none;
 color:#1e293b;
 box-shadow:0 5px 15px rgba(0,0,0,0.05);
 transition:0.3s;
+border:1px solid #eee;
 }
 
 .tool-card:hover{
@@ -88,7 +92,7 @@ box-shadow:0 10px 25px rgba(108,92,231,0.2);
 
 .tag{
 background:linear-gradient(45deg,#667eea,#764ba2);
-color:white;
+color:#fff;
 padding:4px 10px;
 border-radius:20px;
 font-size:12px;
@@ -117,26 +121,36 @@ text-align:center;
 color:#6c5ce7;
 }
 
-/* ===== PREMIUM RIBBON ===== */
+/* ===== AUTO SLIDER RIBBON ===== */
 .ribbon-section{
-margin:40px 0;
+margin:50px 0;
+overflow:hidden;
 }
 
 .ribbon-title{
 font-size:18px;
 font-weight:600;
-margin-bottom:12px;
+margin-bottom:15px;
 }
 
-.ribbon-scroll{
+.ribbon-track{
 display:flex;
-gap:15px;
-overflow-x:auto;
-padding-bottom:10px;
+gap:20px;
+width:max-content;
+animation:scroll 28s linear infinite;
+}
+
+.ribbon-section:hover .ribbon-track{
+animation-play-state:paused;
+}
+
+@keyframes scroll{
+0%{transform:translateX(0);}
+100%{transform:translateX(-50%);}
 }
 
 .ribbon-item{
-min-width:220px;
+min-width:240px;
 display:flex;
 align-items:center;
 gap:12px;
@@ -144,14 +158,14 @@ padding:14px;
 border-radius:14px;
 background:#fff;
 border:1px solid #eee;
-box-shadow:0 6px 18px rgba(0,0,0,0.06);
+box-shadow:0 8px 20px rgba(0,0,0,0.06);
 text-decoration:none;
 transition:0.3s;
 }
 
 .ribbon-item:hover{
-transform:translateY(-6px);
-box-shadow:0 15px 30px rgba(108,92,231,0.25);
+transform:translateY(-6px) scale(1.03);
+box-shadow:0 15px 30px rgba(108,92,231,0.3);
 }
 
 .ribbon-item img{
@@ -214,15 +228,15 @@ text-align:center;
 
 <div class="hero">
 <h1>🚀 Free Online Tools</h1>
-<p>GST, EMI, AI, Image tools & more</p>
+<p>GST, EMI, AI, Image compressor & free Developer Tools – 100% Free</p>
 </div>
 
-<!-- ALL TOOLS (UNCHANGED) -->
+<!-- ALL TOOLS (UNCHANGED FULL LIST) -->
 <div class="tools-grid">
 
 <a href="gst-calculator.html" class="tool-card"><h3>GST Calculator</h3><span class="tag">Trending</span></a>
 <a href="emi-calculator.html" class="tool-card"><h3>EMI Calculator</h3></a>
-<a href="caption.html" class="tool-card"><h3>AI caption generator</h3></a>
+<a href="caption.html" class="tool-card"><h3>AI Caption Generator</h3></a>
 <a href="paraphrase.html" class="tool-card"><h3>Paraphrase Tool</h3></a>
 <a href="text-case-converter.html" class="tool-card"><h3>Case Converter</h3></a>
 <a href="json-formatter.html" class="tool-card"><h3>JSON Formatter</h3></a>
@@ -247,73 +261,76 @@ text-align:center;
 <div class="stat"><h3 id="trending">-</h3><p>Trending Tool</p></div>
 </div>
 
-<!-- 🔥 PREMIUM PARTNER RIBBON -->
+<!-- 🔥 AUTO SLIDING RIBBON -->
 <div class="ribbon-section">
-  <h3 class="ribbon-title">🤝 Our Partners</h3>
+<h3 class="ribbon-title">🤝 Our Partners</h3>
 
-  <div class="ribbon-scroll">
+<div class="ribbon-track">
+<a href="https://www.carandcab.com" target="_blank" class="ribbon-item">
+<img src="/images/footerlogo.png">
+<div class="ribbon-text">
+<strong>Car & Cab</strong>
+<span>Self Drive Rentals</span>
+<div class="ribbon-badge">Verified</div>
+</div>
+</a>
 
-    <!-- Car & Cab -->
-    <a href="https://www.carandcab.com" target="_blank" class="ribbon-item">
-      <img src="/images/footerlogo.png" alt="Car & Cab">
-      <div class="ribbon-text">
-        <strong>Car & Cab</strong>
-        <span>Self Drive Car Rentals</span>
-        <div class="ribbon-badge">Verified</div>
-      </div>
-    </a>
+<a href="https://pinakatrip.com" target="_blank" class="ribbon-item">
+<img src="https://www.google.com/s2/favicons?sz=128&domain=pinakatrip.com">
+<div class="ribbon-text">
+<strong>Pinaka Trip</strong>
+<span>Travel Platform</span>
+</div>
+</a>
 
-    <!-- PinakaTrip -->
-    <a href="https://pinakatrip.com" target="_blank" class="ribbon-item">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=pinakatrip.com" alt="PinakaTrip">
-      <div class="ribbon-text">
-        <strong>Pinaka Trip</strong>
-        <span>Travel Platform</span>
-        <div class="ribbon-badge">Partner</div>
-      </div>
-    </a>
+<!-- duplicate for smooth loop -->
+<a href="https://www.carandcab.com" target="_blank" class="ribbon-item">
+<img src="/images/footerlogo.png">
+<div class="ribbon-text">
+<strong>Car & Cab</strong>
+</div>
+</a>
 
-  </div>
+<a href="https://pinakatrip.com" target="_blank" class="ribbon-item">
+<img src="https://www.google.com/s2/favicons?sz=128&domain=pinakatrip.com">
+<div class="ribbon-text">
+<strong>Pinaka Trip</strong>
+</div>
+</a>
+</div>
 </div>
 
-
-<!-- 🔥 ALSO LIKED BY -->
+<!-- ALSO LIKED -->
 <div class="ribbon-section">
-  <h3 class="ribbon-title">🔥 Also Liked By</h3>
+<h3 class="ribbon-title">🔥 Also Liked By</h3>
 
-  <div class="ribbon-scroll">
+<div class="ribbon-track">
 
-    <!-- Wandering Jerk -->
-    <a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-item">
-      <img src="/images/channels4_profile.jpg" alt="Wandering Jerk">
-      <div class="ribbon-text">
-        <strong>Wandering Jerk</strong>
-        <span>YouTube Channel</span>
-        <div class="ribbon-badge">Popular</div>
-      </div>
-    </a>
-
-    <!-- Car & Cab -->
-    <a href="https://www.carandcab.com" target="_blank" class="ribbon-item">
-      <img src="/images/footerlogo.png" alt="Car & Cab">
-      <div class="ribbon-text">
-        <strong>Car & Cab</strong>
-        <span>Travel Partner</span>
-      </div>
-    </a>
-
-    <!-- Journey Of Road -->
-    <a href="https://journeyofroad.blogspot.com/" target="_blank" class="ribbon-item">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=blogspot.com" alt="Journey Of Road">
-      <div class="ribbon-text">
-        <strong>Journey Of Road</strong>
-        <span>Travel Blog</span>
-      </div>
-    </a>
-
-  </div>
+<a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-item">
+<img src="/images/channels4_profile.jpg">
+<div class="ribbon-text">
+<strong>Wandering Jerk</strong>
+<span>YouTube Channel</span>
 </div>
-  
+</a>
+
+<a href="https://www.carandcab.com" target="_blank" class="ribbon-item">
+<img src="/images/footerlogo.png">
+<div class="ribbon-text">
+<strong>Car & Cab</strong>
+</div>
+</a>
+
+<a href="https://journeyofroad.blogspot.com/" target="_blank" class="ribbon-item">
+<img src="https://www.google.com/s2/favicons?sz=128&domain=blogspot.com">
+<div class="ribbon-text">
+<strong>Journey Of Road</strong>
+</div>
+</a>
+
+</div>
+</div>
+
 <footer>
 © 2026 ExploreDevTools
 </footer>
