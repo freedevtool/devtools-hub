@@ -210,58 +210,96 @@ color:#ffd700;
   color:#6c5ce7;
   font-size:22px;
 }
-  /* 🔥 PARTNER RIBBON */
-.partner-ribbon {
-  margin-top:30px;
-  padding:20px;
-  background:#fff;
-  border-radius:12px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.08);
+  .ribbon-section {
+  margin: 40px 0;
+  padding: 10px 15px;
 }
 
-.partner-ribbon h3 {
-  margin-bottom:15px;
-  color:#6c5ce7;
+.ribbon-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #444;
+  border-left: 4px solid #764ba2;
+  padding-left: 10px;
 }
 
-/* SCROLL ROW */
-.partner-scroll {
-  display:flex;
-  gap:20px;
-  overflow-x:auto;
-  padding-bottom:10px;
+/* Container */
+.ribbon-container {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 
-/* ITEM */
-.partner-scroll a {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-decoration:none;
-  color:#333;
-  min-width:100px;
+/* Card Style */
+.ribbon-card {
+  min-width: 180px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  border-radius: 12px;
+  text-decoration: none;
+  background: linear-gradient(135deg, #764ba2, #667eea);
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* LOGO */
-.partner-scroll img {
-  width:60px;
-  height:60px;
-  border-radius:12px;
-  object-fit:cover;
-  background:#f3f4ff;
-  padding:8px;
-  transition:0.3s;
+/* Logo */
+.ribbon-card img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  padding: 4px;
 }
 
-.partner-scroll img:hover {
-  transform:scale(1.1);
+/* Text */
+.ribbon-card span {
+  font-size: 14px;
+  font-weight: 500;
 }
 
-/* TEXT */
-.partner-scroll span {
-  margin-top:5px;
-  font-size:13px;
+/* Hover Effect */
+.ribbon-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Scrollbar Hide */
+.ribbon-container::-webkit-scrollbar {
+  display: none;
   }
+<!-- Partner Ribbon -->
+<div class="ribbon-section">
+  <h3 class="ribbon-title">Our Advertising Partners</h3>
+  
+  <div class="ribbon-container">
+    
+    <a href="https://www.carandcab.com" target="_blank" class="ribbon-card">
+      <img src="/images/footerlogo.png" alt="Car & Cab">
+      <span>Car & Cab</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- Also Liked By Ribbon -->
+<div class="ribbon-section">
+  <h3 class="ribbon-title">Also Trusted By</h3>
+  
+  <div class="ribbon-container">
+    
+    <a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-card">
+      <img src="/images/channels4_profile.jpg" alt="Wandering Jerk">
+      <span>Wandering Jerk</span>
+    </a>
+
+  </div>
+</div>
   
 </style>
 </head>
