@@ -210,77 +210,65 @@ color:#ffd700;
   color:#6c5ce7;
   font-size:22px;
   }
+/* RIBBON SECTION */
+.ribbon-section {
+  margin: 30px 0;
+  padding: 0 10px;
+}
 
-/* Card Style */
+.ribbon-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* SCROLL CONTAINER */
+.ribbon-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+/* CARD */
 .ribbon-card {
-  min-width: 180px;
+  min-width: 160px;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 15px;
-  border-radius: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
   text-decoration: none;
   background: linear-gradient(135deg, #764ba2, #667eea);
   color: #fff;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* Logo */
+/* LOGO */
 .ribbon-card img {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: 6px;
   background: #fff;
-  padding: 4px;
+  padding: 3px;
 }
 
-/* Text */
-.ribbon-card span {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Hover Effect */
+/* HOVER */
 .ribbon-card:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  transform: translateY(-3px);
 }
 
-/* Scrollbar Hide */
+/* SCROLLBAR HIDE */
 .ribbon-container::-webkit-scrollbar {
   display: none;
-  }
-  
-<!-- Partner Ribbon -->
-<div class="ribbon-section">
-  <h3 class="ribbon-title">Our Advertising Partners</h3>
-  
-  <div class="ribbon-container">
-    
-    <a href="https://www.carandcab.com" target="_blank" class="ribbon-card">
-      <img src="/images/footerlogo.png" alt="Car&Cab">
-      <span>Car&Cab</span>
-    </a>
+}
 
-  </div>
-</div>
-
-<!-- Also Liked By Ribbon -->
-<div class="ribbon-section">
-  <h3 class="ribbon-title">Also Trusted By</h3>
-  
-  <div class="ribbon-container">
-    
-    <a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-card">
-      <img src="/images/channels4_profile.jpg" alt="Wandering Jerk">
-      <span>Wandering Jerk</span>
-    </a>
-
-  </div>
-</div>
-  
 </style>
 </head>
 
@@ -379,56 +367,33 @@ color:#ffd700;
     <p>Trending Tool</p>
   </div>
 
-</div>
-</div>
-<!-- 🔥 PARTNER SITES RIBBON -->
-<div class="partner-ribbon">
+<!-- PARTNER RIBBON -->
+<div class="ribbon-section">
+  <h3 class="ribbon-title">🤝 Our Partners</h3>
 
-  <h3>🤝 Our Partner Sites</h3>
+  <div class="ribbon-container">
 
-  <div class="partner-scroll">
-
-    <a href="https://pinakatrip.com" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=pinakatrip.com">
-      <span>PinakaTrip</span>
-    </a>
-
-    <a href="https://carandcab.com" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=carandcab.com">
-      <span>CarAndCab</span>
+    <a href="https://www.carandcab.com" target="_blank" class="ribbon-card">
+      <img src="/images/footerlogo.png" alt="Car & Cab">
+      <span>Car & Cab</span>
     </a>
 
   </div>
-
 </div>
 
+<!-- ALSO LIKED -->
+<div class="ribbon-section">
+  <h3 class="ribbon-title">🔥 Also Liked By</h3>
 
-<!-- 🔥 ALSO LIKED BY RIBBON -->
-<div class="partner-ribbon">
+  <div class="ribbon-container">
 
-  <h3>🔥 Also Liked By</h3>
-
-  <div class="partner-scroll">
-
-    <a href="https://pinakatrip.com" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=pinakatrip.com">
-    </a>
-
-    <a href="https://carandcab.com" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=carandcab.com">
-    </a>
-
-    <a href="https://journeyofroad.blogspot.com/" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=blogspot.com">
-    </a>
-
-    <a href="https://www.youtube.com/@WanderingJerks" target="_blank">
-      <img src="https://www.google.com/s2/favicons?sz=128&domain=youtube.com">
+    <a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-card">
+      <img src="/images/channels4_profile.jpg" alt="Wandering Jerk">
+      <span>Wandering Jerk</span>
     </a>
 
   </div>
-
-</div>
+      </div>
   
 <!-- FOOTER -->
 <footer>
