@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ExploreDevTools</title>
+<title>100+Free Online Tools for students and developers</title>
 
+<link rel="icon" href="/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -42,6 +43,8 @@ color:#6c5ce7;
 
 .logo-center img{
 height:60px;
+display:block;
+margin:auto;
 }
 
 .logo-center h1{
@@ -52,10 +55,11 @@ color:#6c5ce7;
 /* HERO */
 .hero{
 text-align:center;
-margin:30px 0;
+margin:40px 0;
 }
 
 .hero h1{
+font-size:2.3em;
 color:#6c5ce7;
 }
 
@@ -63,16 +67,16 @@ color:#6c5ce7;
 .tools-grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
+gap:20px;
 margin-top:20px;
 }
 
 .tool-card{
 background:#fff;
-padding:20px;
 border-radius:12px;
+padding:20px;
 text-decoration:none;
-color:#333;
+color:#1e293b;
 box-shadow:0 5px 15px rgba(0,0,0,0.05);
 transition:0.3s;
 }
@@ -82,81 +86,113 @@ transform:translateY(-5px);
 box-shadow:0 10px 25px rgba(108,92,231,0.2);
 }
 
+.tag{
+background:linear-gradient(45deg,#667eea,#764ba2);
+color:white;
+padding:4px 10px;
+border-radius:20px;
+font-size:12px;
+margin-left:5px;
+}
+
 /* ANALYTICS */
 .analytics-strip{
 display:flex;
-gap:10px;
+gap:15px;
 overflow-x:auto;
+padding:15px 10px;
 margin-top:20px;
 }
 
 .stat{
-min-width:150px;
+min-width:180px;
 background:#fff;
 padding:15px;
-border-radius:10px;
+border-radius:12px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
 text-align:center;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
 }
 
 .stat h3{
 color:#6c5ce7;
 }
 
-/* ===== RIBBON UI ===== */
+/* ===== PREMIUM RIBBON ===== */
 .ribbon-section{
-margin:30px 0;
+margin:40px 0;
 }
 
 .ribbon-title{
-font-size:16px;
+font-size:18px;
 font-weight:600;
-margin-bottom:10px;
+margin-bottom:12px;
 }
 
-.ribbon-container{
+.ribbon-scroll{
 display:flex;
-gap:12px;
+gap:15px;
 overflow-x:auto;
 padding-bottom:10px;
 }
 
-.ribbon-card{
-min-width:170px;
+.ribbon-item{
+min-width:220px;
 display:flex;
 align-items:center;
-gap:10px;
-padding:10px;
-border-radius:10px;
+gap:12px;
+padding:14px;
+border-radius:14px;
+background:#fff;
+border:1px solid #eee;
+box-shadow:0 6px 18px rgba(0,0,0,0.06);
 text-decoration:none;
-background:linear-gradient(135deg,#764ba2,#667eea);
-color:#fff;
 transition:0.3s;
 }
 
-.ribbon-card img{
-width:40px;
-height:40px;
+.ribbon-item:hover{
+transform:translateY(-6px);
+box-shadow:0 15px 30px rgba(108,92,231,0.25);
+}
+
+.ribbon-item img{
+width:50px;
+height:50px;
+border-radius:10px;
 background:#fff;
-border-radius:6px;
-padding:3px;
+padding:4px;
 object-fit:contain;
 }
 
-.ribbon-card:hover{
-transform:translateY(-3px);
+.ribbon-text strong{
+font-size:15px;
+color:#222;
 }
 
-.ribbon-container::-webkit-scrollbar{
+.ribbon-text span{
+font-size:12px;
+color:#777;
+}
+
+.ribbon-badge{
+font-size:10px;
+background:linear-gradient(45deg,#667eea,#764ba2);
+color:#fff;
+padding:3px 8px;
+border-radius:6px;
+margin-top:4px;
+display:inline-block;
+}
+
+.ribbon-scroll::-webkit-scrollbar{
 display:none;
 }
 
 /* FOOTER */
 footer{
-margin-top:40px;
+margin-top:50px;
 background:#6c5ce7;
 color:#fff;
-padding:20px;
+padding:30px;
 border-radius:10px;
 text-align:center;
 }
@@ -167,7 +203,6 @@ text-align:center;
 
 <div class="container">
 
-<!-- HEADER -->
 <header class="header">
 <div class="menu-icon">☰</div>
 
@@ -177,52 +212,73 @@ text-align:center;
 </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
 <h1>🚀 Free Online Tools</h1>
 <p>GST, EMI, AI, Image tools & more</p>
 </div>
 
-<!-- TOOLS -->
+<!-- ALL TOOLS (UNCHANGED) -->
 <div class="tools-grid">
-<a href="#" class="tool-card">GST Calculator</a>
-<a href="#" class="tool-card">EMI Calculator</a>
-<a href="#" class="tool-card">Grammar Checker</a>
-<a href="#" class="tool-card">QR Generator</a>
+
+<a href="gst-calculator.html" class="tool-card"><h3>GST Calculator</h3><span class="tag">Trending</span></a>
+<a href="emi-calculator.html" class="tool-card"><h3>EMI Calculator</h3></a>
+<a href="caption.html" class="tool-card"><h3>AI caption generator</h3></a>
+<a href="paraphrase.html" class="tool-card"><h3>Paraphrase Tool</h3></a>
+<a href="text-case-converter.html" class="tool-card"><h3>Case Converter</h3></a>
+<a href="json-formatter.html" class="tool-card"><h3>JSON Formatter</h3></a>
+<a href="image-resizer.html" class="tool-card"><h3>Image Resizer</h3></a>
+<a href="image-compressor.html" class="tool-card"><h3>Image Compressor</h3></a>
+<a href="background-remover.html" class="tool-card"><h3>Background Remover</h3></a>
+<a href="word-counter.html" class="tool-card"><h3>Word Counter</h3></a>
+<a href="grammar-checker.html" class="tool-card"><h3>Grammar Checker</h3></a>
+<a href="password-generator.html" class="tool-card"><h3>Password Generator</h3></a>
+<a href="qr-generator.html" class="tool-card"><h3>QR Generator</h3></a>
+<a href="unit-converter.html" class="tool-card"><h3>Unit Converter</h3></a>
+<a href="pdf-to-jpg.html" class="tool-card"><h3>PDF to JPG</h3></a>
+<a href="seo-tool.html" class="tool-card"><h3>SEO Tool</h3></a>
+
 </div>
 
 <!-- ANALYTICS -->
 <div class="analytics-strip">
-<div class="stat"><h3>28</h3><p>Users</p></div>
-<div class="stat"><h3>120</h3><p>Total Usage</p></div>
-<div class="stat"><h3>GST</h3><p>Most Used</p></div>
+<div class="stat"><h3 id="users">0</h3><p>Users</p></div>
+<div class="stat"><h3 id="totalClicks">0</h3><p>Total Usage</p></div>
+<div class="stat"><h3 id="mostUsed">-</h3><p>Most Used</p></div>
+<div class="stat"><h3 id="trending">-</h3><p>Trending Tool</p></div>
 </div>
 
-<!-- ✅ PARTNER RIBBON -->
+<!-- PREMIUM RIBBON -->
 <div class="ribbon-section">
-<h3 class="ribbon-title">🤝 Our Partners</h3>
+<h3 class="ribbon-title">🤝 Our Advertising Partners</h3>
+<div class="ribbon-scroll">
 
-<div class="ribbon-container">
-<a href="https://www.carandcab.com" target="_blank" class="ribbon-card">
+<a href="https://www.carandcab.com" target="_blank" class="ribbon-item">
 <img src="/images/footerlogo.png">
-<span>Car & Cab</span>
+<div class="ribbon-text">
+<strong>Car & Cab</strong>
+<span>Self Drive Car Rentals</span>
+<div class="ribbon-badge">Verified</div>
+</div>
 </a>
+
 </div>
 </div>
 
-<!-- ✅ ALSO LIKED -->
 <div class="ribbon-section">
-<h3 class="ribbon-title">🔥 Also Liked By</h3>
+<h3 class="ribbon-title">🔥 Also Utilize By</h3>
+<div class="ribbon-scroll">
 
-<div class="ribbon-container">
-<a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-card">
+<a href="https://www.youtube.com/@wanderingjerk" target="_blank" class="ribbon-item">
 <img src="/images/channels4_profile.jpg">
-<span>Wandering Jerk</span>
+<div class="ribbon-text">
+<strong>Wandering Jerk</strong>
+<span>YouTube Channel</span>
+</div>
 </a>
+
 </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
 © 2026 ExploreDevTools
 </footer>
