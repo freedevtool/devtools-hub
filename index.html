@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>100+ Free Online Tools – GST calculator, EMI calculator, Instagram caption generator, AI Tools & More</title>
+<title>100+ Free Online Tools – GST Calculator, Instagram caption generator, EMI, AI Tools & More</title>
 <meta name="description" content="Free online tools: GST calculator, EMI calculator, AI tools, image compressor & more. Fast & secure.">
 
 <link rel="icon" href="/favicon.png">
@@ -12,32 +12,26 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Poppins',sans-serif;background:#f8f9fc;color:#1e293b;}
+body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
 .container{max-width:1200px;margin:auto;padding:20px;}
 
 /* HEADER */
-.header{position:relative;display:flex;justify-content:center;align-items:center;}
-.menu-icon{
-position:absolute;left:10px;cursor:pointer;
-display:flex;flex-direction:column;gap:5px;
-}
-.menu-icon span{
-width:25px;height:3px;background:#6c5ce7;border-radius:3px;
-}
-
+.header{position:relative;display:flex;justify-content:center;align-items:center;margin-bottom:20px;}
+.menu-icon{position:absolute;left:10px;cursor:pointer;display:flex;flex-direction:column;gap:5px;}
+.menu-icon span{width:25px;height:3px;background:#6c5ce7;border-radius:3px;}
 .logo-center img{height:60px;}
 .logo-center h1{color:#6c5ce7;}
 
 /* MENU */
 .mobile-menu{
 position:absolute;top:60px;left:10px;
-background:#fff;padding:15px;border-radius:10px;
-width:240px;box-shadow:0 10px 30px rgba(0,0,0,0.1);
+background:#fff;padding:15px;border-radius:10px;width:240px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
 opacity:0;visibility:hidden;transform:translateY(-10px);
-transition:0.3s;
+transition:0.3s;z-index:999;
 }
 .mobile-menu.active{opacity:1;visibility:visible;transform:translateY(0);}
-.mobile-menu a{display:block;padding:10px;color:#333;text-decoration:none;}
+.mobile-menu a{display:block;padding:10px;text-decoration:none;color:#333;}
 .mobile-menu a:hover{background:#f3f4ff;}
 
 /* HERO */
@@ -47,81 +41,87 @@ transition:0.3s;
 /* TOOLS */
 .tools-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
-.tool-card{
-background:#fff;padding:20px;border-radius:12px;
-text-decoration:none;color:#1e293b;
-border:1px solid #eee;
-box-shadow:0 5px 15px rgba(0,0,0,0.05);
-transition:0.3s;
-}
-.tool-card:hover{
-transform:translateY(-6px);
-box-shadow:0 15px 30px rgba(108,92,231,0.25);
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:22px;
 }
 
-/* ANALYTICS */
-.analytics-strip{
-display:flex;gap:15px;overflow-x:auto;margin-top:20px;
+.tool-card{
+position:relative;
+background:linear-gradient(135deg,#ffffff,#eef1ff);
+border-radius:16px;
+padding:20px;
+text-decoration:none;
+color:#1e293b;
+border:1px solid rgba(108,92,231,0.15);
+box-shadow:0 8px 25px rgba(0,0,0,0.06);
+transition:all 0.35s ease;
 }
-.stat{
-min-width:180px;background:#fff;padding:15px;
-border-radius:12px;text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
+.tool-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 20px 40px rgba(108,92,231,0.25);
+}
+.tool-icon{font-size:28px;margin-bottom:10px;}
+.tool-title{font-size:16px;font-weight:600;}
+.tool-sub{font-size:12px;color:#666;margin-top:4px;}
+
+.tool-badge{
+position:absolute;top:12px;right:12px;
+font-size:11px;padding:4px 8px;border-radius:20px;
+color:#fff;background:linear-gradient(45deg,#667eea,#764ba2);
 }
 
 /* RIBBON */
-.ribbon-section{margin:50px 0;overflow:hidden;}
+.ribbon-section{margin:60px 0;overflow:hidden;}
+
+.ribbon-header{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:15px;
+}
+
+.ribbon-header img{
+width:30px;height:30px;
+}
+
 .ribbon-track{
 display:flex;gap:20px;width:max-content;
 animation:scroll 25s linear infinite;
 }
 .ribbon-section:hover .ribbon-track{animation-play-state:paused;}
+
 @keyframes scroll{
 0%{transform:translateX(0);}
 100%{transform:translateX(-50%);}
 }
 
 .ribbon-item{
-min-width:240px;display:flex;align-items:center;gap:12px;
-padding:14px;border-radius:14px;background:#fff;
+min-width:240px;
+display:flex;
+align-items:center;
+gap:12px;
+padding:14px;
+border-radius:14px;
+background:#fff;
 border:1px solid #eee;
 box-shadow:0 8px 20px rgba(0,0,0,0.06);
 text-decoration:none;
 }
-.ribbon-item img{width:50px;height:50px;border-radius:10px;}
+.ribbon-item img{
+width:50px;height:50px;border-radius:10px;object-fit:contain;
+}
 .ribbon-text strong{font-size:15px;}
 
 /* BLOG */
 .blog-section{margin:60px 0;}
-.blog-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-.blog-card{
-background:#fff;border-radius:14px;overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,0.05);
-transition:0.3s;
-}
-.blog-card:hover{transform:translateY(-6px);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.blog-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 5px 15px rgba(0,0,0,0.05);}
 .blog-card img{width:100%;height:180px;object-fit:cover;}
 .blog-content{padding:15px;}
-.blog-content p{font-size:13px;color:#555;}
-.blog-content a{
-display:inline-block;margin-top:10px;
-color:#fff;background:#6c5ce7;
-padding:6px 12px;border-radius:6px;
-text-decoration:none;
-}
+.blog-content a{display:inline-block;margin-top:10px;background:#6c5ce7;color:#fff;padding:6px 12px;border-radius:6px;text-decoration:none;}
 
 /* FOOTER */
-footer{
-margin-top:50px;background:#6c5ce7;color:#fff;
-padding:30px;border-radius:10px;text-align:center;
-}
+footer{margin-top:50px;background:#6c5ce7;color:#fff;padding:30px;border-radius:10px;text-align:center;}
 </style>
 </head>
 
@@ -151,37 +151,63 @@ padding:30px;border-radius:10px;text-align:center;
 
 <!-- HERO -->
 <div class="hero">
-<h1>🚀 Free Online Tools</h1>
-<p>GST, EMI, AI & Developer Tools – 100% Free</p>
+<h1>🚀 100 % Free Online Tools</h1>
+<p>GST Calculator, EMI Calculator,Instagram caption generator, AI & Developer Tools – 100% Free</p>
 </div>
 
-<!-- ALL TOOLS (FULL LIST PRESERVED) -->
+<!-- TOOLS -->
 <div class="tools-grid" id="tools">
-<a href="gst-calculator.html" class="tool-card">GST Calculator</a>
-<a href="emi-calculator.html" class="tool-card">EMI Calculator</a>
-<a href="caption.html" class="tool-card">AI Caption Generator</a>
-<a href="paraphrase.html" class="tool-card">Paraphrase Tool</a>
-<a href="text-case-converter.html" class="tool-card">Case Converter</a>
-<a href="json-formatter.html" class="tool-card">JSON Formatter</a>
-<a href="image-resizer.html" class="tool-card">Image Resizer</a>
-<a href="image-compressor.html" class="tool-card">Image Compressor</a>
-<a href="background-remover.html" class="tool-card">Background Remover</a>
-<a href="word-counter.html" class="tool-card">Word Counter</a>
-<a href="grammar-checker.html" class="tool-card">Grammar Checker</a>
-<a href="password-generator.html" class="tool-card">Password Generator</a>
-<a href="qr-generator.html" class="tool-card">QR Generator</a>
-<a href="unit-converter.html" class="tool-card">Unit Converter</a>
-<a href="pdf-to-jpg.html" class="tool-card">PDF to JPG</a>
-<a href="seo-tool.html" class="tool-card">SEO Tool</a>
+
+<a href="gst-calculator.html" class="tool-card">
+<div class="tool-badge">🔥 Trending</div>
+<div class="tool-icon">🧾</div>
+<div class="tool-title">GST Calculator</div>
+<div class="tool-sub">Calculate GST instantly</div>
+</a>
+
+<a href="emi-calculator.html" class="tool-card">
+<div class="tool-badge">🚀 Most Used</div>
+<div class="tool-icon">💰</div>
+<div class="tool-title">EMI Calculator</div>
+<div class="tool-sub">Loan breakdown</div>
+</a>
+
+<a href="caption.html" class="tool-card">
+<div class="tool-badge">⭐ Popular</div>
+<div class="tool-icon">🤖</div>
+<div class="tool-title">AI Caption Generator</div>
+<div class="tool-sub">Generate captions</div>
+</a>
+
+<a href="paraphrase.html" class="tool-card"><div class="tool-icon">✍️</div><div class="tool-title">Paraphrase Tool</div></a>
+<a href="text-case-converter.html" class="tool-card"><div class="tool-icon">🔤</div><div class="tool-title">Case Converter</div></a>
+<a href="json-formatter.html" class="tool-card"><div class="tool-icon">🧩</div><div class="tool-title">JSON Formatter</div></a>
+<a href="image-resizer.html" class="tool-card"><div class="tool-icon">🖼️</div><div class="tool-title">Image Resizer</div></a>
+<a href="image-compressor.html" class="tool-card"><div class="tool-badge">🔥 Trending</div><div class="tool-icon">📦</div><div class="tool-title">Image Compressor</div></a>
+<a href="background-remover.html" class="tool-card"><div class="tool-icon">🎯</div><div class="tool-title">Background Remover</div></a>
+<a href="word-counter.html" class="tool-card"><div class="tool-icon">📝</div><div class="tool-title">Word Counter</div></a>
+<a href="grammar-checker.html" class="tool-card"><div class="tool-icon">📖</div><div class="tool-title">Grammar Checker</div></a>
+<a href="password-generator.html" class="tool-card"><div class="tool-icon">🔐</div><div class="tool-title">Password Generator</div></a>
+<a href="qr-generator.html" class="tool-card"><div class="tool-icon">🔳</div><div class="tool-title">QR Generator</div></a>
+<a href="unit-converter.html" class="tool-card"><div class="tool-icon">📏</div><div class="tool-title">Unit Converter</div></a>
+<a href="pdf-to-jpg.html" class="tool-card"><div class="tool-icon">📄</div><div class="tool-title">PDF to JPG</div></a>
+<a href="seo-tool.html" class="tool-card"><div class="tool-badge">🚀 Growth</div><div class="tool-icon">📊</div><div class="tool-title">SEO Tool</div></a>
+
 </div>
 
-<!-- RIBBON -->
+<!-- PARTNER RIBBON -->
 <div class="ribbon-section">
-<h3>🤝 Our Trusted Partners</h3>
+
+<div class="ribbon-header">
+<img src="/images/partner-vector.png">
+<h3>Our Trusted Partners</h3>
+</div>
+
 <div class="ribbon-track">
+
 <a href="https://www.carandcab.com" class="ribbon-item">
-<img src="/images/footerlogo.png">
-<div class="ribbon-text"><strong>Car & Cab</strong></div>
+<img src="/images/carandcab.png">
+<div class="ribbon-text"><strong>Car and Cab</strong></div>
 </a>
 
 <a href="https://pinakatrip.com" class="ribbon-item">
@@ -189,24 +215,26 @@ padding:30px;border-radius:10px;text-align:center;
 <div class="ribbon-text"><strong>PinakaTrip</strong></div>
 </a>
 
-<!-- duplicate -->
-<a href="#" class="ribbon-item"><img src="/images/footerlogo.png"></a>
 </div>
 </div>
 
 <!-- ALSO LIKED -->
 <div class="ribbon-section">
-<h3>🔥 Used By Clients</h3>
+
+<div class="ribbon-header">
+<h3>🔥 Used & Loved By</h3>
+</div>
+
 <div class="ribbon-track">
 
-<a href="https://www.carandcab.com" class="ribbon-item">
-<img src="/images/footerlogo.png">
-<div class="ribbon-text"><strong>Car & Cab</strong></div>
+<a href="https://youtube.com/@wanderingjerks" class="ribbon-item">
+<img src="/images/wanderingjerk.png">
+<div class="ribbon-text"><strong>Wandering Jerk</strong></div>
 </a>
 
-<a href="https://youtube.com/@wanderingjerks" class="ribbon-item">
-<img src="/images/channels4_profile.jpg">
-<div class="ribbon-text"><strong>Wandering Jerk</strong></div>
+<a href="https://www.carandcab.com" class="ribbon-item">
+<img src="/images/carandcab.png">
+<div class="ribbon-text"><strong>Car and Cab</strong></div>
 </a>
 
 <a href="https://journeyofroad.blogspot.com/" class="ribbon-item">
@@ -220,13 +248,14 @@ padding:30px;border-radius:10px;text-align:center;
 <!-- BLOG -->
 <div class="blog-section">
 <h3>📝 Latest Blogs</h3>
+
 <div class="blog-grid">
 
 <div class="blog-card">
 <img src="https://source.unsplash.com/400x300/?technology">
 <div class="blog-content">
 <h4>Top Free Tools for Developers</h4>
-<p>Boost productivity with best tools...</p>
+<p>Boost productivity using free tools...</p>
 <a href="blog.html">Read More</a>
 </div>
 </div>
@@ -244,7 +273,7 @@ padding:30px;border-radius:10px;text-align:center;
 </div>
 
 <footer>
-© 2026 ExploreDevTools
+© 2026 ExploreDevTools | citybreaks2019@gmail.com 
 </footer>
 
 </div>
