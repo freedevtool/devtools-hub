@@ -174,6 +174,22 @@ text-decoration:none;
 
 /* FOOTER */
 footer{margin-top:50px;background:#6c5ce7;color:#fff;padding:30px;border-radius:10px;text-align:center;}
+  .footer-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+footer a{
+color:#fff;
+text-decoration:none;
+display:block;
+margin:5px 0;
+}
+
+footer a:hover{
+color:#ffd700;
+  }
 </style>
 </head>
 
@@ -262,6 +278,30 @@ footer{margin-top:50px;background:#6c5ce7;color:#fff;padding:30px;border-radius:
 </br> <p style="color:#666;font-size:13px;">
     <strong>Trusted by 1000+ users & growing startups </strong>
   </p>
+
+  <div class="analytics-strip">
+
+  <div class="stat">
+    <h3 id="users">0</h3>
+    <p>Users</p>
+  </div>
+
+  <div class="stat">
+    <h3 id="totalClicks">0</h3>
+    <p>Total Usage</p>
+  </div>
+
+  <div class="stat">
+    <h3 id="mostUsed">-</h3>
+    <p>Most Used</p>
+  </div>
+
+  <div class="stat">
+    <h3 id="trending">-</h3>
+    <p>Trending Tool</p>
+  </div>
+
+  </div>
 <!-- PARTNER RIBBON -->
   <div class="ribbon-section">
 
@@ -366,7 +406,48 @@ footer{margin-top:50px;background:#6c5ce7;color:#fff;padding:30px;border-radius:
 </div>
 
 <footer>
-© 2026 ExploreDevTools | citybreaks2019@gmail.com 
+
+<div class="footer-grid">
+
+<div>
+<h3>Tools</h3>
+<a href="gst-calculator.html">GST Calculator</a>
+<a href="emi-calculator.html">EMI Calculator</a>
+<a href="caption.html">Caption Tool</a>
+<a href="paraphrase.html">Paraphrase Tool</a>
+<a href="text-case-converter.html">Case Converter</a>
+</div>
+
+<div>
+<h3>Text Tools</h3>
+<a href="word-counter.html">Word Counter</a>
+<a href="grammar-checker.html">Grammar Checker</a>
+</div>
+
+<div>
+<h3>Image Tools</h3>
+<a href="image-compressor.html">Image Compressor</a>
+<a href="image-resizer.html">Image Resizer</a>
+<a href="background-remover.html">Background Remover</a>
+</div>
+
+<div>
+<h3>Company</h3>
+<a href="index.html">Home</a>
+<a href="#tools">All Tools</a>
+<a href="blog.html">Blog</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="terms.html">Terms & Conditions</a>
+</div>
+
+</div>
+
+<p style="text-align:center;margin-top:20px;">
+© 2026 ExploreDevTools | E-mail citybreaks2019@gmail.com 
+</p>
+
 </footer>
 
 </div>
@@ -401,6 +482,41 @@ function filterTools(category){
 }
 
 </script>
+  <script>
+// USERS
+let users = localStorage.getItem("users") || 0;
+users++;
+localStorage.setItem("users", users);
+
+// TOOL USAGE
+let usage = JSON.parse(localStorage.getItem("usage")) || {};
+
+function trackTool(tool){
+  if(!usage[tool]) usage[tool]=0;
+  usage[tool]++;
+  localStorage.setItem("usage", JSON.stringify(usage));
+}
+
+function updateStats(){
+  document.getElementById("users").innerText = users;
+
+  let total=0,max=0,maxTool="-";
+
+  for(let key in usage){
+    total+=usage[key];
+    if(usage[key]>max){
+      max=usage[key];
+      maxTool=key;
+    }
+  }
+
+  document.getElementById("totalClicks").innerText=total;
+  document.getElementById("mostUsed").innerText=maxTool;
+  document.getElementById("trending").innerText=maxTool;
+}
+
+updateStats();
+  </script>
 
 </body>
 </html>
