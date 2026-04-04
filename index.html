@@ -109,6 +109,47 @@ position:absolute;top:12px;right:12px;
 font-size:11px;padding:4px 8px;border-radius:20px;
 color:#fff;background:linear-gradient(45deg,#667eea,#764ba2);
 }
+  .analytics-strip{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  padding:20px 10px;
+  margin:40px 0;
+  scroll-behavior:smooth;
+}
+
+/* Hide scrollbar */
+.analytics-strip::-webkit-scrollbar{
+  display:none;
+}
+  .stat{
+  min-width:200px;
+  background:#fff;
+  padding:18px;
+  border-radius:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.08);
+  text-align:center;
+  flex:0 0 auto;
+  transition:0.3s;
+}
+
+.stat:hover{
+  transform:translateY(-5px);
+  box-shadow:0 15px 35px rgba(108,92,231,0.25);
+}
+
+.stat h3{
+  margin:0;
+  color:#6c5ce7;
+  font-size:24px;
+  font-weight:700;
+}
+
+.stat p{
+  margin-top:6px;
+  font-size:13px;
+  color:#666;
+  }
 
 /* RIBBON */
 .ribbon-section{margin:60px 0;overflow:hidden;}
@@ -301,7 +342,6 @@ color:#ffd700;
     <p>Trending Tool</p>
   </div>
 
-  </div>
 <!-- PARTNER RIBBON -->
   <div class="ribbon-section">
 
