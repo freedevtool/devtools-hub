@@ -223,6 +223,17 @@ transition:0.3s;z-index:999;
   color: #555;
   margin-top: 6px;
 } 
+  .analytics-section {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.analytics-heading {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #2d3748;
+    }
 /* RIBBON */
 .ribbon-section{margin:60px 0;overflow:hidden;}
 
@@ -409,8 +420,9 @@ color:#ffd700;
 
     <div class="analytics-box">
       <div class="analytics-icon">👥</div>
-      <h2>106</h2>
+      <h2 id="visitor-count">0</h2>
       <p>Users</p>
+    
     </div>
 
     <div class="analytics-box">
@@ -643,6 +655,12 @@ function updateStats(){
 }
 
 updateStats();
+
+   fetch('https://api.countapi.xyz/hit/exploredevtools.com/visits')
+  .then(res => res.json())
+  .then(res => {
+    document.getElementById('visitor-count').innerText = res.value;
+  }); 
   </script>
 
 </body>
