@@ -100,7 +100,6 @@ transition:0.3s;z-index:999;
   color:#fff;
 }
 
-/* TOOLS */
 /* TOOLS GRID */
 .tools-grid {
   display: grid;
@@ -189,7 +188,7 @@ transition:0.3s;z-index:999;
   align-items: center;
   padding: 30px 10px;
   background: #f8f9fa;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .analytics-box {
@@ -322,12 +321,14 @@ color:#ffd700;
     </div>
   </div>
 </section>
-
+</br>
+  
  <!-- SEARCH --> 
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="🔍 Search tools...">
 </div>
 </div>
+</br>
   <div class="filter-buttons">
   <button onclick="filterTools('all')">All</button>
   <button onclick="filterTools('finance')">Finance</button>
