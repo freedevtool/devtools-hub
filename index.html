@@ -655,13 +655,23 @@ function updateStats(){
 }
 
 updateStats();
+  <script>
   
-   fetch('https://api.countapi.xyz/hit/exploredevtools/visitors')
+fetch('https://api.countapi.xyz/hit/exploredevtools.com/visits')
   .then(res => res.json())
   .then(res => {
-    document.getElementById('visitor-count').innerText = res.value;
-  }); 
-  </script>
+    let count = res.value;
+    let el = document.getElementById('visitor-count');
+    let i = 0;
+
+    let interval = setInterval(() => {
+      el.innerText = i;
+      i++;
+      if (i > count) clearInterval(interval);
+    }, 20);
+  });
 </script>
+  </script>
+
 </body>
 </html>
