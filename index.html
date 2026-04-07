@@ -656,7 +656,7 @@ function updateStats(){
 
 updateStats();
   
-   fetch('https://api.countapi.xyz/hit/exploredevtools.com/visits')
+   fetch('https://api.countapi.xyz/hit/exploredevtools/visitors')
   .then(res => res.json())
   .then(res => {
     document.getElementById('visitor-count').innerText = res.value;
