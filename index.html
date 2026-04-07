@@ -36,11 +36,38 @@ transition:0.3s;z-index:999;
 .mobile-menu a:hover{background:#f3f4ff;}
 
 /* HERO */
-.hero{text-align:center;margin:40px 0;}
-.hero h1{font-size:2.3em;color:#6c5ce7;}
-  .search-box{
-  margin:20px 0;
-  text-align:center;
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1rem;
+  margin-bottom: 25px;
+}
+
+.hero-buttons .btn {
+  padding: 12px 20px;
+  margin: 5px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn.primary {
+  background: white;
+  color: #764ba2;
+}
+
+.btn.secondary {
+  border: 1px solid white;
+  color: white;
 }
 
 .search-box input{
@@ -74,103 +101,106 @@ transition:0.3s;z-index:999;
 }
 
 /* TOOLS */
-.tools-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:22px;
+/* TOOLS GRID */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  padding: 30px 20px;
 }
 
-.tool-card{
-position:relative;
-background:linear-gradient(135deg,#ffffff,#eef1ff);
-border-radius:16px;
-padding:20px;
-text-decoration:none;
-color:#1e293b;
-border:1px slid rgba(108,92,231,0.15);
-box-shadow:0 8px 25px rgba(0,0,0,0.06);
-transition:all 0.35s ease;
-}
-.tool-card:hover{
-transform:translateY(-8px) scale(1.02);
-box-shadow:0 20px 40px rgba(108,92,231,0.25);
-}
-  .tool-card {
-  border-radius: 14px;
+/* TOOL CARD */
+.tool-card {
+  position: relative;
+  background: linear-gradient(135deg, #ffffff, #eef1ff);
+  border-radius: 16px;
   padding: 20px;
-  transition: 0.3s;
+  text-decoration: none;
+  color: #1e293b;
+  border: 1px solid rgba(108,92,231,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: all 0.3s ease;
+  text-align: center;
 }
+
+/* HOVER EFFECT */
 .tool-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 40px rgba(108,92,231,0.2);
 }
-  .tool-icon{
-  font-size:28px;
-  color:#6c5ce7;
-  margin-bottom:10px;
-  }
-.tool-icon{font-size:28px;margin-bottom:10px;}
-.tool-title{font-size:16px;font-weight:600;}
-.tool-sub{font-size:12px;color:#666;margin-top:4px;}
 
-.tool-badge{
-position:absolute;top:12px;right:12px;
-font-size:11px;padding:4px 8px;border-radius:20px;
-color:#fff;background:linear-gradient(45deg,#667eea,#764ba2);
-} 
-@media (max-width: 768px) {
-  .cards { grid-template-columns: 1fr; }
+/* ICON */
+.tool-icon {
+  font-size: 28px;
+  color: #6c5ce7;
+  margin-bottom: 10px;
 }
-  @media (max-width: 768px) {
+
+/* TITLE */
+.tool-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* SUBTEXT */
+.tool-sub {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* BADGE */
+.tool-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  color: #fff;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
   .tools-grid {
     grid-template-columns: 1fr;
+    padding: 20px;
   }
-  }
-  .card {
+}
+  .tool-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: linear-gradient(45deg, transparent, rgba(108,92,231,0.08));
+  opacity: 0;
   transition: 0.3s;
 }
-.card:hover {
-  transform: translateY(-5px);
-}
+
+.tool-card:hover::after {
+  opacity: 1;
+  }
   
 /* ===== ANALYTICS STRIP FIX ===== */
-.analytics-strip{
-  display:flex;
-  gap:15px;
-  overflow-x:auto;
-  padding:20px 0;
-  margin:30px 0;
+  .analytics {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px 10px;
+  background: #f8f9fa;
+  flex-wrap: wrap;
 }
 
-.analytics-strip::-webkit-scrollbar{
-  display:none;
+.analytics-box {
+  text-align: center;
+  margin: 10px;
 }
 
-.stat{
-  flex:0 0 180px;
-  background:#fff;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
-  text-align:center;
+.analytics-box h2 {
+  font-size: 22px;
+  margin: 5px 0;
 }
-
-.stat h3{
-  color:#6c5ce7;
-  font-size:20px;
-  margin-bottom:5px;
-}
-
-.stat p{
-  font-size:13px;
-  color:#666;
-  }
-  .analytics-strip{
-  display:flex;
-  flex-wrap:nowrap;
-  }
   
 /* RIBBON */
 .ribbon-section{margin:60px 0;overflow:hidden;}
@@ -281,15 +311,17 @@ color:#ffd700;
 </header>
 
 <!-- HERO -->
-<div class="hero">
-<h1>🚀 100 % Free Online Tools</h1>
-<p Free Developer & office Tools – Fast, Secure & Easy
-
-Format, convert, and optimize your code instantly with our powerful online tools.
-
-Explore Tools, Try JSON Formatter </p>
-</div>
-</div>
+<section class="hero">
+  <div class="hero-content">
+    <h1>Free Developer Tools – Fast, Secure & Easy</h1>
+    <p>Format, convert, and optimize your code instantly with powerful online tools.</p>
+    
+    <div class="hero-buttons">
+      <a href="#tools" class="btn primary">Explore Tools</a>
+      <a href="/json-formatter.html" class="btn secondary">Try JSON Formatter</a>
+    </div>
+  </div>
+</section>
 
  <!-- SEARCH --> 
 <div class="search-box">
