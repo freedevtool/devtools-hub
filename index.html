@@ -655,23 +655,21 @@ function updateStats(){
 }
 
 updateStats();
-  <script>
-  
-fetch('https://api.countapi.xyz/hit/exploredevtools.com/visits')
-  .then(res => res.json())
-  .then(res => {
-    let count = res.value;
-    let el = document.getElementById('visitor-count');
-    let i = 0;
-
-    let interval = setInterval(() => {
-      el.innerText = i;
-      i++;
-      if (i > count) clearInterval(interval);
-    }, 20);
-  });
+    
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("https://api.countapi.xyz/hit/exploredevtools/visits")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("visitor-count").innerText = data.value;
+    })
+    .catch(error => {
+      console.log("Error:", error);
+      document.getElementById("visitor-count").innerText = "0";
+    });
+});
 </script>
-  </script>
-
+  
+ </script>
 </body>
 </html>
