@@ -672,9 +672,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+  </script>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js"></script>
 
+<script>
+// 🔥 YOUR FIREBASE CONFIG (PASTE HERE)
+const firebaseConfig = {
+  apiKey: "AIzaSyCDwOW79ZsGQ_lbvbIqkdSWNVM2pteABnw",
+    authDomain: "exploredevtools.firebaseapp.com",
+    projectId: "exploredevtools",
+    storageBucket: "exploredevtools.firebasestorage.app",
+    messagingSenderId: "195725876065",
+  appId: "1:195725876065:web:67968eba5d43843d3bc320",
+    measurementId: "G-TLXLD6XZ45"
+  };
 
- </script>
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+// Visitor Counter
+const counterRef = db.collection("analytics").doc("visitors");
+
+counterRef.get().then((doc) => {
+  if (doc.exists) {
+    let count = doc.data().count || 0;
+    count++;
+
+    counterRef.update({ count: count });
+
+    document.getElementById("visitor-count").innerText = count;
+  } else {
+    counterRef.set({ count: 1 });
+    document.getElementById("visitor-count").innerText = 1;
+  }
+});
+</script>
+
+  
 </body>
 </html>
