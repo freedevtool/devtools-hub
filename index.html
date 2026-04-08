@@ -393,7 +393,7 @@ color:#ffd700;
 
 <a href="paraphrase.html" class="tool-card"><i class="bi bi-pencil-square"></i><div class="tool-title">Paraphrase Tool</div></a>
 <a href="text-case-converter.html" class="tool-card"><i class="bi bi-type"></i><div class="tool-title">Case Converter</div></a>
-<a href="json-formatter.html" class="tool-card"><i class="bi bi-braces"></i><div class="tool-title">JSON Formatter</div></a>
+<a href="json-formatter.html" onclick="trackTool('json')" class="tool-card"><i class="bi bi-braces"></i><div class="tool-title">JSON Formatter</div></a>
 <a href="image-resizer.html" class="tool-card" data-category="image"><i class="bi bi-image"></i><div class="tool-title">Image Resizer</div></a>
 <a href="image-compressor.html" class="tool-card" data-category="image"><div class="tool-badge">🔥Trending</div><i class="bi bi-box"></i><div class="tool-title">Image Compressor</div></a>
 <a href="background-remover.html" class="tool-card"><i class="bi bi-scissors"></i><div class="tool-title">Background Remover</div></a>
@@ -433,9 +433,9 @@ color:#ffd700;
 
     <div class="analytics-box">
       <div class="analytics-icon">⭐</div>
-      <h2>Image Resizer</h2>
+      <h2 id="most-used">Loading...</h2>
       <p>Most Used</p>
-    </div>
+       </div>
 
     <div class="analytics-box">
       <div class="analytics-icon">📈</div>
@@ -692,6 +692,45 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+</script>
+  
+  <script>
+function trackTool(toolName) {
+
+  const toolRef = db.collection("tools").doc(toolName);
+
+  toolRef.get().then((doc) => {
+    if (doc.exists) {
+      let count = doc.data().count || 0;
+      count++;
+
+      toolRef.set({ count: count });
+    } else {
+      toolRef.set({ count: 1 });
+    }
+  });
+
+}
+    
+/* 🔥 GET MOST USED TOOL */
+db.collection("tools").get().then((snapshot) => {
+
+  let max = 0;
+  let topTool = "None";
+
+  snapshot.forEach((doc) => {
+    let data = doc.data();
+
+    if (data.count > max) {
+      max = data.count;
+      topTool = doc.id;
+    }
+  });
+
+  document.getElementById("most-used").innerText = topTool;
+
+});
+
 </script>
   
 </body>
