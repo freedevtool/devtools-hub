@@ -655,46 +655,42 @@ function updateStats(){
 }
 
 updateStats();
-
-
+  </script>
 
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
-// 🔥 PASTE YOUR CONFIG HERE
+document.addEventListener("DOMContentLoaded", function () {
 
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCDwOW79ZsGQ_lbvbIqkdSWNVM2pteABnw",
-  authDomain: "exploredevtools.firebaseapp.com",
-  projectId: "exploredevtools",
-  storageBucket: "exploredevtools.firebasestorage.app",
-  messagingSenderId: "195725876065",
-  appId: "1:195725876065:web:67968eba5d43843d3bc320",
-  measurementId: "G-TLXLD6XZ45"
-}
+  const firebaseConfig = {
+    apiKey: "AIzaSyCDwOW79ZsGQ_lbvbIqkdSWNVM2pteABnw",
+    authDomain: "exploredevtools.firebaseapp.com",
+    projectId: "exploredevtools",
+  };
 
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-// Visitor Counter
-const counterRef = db.collection("analytics").doc("visitors");
+  const counterRef = db.collection("analytics").doc("visitors");
 
-counterRef.get().then((doc) => {
-  if (doc.exists) {
-    let count = doc.data().count || 0;
-    count++;
+  counterRef.get().then((doc) => {
+    if (doc.exists) {
+      let count = doc.data().count || 0;
+      count = count + 1;
 
-    counterRef.update({ count: count });
+      counterRef.set({ count: count });
 
-    document.getElementById("visitor-count").innerText = count;
-  } else {
-    counterRef.set({ count: 1 });
-    document.getElementById("visitor-count").innerText = 1;
-  }
+      document.getElementById("visitor-count").innerText = count;
+    } else {
+      counterRef.set({ count: 1 });
+      document.getElementById("visitor-count").innerText = 1;
+    }
+  }).catch((error) => {
+    console.log("ERROR:", error);
+  });
+
 });
 </script>
   
