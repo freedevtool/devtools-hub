@@ -656,22 +656,25 @@ function updateStats(){
 
 updateStats();
 
-
+<script>
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("https://api.counterapi.dev/v1/exploredevtools/visits/up")
-    .then(res => res.json())
-    .then(data => {
-      let count = data.data.up_count;
-      let el = document.getElementById("visitor-count");
-      let i = 0;
 
-      let interval = setInterval(() => {
-        el.innerText = i;
-        i++;
-        if (i > count) clearInterval(interval);
-      }, 10);
-    });
+  let count = localStorage.getItem("visitCount");
+
+  if (!count) {
+    count = 1;
+  } else {
+    count = parseInt(count) + 1;
+  }
+
+  localStorage.setItem("visitCount", count);
+
+  document.getElementById("visitor-count").innerText = count;
+
 });
+</script>
+
+
 
 
  </script>
