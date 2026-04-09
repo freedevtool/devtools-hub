@@ -746,25 +746,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-  <script>
+  
+  //EVENT LISTNER UPDATED 
+  
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
   const toolCards = document.querySelectorAll(".tool-card");
 
   toolCards.forEach(card => {
-    card.addEventListener("click", function (event) {
-
-      event.preventDefault();
+    card.addEventListener("click", function () {
 
       const toolName = card.getAttribute("data-tool");
-      const link = card.getAttribute("href");
 
-      console.log("Clicked:", toolName);
+      console.log("Tracking:", toolName);
 
       const toolRef = db.collection("tools").doc(toolName);
 
       toolRef.get().then((doc) => {
-
         let count = 1;
 
         if (doc.exists) {
@@ -773,19 +772,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return toolRef.set({ count: count });
 
-      }).then(() => {
-        window.location.href = link;
       }).catch((err) => {
         console.log("Error:", err);
-        window.location.href = link;
       });
+
+      // ❌ NO preventDefault
+      // ✅ Let link open normally
 
     });
   });
 
 });
-  </script>
-  
+</script>
 <script>
 
 // 🔥 HANDLE TOOL CLICK (FIXED)
