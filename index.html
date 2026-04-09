@@ -373,91 +373,91 @@ color:#ffd700;
 <!-- TOOLS -->
 <div class="tools-grid" id="tools">
 
-<a href="gst-calculator.html" onclick="trackTool('Gst Calculator')" class="tool-card" data-category="finance"><i class="bi bi-receipt"></i>
+<a href="gst-calculator.html" onclick="handleToolClick(event, 'Gst Calculator')" class="tool-card" data-category="finance"><i class="bi bi-receipt"></i>
 <div class="tool-badge">🔥 Trending</div>
 <div class="tool-title">GST Calculator</div>
 <div class="tool-sub">Calculate GST instantly</div>
 </a>
 
-<a href="emi-calculator.html" onclick="trackTool('Emi Calculator')" class="tool-card" data-category="finance"><i class="bi bi-cash-stack"></i>
+<a href="emi-calculator.html" onclick="handleToolClick(event, 'Emi Calculator')" class="tool-card" data-category="finance"><i class="bi bi-cash-stack"></i>
 <div class="tool-badge">🚀 Most Used</div>
 <div class="tool-title">EMI Calculator</div>
 <div class="tool-sub">Loan breakdown</div>
 </a>
 
-<a href="caption.html" onclick="trackTool('Ai Caption Generator')" class="tool-card" data-category="ai"><i class="bi bi-robot"></i>
+<a href="caption.html" onclick="handleToolClick(event, 'Ai Caption Generator')" class="tool-card" data-category="ai"><i class="bi bi-robot"></i>
 <div class="tool-badge">⭐ Popular</div>
 <div class="tool-title">AI Caption Generator</div>
 <div class="tool-sub">Generate captions</div>
 </a>
   
-<a href="paraphrase.html" onclick="trackTool('Paraphrase Tool')" class="tool-card">
+<a href="paraphrase.html" onclick="handleToolClick(event, 'Paraphrase Tool')" class="tool-card">
 <i class="bi bi-pencil-square"></i>
 <div class="tool-title">Paraphrase Tool</div>
 </a>
 
-<a href="text-case-converter.html" onclick="trackTool('Case Converter')" class="tool-card">
+<a href="text-case-converter.html" onclick="handleToolClick(event, 'Case Converter')" class="tool-card">
 <i class="bi bi-type"></i>
 <div class="tool-title">Case Converter</div>
 </a>
 
-<a href="json-formatter.html" onclick="trackTool('TEST TOOL')" class="tool-card">
+<a href="json-formatter.html" onclick="handleToolClick(event, 'JSON Formatter')" class="tool-card">
 <i class="bi bi-braces"></i>
 <div class="tool-title">JSON Formatter</div>
 </a>
 
-<a href="image-resizer.html" onclick="trackTool('Image Resizer')" class="tool-card" data-category="image">
+<a href="image-resizer.html" onclick="handleToolClick(event, 'Image Resizer')" class="tool-card" data-category="image">
 <i class="bi bi-image"></i>
 <div class="tool-title">Image Resizer</div>
 </a>
 
-<a href="image-compressor.html" onclick="trackTool('Image Compressor')" class="tool-card" data-category="image">
+<a href="image-compressor.html" onclick="handleToolClick(event, 'Image Compressor')" class="tool-card" data-category="image">
 <div class="tool-badge">🔥Trending</div>
 <i class="bi bi-box"></i>
 <div class="tool-title">Image Compressor</div>
 </a>
 
-<a href="background-remover.html" onclick="trackTool('Background Remover')" class="tool-card">
+<a href="background-remover.html" onclick="handleToolClick(event, 'Background Remover')" class="tool-card">
 <i class="bi bi-scissors"></i>
 <div class="tool-title">Background Remover</div>
 </a>
 
-<a href="word-counter.html" onclick="trackTool('Word Counter')" class="tool-card">
+<a href="word-counter.html" onclick="handleToolClick(event, 'Word Counter')" class="tool-card">
 <i class="bi bi-file-text"></i>
 <div class="tool-title">Word Counter</div>
 </a>
 
-<a href="grammar-checker.html" onclick="trackTool('Grammar Checker')" class="tool-card">
+<a href="grammar-checker.html" onclick="handleToolClick(event, 'Grammar Checker')" class="tool-card">
 <i class="bi bi-journal-check"></i>
 <div class="tool-title">Grammar Checker</div>
 </a>
 
-<a href="password-generator.html" onclick="trackTool('Password Generator')" class="tool-card" data-category="office">
+<a href="password-generator.html" onclick="handleToolClick(event, 'Password Generator')" class="tool-card" data-category="office">
 <i class="bi bi-shield-lock"></i>
 <div class="tool-title">Password Generator</div>
 </a>
 
-<a href="qr-generator.html" onclick="trackTool('QR Generator')" class="tool-card" data-category="office">
+<a href="qr-generator.html" onclick="handleToolClick(event, 'QR Generator')" class="tool-card" data-category="office">
 <i class="bi bi-qr-code"></i>
 <div class="tool-title">QR Generator</div>
 </a>
 
-<a href="unit-converter.html" onclick="trackTool('Unit Converter')" class="tool-card" data-category="office">
+<a href="unit-converter.html" onclick="handleToolClick(event, 'Unit Converter')" class="tool-card" data-category="office">
 <i class="bi bi-rulers"></i>
 <div class="tool-title">Unit Converter</div>
 </a>
 
-<a href="pdf-to-jpg.html" onclick="trackTool('PDF to JPG')" class="tool-card" data-category="office">
+<a href="pdf-to-jpg.html" onclick="handleToolClick(event, 'PDF to JPG')" class="tool-card" data-category="office">
 <i class="bi bi-file-earmark-pdf"></i>
 <div class="tool-title">PDF to JPG</div>
 </a>
 
-<a href="seo-tool.html" onclick="trackTool('SEO Tool')" class="tool-card" data-category="seo">
+<a href="seo-tool.html" onclick="handleToolClick(event, 'SEO Tool')" class="tool-card" data-category="seo">
 <div class="tool-badge">🚀 Growth</div>
 <i class="bi bi-graph-up"></i>
 <div class="tool-title">SEO Tool</div>
 </a>
-
+  
 </div>
 </div>
   
@@ -747,44 +747,64 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
   
-  <script>
-function trackTool(toolName) {
+<script>
+
+// 🔥 HANDLE TOOL CLICK (FIXED)
+function handleToolClick(event, toolName) {
+  event.preventDefault(); // stop instant redirect
 
   const toolRef = db.collection("tools").doc(toolName);
 
   toolRef.get().then((doc) => {
+    let count = 1;
+
     if (doc.exists) {
-      let count = doc.data().count || 0;
-      count++;
-
-      toolRef.set({ count: count });
-    } else {
-      toolRef.set({ count: 1 });
+      count = (doc.data().count || 0) + 1;
     }
-  });
 
+    toolRef.set({ count: count }).then(() => {
+      // ✅ redirect AFTER saving
+      window.location.href = event.currentTarget.href;
+    });
+
+  }).catch(() => {
+    // fallback redirect
+    window.location.href = event.currentTarget.href;
+  });
 }
-    
-/* 🔥 GET MOST USED TOOL */
-db.collection("tools").get().then((snapshot) => {
 
-  let max = 0;
-  let topTool = "None";
 
-  snapshot.forEach((doc) => {
-    let data = doc.data();
+// 🔥 GET MOST USED TOOL
+document.addEventListener("DOMContentLoaded", function () {
 
-    if (data.count > max) {
-      max = data.count;
-      topTool = doc.id;
-    }
-  });
+  const mostUsedEl = document.getElementById("most-used");
 
-  document.getElementById("most-used").innerText = topTool;
+  if (mostUsedEl) {
+    db.collection("tools").get().then((snapshot) => {
+
+      let max = 0;
+      let topTool = "None";
+
+      snapshot.forEach((doc) => {
+        let data = doc.data();
+
+        if (data.count > max) {
+          max = data.count;
+          topTool = doc.id;
+        }
+      });
+
+      mostUsedEl.innerText = topTool;
+
+    }).catch((err) => {
+      console.log("Error fetching tools:", err);
+    });
+  }
 
 });
 
 </script>
+
   
 </body>
 </html>
