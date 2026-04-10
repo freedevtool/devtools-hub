@@ -17,11 +17,31 @@ body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
 .container{max-width:1200px;margin:auto;padding:20px;}
 
 /* HEADER */
-.header{position:relative;display:flex;justify-content:center;align-items:center;margin-bottom:20px;}
-.menu-icon{position:absolute;left:10px;cursor:pointer;display:flex;flex-direction:column;gap:5px;}
-.menu-icon span{width:25px;height:3px;background:#6c5ce7;border-radius:3px;}
-.logo-center img{height:60px;}
-.logo-center h1{color:#6c5ce7;}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+  .logo {
+    font-size: 16px;
+  }
+}
 
 /* MENU */
 .mobile-menu{
@@ -323,9 +343,7 @@ color:#ffd700;
 
 <!-- HEADER -->
 <header class="header">
-<div class="menu-icon" onclick="toggleMenu()">
-<span></span><span></span><span></span>
-</div>
+<div class="menu-toggle">☰</div>
 
 <div class="logo-center">
 <img src="logo.png" loading="lazy">
@@ -345,8 +363,8 @@ color:#ffd700;
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <h1>Free Developer & public Tools like Emi, Gst calculator, image resizer – Fast, Secure & Easy</h1>
-    <p>Format, convert, and optimize your code instantly with powerful online tools.</p>
+    <h1>All-in-One Free Online Tools</h1>
+    <p>Image, PDF, SEO & Developer tools — fast & free</p>
     
     <div class="hero-buttons">
       <a href="#tools" class="btn primary">Explore Tools</a>
@@ -497,6 +515,21 @@ color:#ffd700;
     </div>
 
   </div>
+    <section class="features">
+  <h2>Why Choose Us?</h2>
+  <div class="grid">
+    <div>⚡ Fast Processing</div>
+    <div>🔒 Secure Tools</div>
+    <div>💯 Free Forever</div>
+  </div>
+    </section>
+    <section class="how-to">
+  <h2>How to Use Our Tools</h2>
+  <p>1. Select tool</p>
+  <p>2. Upload or enter data</p>
+  <p>3. Get instant result</p>
+    </section>
+    
 
 </section>
 <!-- PARTNER RIBBON -->
