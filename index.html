@@ -747,34 +747,27 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
   
-  //EVENT LISTNER UPDATED 
-  <script>
+  <!-- 🔥 TOOL CLICK TRACKING (CLEAN & SAFE) -->
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // safety check
-  if (typeof db === "undefined") {
-    console.log("Firebase DB not found");
-    return;
-  }
+  // check Firebase db exists
+  if (typeof db === "undefined") return;
 
   document.querySelectorAll(".tool-card").forEach(card => {
 
     card.addEventListener("click", function () {
 
       const toolName = this.getAttribute("data-tool");
-      console.log("Tracking:", toolName);
 
-      try {
-        db.collection("tools").doc(toolName).set({
-          count: firebase.firestore.FieldValue.increment(1)
-        }, { merge: true });
-
-      } catch (e) {
-        console.log("Tracking error:", e);
-      }
-
-      // ✅ DO NOTHING ELSE
-      // let link open normally
+      // small delay so navigation doesn't interrupt
+      setTimeout(() => {
+        try {
+          db.collection("tools").doc(toolName).set({
+            count: firebase.firestore.FieldValue.increment(1)
+          }, { merge: true });
+        } catch (e) {}
+      }, 100);
 
     });
 
@@ -783,40 +776,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
-  
+
+<!-- 🔥 MOST USED TOOL DISPLAY -->
 <script>
-
-// 🔥 HANDLE TOOL CLICK (FIXED)
-function handleToolClick(event, toolName) {
-  event.preventDefault(); // stop instant redirect
-
-  const toolRef = db.collection("tools").doc(toolName);
-
-  toolRef.get().then((doc) => {
-    let count = 1;
-
-    if (doc.exists) {
-      count = (doc.data().count || 0) + 1;
-    }
-
-    toolRef.set({ count: count }).then(() => {
-      // ✅ redirect AFTER saving
-      window.location.href = event.currentTarget.href;
-    });
-
-  }).catch(() => {
-    // fallback redirect
-    window.location.href = event.currentTarget.href;
-  });
-}
-
-
-// 🔥 GET MOST USED TOOL
 document.addEventListener("DOMContentLoaded", function () {
 
   const mostUsedEl = document.getElementById("most-used");
 
-  if (mostUsedEl) {
+  if (mostUsedEl && typeof db !== "undefined") {
     db.collection("tools").get().then((snapshot) => {
 
       let max = 0;
@@ -833,15 +800,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       mostUsedEl.innerText = topTool;
 
-    }).catch((err) => {
-      console.log("Error fetching tools:", err);
+    }).catch(() => {
+      mostUsedEl.innerText = "None";
     });
   }
 
 });
-
 </script>
 
-  
 </body>
 </html>
+  
