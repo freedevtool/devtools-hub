@@ -36,6 +36,9 @@ body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
   overflow: hidden;
   text-overflow: ellipsis;
 }
+  .logo img {
+  height: 32px;
+  }
 
 /* MENU BUTTON */
 .menu-toggle {
@@ -414,6 +417,13 @@ margin:5px 0;
 footer a:hover{
 color:#ffd700;
   }
+  footer svg {
+  transition: transform 0.3s ease;
+}
+
+footer svg:hover {
+  transform: scale(1.2);
+}
 </style>
 </head>
 
@@ -424,7 +434,9 @@ color:#ffd700;
 <!-- HEADER -->
 <header class="header">
   <div class="logo">Explore Dev Tools</div>
-
+<div class="logo">
+  <img src="logo.png" alt="logo">
+</div>
   <div class="menu-toggle" id="menuToggle">
     ☰
   </div>
@@ -610,7 +622,7 @@ color:#ffd700;
   <p>3. Get instant result</p>
     </section>
     
-    /*FAQ */
+  
 <section class="section-box faq">
   <h2>Frequently Asked Questions</h2>
 
@@ -795,7 +807,20 @@ color:#ffd700;
 
 <p style="text-align:center;margin-top:15px;">
 © 2026 ExploreDevTools citybreaks2019@gmail.com 
+  <p style="text-align:center; font-size:14px; color:#666;">
   Made with 
+  <!-- HEART -->
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="#e25555" style="vertical-align:middle;">
+    <path d="M12 21s-6.716-4.35-9.428-7.062C.86 12.226 0 10.678 0 9.072 0 6.284 2.284 4 5.072 4c1.6 0 3.136.784 4.072 2.048C10.864 4.784 12.4 4 14 4c2.788 0 5.072 2.284 5.072 5.072 0 1.606-.86 3.154-2.572 4.866C18.716 16.65 12 21 12 21z"/>
+  </svg>
+  in India
+  <!-- INDIA FLAG -->
+  <svg width="20" height="14" viewBox="0 0 30 20" style="vertical-align:middle;">
+    <rect width="30" height="20" fill="#fff"/>
+    <rect width="30" height="6.66" fill="#FF9933"/>
+    <rect y="13.33" width="30" height="6.66" fill="#138808"/>
+    <circle cx="15" cy="10" r="2" fill="#000080"/>
+  </svg>
 </p>
 
 </footer>
