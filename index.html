@@ -254,6 +254,48 @@ transition:0.3s;z-index:999;
   margin-bottom: 25px;
   color: #2d3748;
     }
+  /*why choose us */
+  .section-box {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 30px 20px;
+  margin: 20px auto;
+  max-width: 1100px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.section-box h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.section-box p {
+  color: #555;
+  font-size: 14px;
+}
+  /* FAQ CSS */
+  .faq-item {
+  text-align: left;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.faq-item h4 {
+  font-size: 15px;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.faq-item p {
+  font-size: 13px;
+  color: #666;
+}
+  .faq-item p {
+  display: none;
+  transition: all 0.3s ease;
+  }
 /* RIBBON */
 .ribbon-section{margin:60px 0;overflow:hidden;}
 
@@ -515,7 +557,8 @@ color:#ffd700;
     </div>
 
   </div>
-    <section class="features">
+  
+  <section class="section-box">
   <h2>Why Choose Us?</h2>
   <div class="grid">
     <div>⚡ Fast Processing</div>
@@ -523,14 +566,60 @@ color:#ffd700;
     <div>💯 Free Forever</div>
   </div>
     </section>
-    <section class="how-to">
+      
+  <section class="section-box">
   <h2>How to Use Our Tools</h2>
   <p>1. Select tool</p>
   <p>2. Upload or enter data</p>
   <p>3. Get instant result</p>
     </section>
     
+    /*FAQ */
+<section class="section-box faq">
+  <h2>Frequently Asked Questions</h2>
 
+  <div class="faq-item">
+    <h4>Are all tools free to use?</h4>
+    <p>Yes, all tools on Explore Dev Tools are completely free with no hidden charges.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Is my data secure?</h4>
+    <p>Yes, most tools run directly in your browser and do not store your data on servers.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Do I need to create an account?</h4>
+    <p>No signup or login is required to use any tool on our website.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Which tools are most popular?</h4>
+    <p>Popular tools include JSON Formatter, Image Compressor, and Password Generator.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Can I use these tools on mobile?</h4>
+    <p>Yes, all tools are fully responsive and work on mobile, tablet, and desktop devices.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>How fast are the tools?</h4>
+    <p>Our tools are optimized for speed and deliver results instantly in most cases.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Will more tools be added?</h4>
+    <p>Yes, we are continuously adding new tools based on user demand and trends.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Do tools work offline?</h4>
+    <p>Some tools work in-browser, but internet is required to access the platform.</p>
+  </div>
+
+  </section>
+    
 </section>
 <!-- PARTNER RIBBON -->
   <div class="ribbon-section">
@@ -841,7 +930,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
+  <!-- FAQ SECTION (your HTML above this) -->
+
+<script>
+document.querySelectorAll(".faq-item h4").forEach(q => {
+  q.addEventListener("click", () => {
+    const p = q.nextElementSibling;
+    p.style.display = p.style.display === "block" ? "none" : "block";
+  });
+});
+</script>
 
 </body>
 </html>
-  
