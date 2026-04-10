@@ -748,42 +748,42 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
   
   //EVENT LISTNER UPDATED 
-  
-<script>
+  <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  const toolCards = document.querySelectorAll(".tool-card");
+  // safety check
+  if (typeof db === "undefined") {
+    console.log("Firebase DB not found");
+    return;
+  }
 
-  toolCards.forEach(card => {
+  document.querySelectorAll(".tool-card").forEach(card => {
+
     card.addEventListener("click", function () {
 
-      const toolName = card.getAttribute("data-tool");
-
+      const toolName = this.getAttribute("data-tool");
       console.log("Tracking:", toolName);
 
-      const toolRef = db.collection("tools").doc(toolName);
+      try {
+        db.collection("tools").doc(toolName).set({
+          count: firebase.firestore.FieldValue.increment(1)
+        }, { merge: true });
 
-      toolRef.get().then((doc) => {
-        let count = 1;
+      } catch (e) {
+        console.log("Tracking error:", e);
+      }
 
-        if (doc.exists) {
-          count = (doc.data().count || 0) + 1;
-        }
-
-        return toolRef.set({ count: count });
-
-      }).catch((err) => {
-        console.log("Error:", err);
-      });
-
-      // ❌ NO preventDefault
-      // ✅ Let link open normally
+      // ✅ DO NOTHING ELSE
+      // let link open normally
 
     });
+
   });
 
 });
 </script>
+
+  
 <script>
 
 // 🔥 HANDLE TOOL CLICK (FIXED)
