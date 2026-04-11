@@ -97,47 +97,71 @@ transition:0.3s;z-index:999;
 .mobile-menu a:hover{background:#f3f4ff;}
 
 /* HERO */
-.hero {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 70px 20px;
 
-  text-align: center;
+  .hero {
+  width: 100%;
+  min-height: 90vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-/* TEXT */
+/* CENTER CONTENT */
+.hero-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+/* TITLE */
 .hero h1 {
-  font-size: 2rem;
-  margin-bottom: 15px;
+  font-size: 2.5rem;
   line-height: 1.3;
+  margin-bottom: 15px;
 }
 
+/* SUBTEXT */
 .hero p {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 25px;
+  opacity: 0.9;
 }
 
-/* BUTTON WRAPPER FIX */
+/* SEARCH BAR */
+.hero-search {
+  margin-bottom: 20px;
+}
+
+.hero-search input {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+/* BUTTONS */
 .hero-buttons {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-/* BUTTON BASE */
-.hero-buttons .btn {
+.btn {
   padding: 12px 18px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  display: inline-block;
 }
 
-/* FIX CLASS NAMES */
 .btn-primary {
   background: white;
   color: #764ba2;
@@ -151,24 +175,20 @@ transition:0.3s;z-index:999;
 /* MOBILE FIX */
 @media (max-width: 768px) {
   .hero {
-    padding: 50px 15px;
+    min-height: 80vh;
+    padding: 30px 15px;
   }
 
   .hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
   }
 }
 
-.search-box input{
-  width:100%;
-  max-width:400px;
-  padding:12px 15px;
-  border-radius:10px;
-  border:1px solid #ddd;
-  outline:none;
-  font-size:14px;
-}
-
+  
 .filter-buttons{
   text-align:center;
   margin-bottom:20px;
@@ -480,23 +500,28 @@ footer svg:hover {
 
 <!-- HERO -->
 <section class="hero">
+
   <div class="hero-content">
-    <h1>All-in-One Free Online Tools</h1>
-    <p>Image, PDF, SEO & Developer tools — fast & free</p>
-    
-      <div class="hero-buttons">
-  <a href="#tools" class="btn btn-primary">Explore Tools</a>
-  <a href="json-formatter.html" class="btn btn-secondary">Try JSON Formatter</a>
-</div>
+
+    <h1>100+ Free Online Tools for Developers & Creators</h1>
+
+    <p>Format, convert, compress & optimize files instantly — fast, secure & easy to use.</p>
+
+    <!-- 🔍 SEARCH BAR -->
+    <div class="hero-search">
+      <input type="text" placeholder="Search tools like JSON, Image, PDF..." id="toolSearch">
+    </div>
+
+    <!-- BUTTONS -->
+    <div class="hero-buttons">
+      <a href="#tools" class="btn btn-primary">Explore Tools</a>
+      <a href="json-formatter.html" class="btn btn-secondary">Try JSON Formatter</a>
+    </div>
+
   </div>
+
 </section>
-</br>
   
- <!-- SEARCH --> 
-<div class="search-box">
-  <input type="text" id="searchInput" placeholder="🔍 Search tools...">
-</div>
-</div>
 </br>
   <div class="filter-buttons">
   <button onclick="filterTools('all')">All</button>
@@ -863,15 +888,17 @@ document.getElementById("mobileMenu").classList.toggle("active");
 }
 
 // SEARCH FUNCTION
-document.getElementById("searchInput").addEventListener("keyup", function(){
+  
+document.getElementById("toolSearch").addEventListener("input", function () {
   let value = this.value.toLowerCase();
-  let cards = document.querySelectorAll(".tool-card");
 
-  cards.forEach(card => {
+  document.querySelectorAll(".tool-card").forEach(card => {
     let text = card.innerText.toLowerCase();
+
     card.style.display = text.includes(value) ? "block" : "none";
   });
 });
+
 
 // FILTER FUNCTION
 function filterTools(category){
