@@ -54,17 +54,17 @@ body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
   display: none;
 }
 
-/* NAV MENU */
+/* NAV MENU */ 
 .nav {
   display: flex;
   gap: 20px;
+  z-index: 1000;
 }
-
-@media (max-width: 768px) {
 
   .menu-toggle {
     display: block;
   }
+@media (max-width: 768px) {
 
   .nav {
     display: none;
@@ -77,12 +77,19 @@ body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
     border-radius: 10px;
     width: 200px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 9999; /* 🔥 IMPORTANT */
   }
 
   .nav.active {
     display: flex;
   }
-}  
+
+  .nav a {
+    padding: 10px;
+    display: block;
+  }
+}
+  
 
 /* MENU */
 .mobile-menu{
@@ -453,7 +460,20 @@ transition:0.3s;z-index:999;
   max-height: 60px;
   object-fit: contain;
 }
+.ribbon-item {
+  text-decoration: none;   /* 🔥 REMOVE underline */
+  color: #333;
+}
 
+.ribbon-item:hover {
+  text-decoration: none;   /* ensure no underline on hover */
+}
+
+.ribbon-text span {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}
 /* BLOG */
 .blog-section{margin:60px 0;}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
@@ -1079,20 +1099,23 @@ document.querySelectorAll(".faq-item h4").forEach(q => {
     const p = q.nextElementSibling;
     p.style.display = p.style.display === "block" ? "none" : "block";
   });
-});
-    
- document.addEventListener("DOMContentLoaded", function () {
+})
+
+  document.addEventListener("DOMContentLoaded", function () {
 
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("navMenu");
 
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener("click", function () {
+  toggle.addEventListener("click", function (e) {
+    e.stopPropagation();
     menu.classList.toggle("active");
   });
 
-});  
+  document.addEventListener("click", function () {
+    menu.classList.remove("active");
+  });
+
+});
   </script>
 </body>
 </html>
