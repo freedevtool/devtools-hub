@@ -55,60 +55,38 @@ body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
 }
 
 /* NAV MENU */
-.nav {
-  display: flex;
-  gap: 20px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 500;
-}
-
   
-/* MOBILE VIEW */
-@media (max-width: 768px) {
-
-  .menu-toggle {
-    display: block;
-  }
-
   .nav {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    background: #fff;
-    flex-direction: column;
-    width: 200px;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  }
-
-  .nav {
-  display: flex;
-  gap: 20px;
+  display:flex;
+  gap:20px;
 }
 
-@media (max-width: 768px) {
+.menu-toggle {
+  display:none;
+  font-size:24px;
+  cursor:pointer;
+}
 
-  .nav {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 10px;
-    flex-direction: column;
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
+@media(max-width:768px){
+  .menu-toggle{display:block;}
+
+  .nav{
+    display:none;
+    position:absolute;
+    top:60px;
+    right:10px;
+    background:#fff;
+    flex-direction:column;
+    padding:15px;
+    border-radius:10px;
+    width:200px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
   }
-nav.active {
-    display: flex;
+
+  .nav.active{
+    display:flex;
   }
 }
-  
 /* MENU */
 .mobile-menu{
 position:absolute;top:60px;left:10px;
@@ -126,15 +104,22 @@ transition:0.3s;z-index:999;
   }
 
 /* HERO */
+
 .hero {
-  width: 100%;
-  padding: 60px 20px;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  min-height: 85vh;
 
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  text-align: center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:60px 20px;
+
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  color:white;
+  text-align:center;
 }
-
 /* CENTER CONTENT */
 .hero-content {
   max-width: 800px;
@@ -325,22 +310,19 @@ transition:0.3s;z-index:999;
 }
 
 /* ANALYTIC CARD */
-.analytics-box {
-  min-width: 140px;
-  padding: 20px;
-  border-radius: 16px;
-  text-align: center;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(108,92,231,0.2);
-  box-shadow: 0 10px 30px rgba(108,92,231,0.15);
-  transition: all 0.3s ease;
+
+  .analytics-box{
+  min-width:140px;
+  padding:20px;
+  border-radius:16px;
+  text-align:center;
+  background:linear-gradient(135deg,#ffffff,#eef1ff);
+  box-shadow:0 10px 30px rgba(108,92,231,0.15);
+  transition:0.3s;
 }
 
-/* HOVER EFFECT */
-.analytics-box:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 20px 40px rgba(108,92,231,0.3);
+.analytics-box:hover{
+  transform:translateY(-6px);
 }
 
 /* NUMBER */
@@ -447,6 +429,16 @@ transition:0.3s;z-index:999;
   height: 30px;
 }
 .ribbon-text strong{font-size:15px;}
+  .partner-ribbon{
+  overflow:hidden;
+}
+
+.ribbon-track{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  flex-wrap:nowrap;
+}
 
 /* BLOG */
 .blog-section{margin:60px 0;}
@@ -486,12 +478,21 @@ footer svg:hover {
   margin: auto;
   padding: 0 15px;
   }
+  .tool-card:hover{
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 20px 40px rgba(108,92,231,0.25);
+}
+
+.section-box:hover{
+  transform:translateY(-4px);
+  box-shadow:0 15px 35px rgba(0,0,0,0.08);
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+
 
 <!-- HEADER -->
 <header class="header">
@@ -520,6 +521,7 @@ footer svg:hover {
 
     <p>Format, convert, compress & optimize files instantly — fast, secure & easy to use.</p>
 
+    <div class="container">
     <!-- 🔍 SEARCH BAR -->
     <div class="hero-search">
       <input type="text" placeholder="Search tools like JSON, Image, PDF..." id="toolSearch">
@@ -810,28 +812,28 @@ footer svg:hover {
   </section>
 
 <!-- BLOG -->
-<div class="blog-section">
-<h3>📝 Latest Blogs</h3>
 
 <div class="blog-grid">
 
 <div class="blog-card">
-<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" loading="lazy">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600">
 <div class="blog-content">
-<h4>Top Free Tools for Developers & All People</h4>
+<h4>Top Free Tools for Developers</h4>
 <p>Boost productivity using free tools...</p>
 <a href="blog.html">Read More Blogs</a>
 </div>
+</div>
 
 <div class="blog-card">
-<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600" loading="lazy">
+<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600">
 <div class="blog-content">
 <h4>Best AI Tools 2026</h4>
 <p>Explore latest AI tools...</p>
 <a href="blog.html">Read More Blogs</a>
-</div
+</div>
 </div>
 
+</div>
 <footer>
 
 <div class="footer-grid">
@@ -1074,21 +1076,7 @@ document.querySelectorAll(".faq-item h4").forEach(q => {
 document.getElementById("menuToggle").addEventListener("click", function () {
   document.getElementById("navMenu").classList.toggle("active");
 });
-  </script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const toggle = document.getElementById("menuToggle");
-  const menu = document.getElementById("navMenu");
-
-  if (!toggle || !menu) return;
-
-  toggle.addEventListener("click", function () {
-    menu.classList.toggle("active");
-  });
-
-});
+    
 </script>
 </body>
 </html>
