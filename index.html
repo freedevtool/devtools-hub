@@ -1124,21 +1124,29 @@ document.querySelectorAll(".faq-item h4").forEach(q => {
   });
 })
 
-  document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
 
   const toggle = document.getElementById("menuToggle");
   const menu = document.getElementById("navMenu");
 
+  // TOGGLE MENU
   toggle.addEventListener("click", function (e) {
     e.stopPropagation();
     menu.classList.toggle("active");
   });
 
+  // PREVENT MENU CLOSE WHEN CLICK INSIDE
+  menu.addEventListener("click", function (e) {
+    e.stopPropagation();
+  });
+
+  // CLOSE WHEN CLICK OUTSIDE
   document.addEventListener("click", function () {
     menu.classList.remove("active");
   });
 
-});
+}); 
   </script>
+    
 </body>
 </html>
