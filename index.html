@@ -103,6 +103,19 @@ body{font-family:'Poppins',sans-serif;background:#f4f6ff;color:#1e293b;}
     transform: translateX(5px);
   }
 } 
+  .nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  border-radius: 6px;
+  padding: 8px 10px;
+  transition: 0.3s;
+}
+
+.nav a.active {
+  background: #6c5ce7;
+  color: #fff;
+}
   @keyframes fadeIn {
   from {
     opacity: 0;
@@ -1149,6 +1162,12 @@ document.querySelectorAll(".faq-item h4").forEach(q => {
   });
 
 }); 
+  const links = document.querySelectorAll(".nav a");
+links.forEach(link => {
+  if (link.href === window.location.href) {
+    link.classList.add("active");
+  }
+});
   </script>
     
 </body>
